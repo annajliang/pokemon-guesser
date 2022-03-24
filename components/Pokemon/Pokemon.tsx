@@ -23,13 +23,19 @@ export const Pokemon = () => {
       {randomPokemon && (
         <>
           <h1>{randomPokemon.name}</h1>
-          <Image
-            src={`/pokemon/gen1/${randomPokemon.id}.png`}
-            alt={`${randomPokemon.name}`}
-            width={500}
-            height={500}
-            priority
-          />
+          <picture>
+            <source
+              srcSet={require(`../../public/pokemon/gen1/${randomPokemon.id}.png?webp`)}
+              type="image/webp"
+            />
+            <Image
+              src={`/pokemon/gen1/${randomPokemon.id}.png`}
+              alt={`${randomPokemon.name}`}
+              width={500}
+              height={500}
+              priority={true}
+            />
+          </picture>
         </>
       )}
     </div>
