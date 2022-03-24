@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { allPokemonState } from "../globalState";
+import { PokemonData } from "../types/interfaces";
 
-interface Pokemon {
-  name: string;
-  id: string | undefined;
-  url?: string | undefined;
-}
-
-const getPokemonId = (url: Pokemon["url"]) => {
+const getPokemonId = (url: PokemonData["url"]) => {
   const id = url?.split("/")[6];
 
   if (!id) {
@@ -24,21 +21,19 @@ const getPokemonId = (url: Pokemon["url"]) => {
   return id;
 };
 
-const getPokemonNameId = (results: Pokemon[]) => {
-  return results.map((result: Pokemon) => {
+const getPokemonNameId = (results: PokemonData[]) => {
+  return results.map((result: PokemonData) => {
     return { name: result.name, id: getPokemonId(result.url) };
   });
 };
 
-export const useApi = () => {
-  const [allPokemon, setallPokemon] = useState<Pokemon[]>([]);
+export const useApi = (url: string) => {
+  const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
 
   useEffect(() => {
     const getPokemon = async () => {
       try {
-        const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=151"
-        );
+        const response = await fetch(url);
 
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -59,7 +54,7 @@ export const useApi = () => {
     if (allPokemon.length === 0) {
       getPokemon();
     }
-  }, [allPokemon]);
+  }, [allPokemon, setallPokemon, url]);
 
   return [allPokemon, setallPokemon];
 };
