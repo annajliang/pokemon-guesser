@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react';
+import levenshtein from 'js-levenshtein';
 import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 import { useRecoilValue } from 'recoil';
@@ -10,8 +11,11 @@ export const Form = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const answer = currentPokemon;
 
-    if (userGuess === currentPokemon) {
+    const levenshteinDistance = levenshtein(guess, answer);
+
+    if (levenshteinDistance < 2) {
       return console.log('correct');
     }
 
