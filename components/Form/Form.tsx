@@ -11,8 +11,8 @@ export const Form = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const answer = currentPokemon;
 
+    const answer = currentPokemon.toLowerCase();
     const levenshteinDistance = levenshtein(guess, answer);
 
     if (levenshteinDistance < 2) {

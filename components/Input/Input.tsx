@@ -3,5 +3,10 @@ interface Props {
 }
 
 export const Input = ({ setGuess }: Props) => {
-  return <input type="text" onChange={(e) => setGuess(e.target.value)} />;
+  return (
+    <input
+      type="text"
+      onChange={(e) => setGuess(e.target.value.toLowerCase())}
+    />
+  );
 };
