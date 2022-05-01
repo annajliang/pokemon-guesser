@@ -1,22 +1,25 @@
-import Image from "next/image";
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { useState } from "react";
-import { allPokemonState } from "../../utils/globalState";
-import { PokemonData } from "../../utils/types/interfaces";
+import Image from 'next/image';
+import { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { useState } from 'react';
+import { allPokemonState, currentPokemonState } from '../../utils/globalState';
+import { PokemonData } from '../../utils/types/interfaces';
 
 const getRandomIndex = (arr: PokemonData[]) => {
   return Math.floor(Math.random() * arr.length);
 };
 
 export const Pokemon = () => {
-  const [allPokemon] = useRecoilState(allPokemonState);
+  const allPokemon = useRecoilValue(allPokemonState);
+  const [currentPokemon, setCurrentPokemon] =
+    useRecoilState(currentPokemonState);
   const [randomPokemon, setRandomPokemon] = useState<PokemonData>();
 
   useEffect(() => {
     const randomIndex = getRandomIndex(allPokemon);
+    setCurrentPokemon(allPokemon[randomIndex]?.name);
     setRandomPokemon(allPokemon[randomIndex]);
-  }, [allPokemon]);
+  }, [allPokemon, setCurrentPokemon]);
 
   return (
     <div>
