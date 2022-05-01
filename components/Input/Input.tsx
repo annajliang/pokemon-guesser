@@ -1,7 +1,7 @@
 interface Props {
-  setUserGuess: (val: string) => void;
+  setGuess: (val: string) => void;
 }
 
-export const Input = ({ setUserGuess }: Props) => {
-  return <input type="text" onChange={(e) => setUserGuess(e.target.value)} />;
+export const Input = ({ setGuess }: Props) => {
+  return <input type="text" onChange={(e) => setGuess(e.target.value)} />;
 };

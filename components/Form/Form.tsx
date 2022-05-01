@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil';
 import { currentPokemonState } from '../../utils/globalState';
 
 export const Form = () => {
-  const [userGuess, setUserGuess] = useState('');
+  const [guess, setGuess] = useState('');
   const currentPokemon = useRecoilValue(currentPokemonState);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -24,7 +24,7 @@ export const Form = () => {
 
   return (
     <form action="submit" onSubmit={handleSubmit}>
-      <Input setUserGuess={setUserGuess} />
+      <Input setGuess={setGuess} />
       <Button />
     </form>
   );
