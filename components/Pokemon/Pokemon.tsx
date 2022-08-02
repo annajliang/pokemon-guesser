@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { allPokemonState, randomIndexState } from '../../utils/globalState';
+import { StyledPokemonImage } from './Pokemon.styled';
 
 const getRandomIndex = (arr: any[]) => {
   return Math.floor(Math.random() * arr.length);
@@ -25,13 +26,15 @@ export const Pokemon = () => {
               srcSet={require(`../../public/pokemon/gen1/${allPokemon[randomIndex].id}.png?webp`)}
               type="image/webp"
             />
-            <Image
-              src={`/pokemon/gen1/${allPokemon[randomIndex].id}.png`}
-              alt={`${allPokemon[randomIndex].name}`}
-              width={500}
-              height={500}
-              priority={true}
-            />
+            <StyledPokemonImage>
+              <Image
+                src={`/pokemon/gen1/${allPokemon[randomIndex].id}.png`}
+                alt={`${allPokemon[randomIndex].name}`}
+                width={500}
+                height={500}
+                priority={true}
+              />
+            </StyledPokemonImage>
           </picture>
         </>
       )}
