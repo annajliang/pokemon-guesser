@@ -15,3 +15,8 @@ export const scoreState = atom({
   key: 'scoreState',
   default: 0 as number,
 });
+
+export const timerState = atom({
+  key: 'timerState',
+  default: 60 as number,
+});
