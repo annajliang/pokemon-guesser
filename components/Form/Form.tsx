@@ -54,6 +54,7 @@ export const Form = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     evaluateGuess();
+    setGuess('');
 
     // remove pokemon that just appeared from allPokemon array to ensure no pokemon appears twice
     const filteredPokemon = getFilteredPokemon(allPokemon, currentPokemon);
@@ -62,6 +63,7 @@ export const Form = () => {
 
   const handleSkip = () => {
     evaluateGuess();
+    setGuess('');
 
     // remove pokemon that just appeared from allPokemon array to ensure no pokemon appears twice
     const filteredPokemon = getFilteredPokemon(allPokemon, currentPokemon);
@@ -72,7 +74,7 @@ export const Form = () => {
     <>
       <Skip handleSkip={handleSkip} />
       <form action="submit" onSubmit={handleSubmit}>
-        <Input setGuess={setGuess} />
+        <Input setGuess={setGuess} guess={guess} />
         <Button />
       </form>
     </>
