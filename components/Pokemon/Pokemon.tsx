@@ -1,39 +1,34 @@
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { useState } from 'react';
-import { allPokemonState, currentPokemonState } from '../../utils/globalState';
-import { PokemonData } from '../../utils/types/interfaces';
+import { allPokemonState, randomIndexState } from '../../utils/globalState';
 
-const getRandomIndex = (arr: PokemonData[]) => {
+const getRandomIndex = (arr: any[]) => {
   return Math.floor(Math.random() * arr.length);
 };
 
 export const Pokemon = () => {
   const allPokemon = useRecoilValue(allPokemonState);
-  const [currentPokemon, setCurrentPokemon] =
-    useRecoilState(currentPokemonState);
-  const [randomPokemon, setRandomPokemon] = useState<PokemonData>();
+  const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
 
   useEffect(() => {
-    const randomIndex = getRandomIndex(allPokemon);
-    setCurrentPokemon(allPokemon[randomIndex]?.name);
-    setRandomPokemon(allPokemon[randomIndex]);
-  }, [allPokemon, setCurrentPokemon]);
+    setRandomIndex(getRandomIndex(allPokemon));
+  }, [allPokemon, setRandomIndex]);
 
+  console.log('pokemon', allPokemon[randomIndex]?.name);
   return (
     <div>
-      {randomPokemon && (
+      {allPokemon[randomIndex] && (
         <>
-          <h1>{randomPokemon.name}</h1>
+          <h1>{allPokemon[randomIndex].name}</h1>
           <picture>
             <source
-              srcSet={require(`../../public/pokemon/gen1/${randomPokemon.id}.png?webp`)}
+              srcSet={require(`../../public/pokemon/gen1/${allPokemon[randomIndex].id}.png?webp`)}
               type="image/webp"
             />
             <Image
-              src={`/pokemon/gen1/${randomPokemon.id}.png`}
-              alt={`${randomPokemon.name}`}
+              src={`/pokemon/gen1/${allPokemon[randomIndex].id}.png`}
+              alt={`${allPokemon[randomIndex].name}`}
               width={500}
               height={500}
               priority={true}

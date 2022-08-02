@@ -3,7 +3,7 @@ import levenshtein from 'js-levenshtein';
 import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { allPokemonState, currentPokemonState } from '../../utils/globalState';
+import { allPokemonState, randomIndexState } from '../../utils/globalState';
 import { PokemonData } from '../../utils/types/interfaces';
 
 const getFilteredPokemon = (
@@ -17,8 +17,10 @@ const getFilteredPokemon = (
 
 export const Form = () => {
   const [guess, setGuess] = useState('');
-  const currentPokemon = useRecoilValue(currentPokemonState);
+  const randomIndex = useRecoilValue(randomIndexState);
   const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
+
+  const currentPokemon = allPokemon[randomIndex]?.name;
 
   const evaluateGuess = () => {
     const answer = currentPokemon.toLowerCase();

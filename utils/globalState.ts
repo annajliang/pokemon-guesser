@@ -6,7 +6,7 @@ export const allPokemonState = atom({
   default: [] as PokemonData[],
 });
 
-export const currentPokemonState = atom({
-  key: 'currentPokemonState',
-  default: '' as string,
+export const randomIndexState = atom({
+  key: 'randomIndexState',
+  default: 0 as number,
 });
