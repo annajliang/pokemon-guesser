@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import levenshtein from 'js-levenshtein';
 import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
@@ -10,6 +10,8 @@ import {
   scoreState,
 } from '../../utils/globalState';
 import { PokemonData } from '../../utils/types/interfaces';
+import correct from '../../public/sounds/correct.mp3';
+import wrong from '../../public/sounds/wrong.mp3';
 
 const getFilteredPokemon = (
   allPokemon: PokemonData[],
@@ -25,8 +27,15 @@ export const Form = () => {
   const randomIndex = useRecoilValue(randomIndexState);
   const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
   const [score, setScore] = useRecoilState(scoreState);
-
+  const [wrongAudio, setWrongAudio] = useState<HTMLAudioElement>();
+  const [correctAudio, setCorrectAudio] = useState<HTMLAudioElement>();
   const currentPokemon = allPokemon[randomIndex]?.name;
+
+  //https://github.com/vercel/next.js/discussions/17963
+  useEffect(() => {
+    setCorrectAudio(new Audio(correct));
+    setWrongAudio(new Audio(wrong));
+  }, []);
 
   const evaluateGuess = () => {
     console.log('guess', guess);
@@ -35,10 +44,11 @@ export const Form = () => {
     const levenshteinDistance = levenshtein(guess, answer);
 
     if (levenshteinDistance < 2) {
+      correctAudio?.play();
       return setScore((prevScore) => prevScore + 5);
     }
 
-    return console.log('wrong');
+    return wrongAudio?.play();
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
