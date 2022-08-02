@@ -23,7 +23,11 @@ const getPokemonId = (url: PokemonData["url"]) => {
 
 const getPokemonNameId = (results: PokemonData[]) => {
   return results.map((result: PokemonData) => {
-    return { name: result.name, id: getPokemonId(result.url) };
+    return {
+      name: getReformattedName(result.name),
+      id: getPokemonId(result.url),
+      status: 'hidden',
+    };
   });
 };
 
