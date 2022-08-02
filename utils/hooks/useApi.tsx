@@ -1,24 +1,40 @@
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { allPokemonState } from "../globalState";
-import { PokemonData } from "../types/interfaces";
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { allPokemonState } from '../globalState';
+import { PokemonData } from '../types/interfaces';
 
-const getPokemonId = (url: PokemonData["url"]) => {
-  const id = url?.split("/")[6];
+const getPokemonId = (url: PokemonData['url']) => {
+  const id = url?.split('/')[6];
 
   if (!id) {
     return;
   }
 
   if (parseInt(id) <= 9) {
-    return "00" + id;
+    return '00' + id;
   }
 
   if (parseInt(id) >= 10 && parseInt(id) < 100) {
-    return "0" + id;
+    return '0' + id;
   }
 
   return id;
+};
+
+const getReformattedName = (name: string) => {
+  if (name === 'nidoran-f' || name === 'nidoran-m') {
+    return 'nidoran';
+  }
+
+  if (name === 'farfetchd') {
+    return `farfetch'd`;
+  }
+
+  if (name === 'mr-mime') {
+    return 'mr. mime';
+  }
+
+  return name;
 };
 
 const getPokemonNameId = (results: PokemonData[]) => {
@@ -49,6 +65,7 @@ export const useApi = (url: string) => {
         if (data) {
           const pokemonNameId = getPokemonNameId(results);
           setallPokemon([...pokemonNameId]);
+          console.log('pokemonNameId', pokemonNameId);
         }
       } catch (err) {
         console.log(err);
