@@ -10,3 +10,8 @@ export const randomIndexState = atom({
   key: 'randomIndexState',
   default: 0 as number,
 });
+
+export const scoreState = atom({
+  key: 'scoreState',
+  default: 0 as number,
+});

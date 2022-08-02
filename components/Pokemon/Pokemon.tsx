@@ -15,7 +15,6 @@ export const Pokemon = () => {
     setRandomIndex(getRandomIndex(allPokemon));
   }, [allPokemon, setRandomIndex]);
 
-  console.log('pokemon', allPokemon[randomIndex]?.name);
   return (
     <div>
       {allPokemon[randomIndex] && (
