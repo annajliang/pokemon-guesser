@@ -4,11 +4,11 @@ import { RecoilRoot } from 'recoil';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <>
-      <RecoilRoot>
+    <RecoilRoot>
+      <div>
         <Component {...pageProps} />
-      </RecoilRoot>
-    </>
+      </div>
+    </RecoilRoot>
   );
 };
 
