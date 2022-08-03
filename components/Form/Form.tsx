@@ -8,6 +8,7 @@ import {
   allPokemonState,
   randomIndexState,
   scoreState,
+  showPokemonState,
 } from '../../utils/globalState';
 import { PokemonData } from '../../utils/types/interfaces';
 import correct from '../../public/sounds/correct.mp3';
@@ -27,6 +28,7 @@ export const Form = () => {
   const randomIndex = useRecoilValue(randomIndexState);
   const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
   const [score, setScore] = useRecoilState(scoreState);
+  const [showPokemon, setshowPokemon] = useRecoilState(showPokemonState);
   const [wrongAudio, setWrongAudio] = useState<HTMLAudioElement>();
   const [correctAudio, setCorrectAudio] = useState<HTMLAudioElement>();
   const currentPokemon = allPokemon[randomIndex]?.name;
@@ -38,10 +40,9 @@ export const Form = () => {
   }, []);
 
   const evaluateGuess = () => {
-    console.log('guess', guess);
     const answer = currentPokemon.toLowerCase();
-    console.log('answer', guess);
     const levenshteinDistance = levenshtein(guess, answer);
+    setshowPokemon(true);
 
     if (levenshteinDistance < 2) {
       correctAudio?.play();
@@ -56,18 +57,24 @@ export const Form = () => {
     evaluateGuess();
     setGuess('');
 
-    // remove pokemon that just appeared from allPokemon array to ensure no pokemon appears twice
-    const filteredPokemon = getFilteredPokemon(allPokemon, currentPokemon);
-    setallPokemon(filteredPokemon);
+    setTimeout(() => {
+      // remove pokemon that just appeared from allPokemon array to ensure no pokemon appears twice
+      const filteredPokemon = getFilteredPokemon(allPokemon, currentPokemon);
+      setallPokemon(filteredPokemon);
+      setshowPokemon(false);
+    }, 1000);
   };
 
   const handleSkip = () => {
     evaluateGuess();
     setGuess('');
 
-    // remove pokemon that just appeared from allPokemon array to ensure no pokemon appears twice
-    const filteredPokemon = getFilteredPokemon(allPokemon, currentPokemon);
-    setallPokemon(filteredPokemon);
+    setTimeout(() => {
+      // remove pokemon that just appeared from allPokemon array to ensure no pokemon appears twice
+      const filteredPokemon = getFilteredPokemon(allPokemon, currentPokemon);
+      setallPokemon(filteredPokemon);
+      setshowPokemon(false);
+    }, 1000);
   };
 
   return (

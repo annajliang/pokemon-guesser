@@ -20,3 +20,8 @@ export const timerState = atom({
   key: 'timerState',
   default: 60 as number,
 });
+
+export const showPokemonState = atom({
+  key: 'showPokemonState',
+  default: false as boolean,
+});

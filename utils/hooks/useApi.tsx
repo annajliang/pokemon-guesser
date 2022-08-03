@@ -42,7 +42,6 @@ const getPokemonNameId = (results: PokemonData[]) => {
     return {
       name: getReformattedName(result.name),
       id: getPokemonId(result.url),
-      status: 'hidden',
     };
   });
 };

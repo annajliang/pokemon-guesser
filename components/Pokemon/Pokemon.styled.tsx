@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const StyledPokemonImage = styled.div`
+export const StyledPokemonImage = styled.div<{ showPokemon: boolean }>`
   img {
-    filter: brightness(0);
+    filter: ${({ showPokemon }) => (showPokemon ? 'none' : 'brightness(0)')};
   }
 `;
