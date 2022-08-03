@@ -1,9 +1,10 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
-import { timerState } from '../../utils/globalState';
+import { showPokemonState, timerState } from '../../utils/globalState';
 
 export const Timer = () => {
   const [timer, setTimer] = useRecoilState(timerState);
+  const showPokemon = useRecoilValue(showPokemonState);
 
   useEffect(() => {
     let countdown: NodeJS.Timeout;
@@ -20,7 +21,7 @@ export const Timer = () => {
   return (
     <div>
       <h3>Timer</h3>
-      <p>{timer}</p>
+      <p>{showPokemon ? 'Paused' : timer}</p>
     </div>
   );
 };
