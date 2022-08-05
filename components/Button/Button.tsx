@@ -1,3 +1,5 @@
+import { StyledButton } from './Button.styled';
+
 export const Button = () => {
-  return <button type="submit">Guess</button>;
+  return <StyledButton type="submit">Guess</StyledButton>;
 };

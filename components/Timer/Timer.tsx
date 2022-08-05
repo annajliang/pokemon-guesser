@@ -1,6 +1,8 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
 import { showPokemonState, timerState } from '../../utils/globalState';
+import { StyledTimer, StyledClockIcon } from './Timer.styled';
+import Image from 'next/image';
 
 export const Timer = () => {
   const [timer, setTimer] = useRecoilState(timerState);
@@ -19,9 +21,12 @@ export const Timer = () => {
   }, [timer, setTimer]);
 
   return (
-    <div>
+    <StyledTimer>
+      <StyledClockIcon>
+        <Image src="/assets/clock.svg" alt="" width={50} height={50} priority />
+      </StyledClockIcon>
       <h3>Timer</h3>
       <p>{showPokemon ? 'Paused' : timer}</p>
-    </div>
+    </StyledTimer>
   );
 };

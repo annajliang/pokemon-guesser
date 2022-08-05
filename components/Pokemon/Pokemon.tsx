@@ -35,8 +35,8 @@ export const Pokemon = () => {
               <Image
                 src={`/pokemon/gen1/${allPokemon[randomIndex].id}.png`}
                 alt={`${allPokemon[randomIndex].name}`}
-                width={500}
-                height={500}
+                width={400}
+                height={400}
                 priority={true}
               />
             </StyledPokemonImage>

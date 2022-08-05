@@ -11,6 +11,7 @@ import {
   showPokemonState,
 } from '../../utils/globalState';
 import { PokemonData } from '../../utils/types/interfaces';
+import { StyledForm, StyledContainer } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
 import wrong from '../../public/sounds/wrong.mp3';
 
@@ -78,12 +79,12 @@ export const Form = () => {
   };
 
   return (
-    <>
+    <StyledContainer>
       <Skip handleSkip={handleSkip} />
-      <form action="submit" onSubmit={handleSubmit}>
+      <StyledForm action="submit" onSubmit={handleSubmit}>
         <Input setGuess={setGuess} guess={guess} />
         <Button />
-      </form>
-    </>
+      </StyledForm>
+    </StyledContainer>
   );
 };

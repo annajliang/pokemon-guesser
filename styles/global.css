@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "Pokemon";
+  src: url('../public/fonts/pokemonsolid-webfont.woff');
+}
+  
+@font-face {
+  font-family: "Pokemon";
+  src: url('../public/fonts/pokemonsolid-webfont.woff2');
+}
+  
+@font-face {
+  font-family: "Pokemon";
+  src: url('../public/fonts/PokemonSolid.ttf');
+}
