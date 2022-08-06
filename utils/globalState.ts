@@ -25,3 +25,8 @@ export const showPokemonState = atom({
   key: 'showPokemonState',
   default: false as boolean,
 });
+
+export const previouslyShownIndicesState = atom({
+  key: 'previouslyShownIndicesState',
+  default: [] as number[],
+});

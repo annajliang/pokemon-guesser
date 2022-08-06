@@ -4,22 +4,29 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   allPokemonState,
   randomIndexState,
+  previouslyShownIndicesState,
   showPokemonState,
 } from '../../utils/globalState';
 import { StyledPokemonImage } from './Pokemon.styled';
-
-const getRandomIndex = (arr: any[]) => {
-  return Math.floor(Math.random() * arr.length);
-};
+import { getRandomIndex } from '../../utils/helpers';
 
 export const Pokemon = () => {
   const allPokemon = useRecoilValue(allPokemonState);
-  const showPokemon = useRecoilValue(showPokemonState);
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
+  const [previouslyShownIndices, setPreviouslyShownIndices] = useRecoilState(
+    previouslyShownIndicesState
+  );
+  const showPokemon = useRecoilValue(showPokemonState);
 
   useEffect(() => {
     setRandomIndex(getRandomIndex(allPokemon));
   }, [allPokemon, setRandomIndex]);
+
+  useEffect(() => {
+    if (!previouslyShownIndices.includes(randomIndex)) {
+      setPreviouslyShownIndices([randomIndex, ...previouslyShownIndices]);
+    }
+  }, [previouslyShownIndices, randomIndex, setPreviouslyShownIndices]);
 
   return (
     <div>

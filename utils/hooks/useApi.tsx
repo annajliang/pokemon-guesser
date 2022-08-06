@@ -65,7 +65,6 @@ export const useApi = (url: string) => {
         if (data) {
           const pokemonNameId = getPokemonNameId(results);
           setallPokemon([...pokemonNameId]);
-          console.log('pokemonNameId', pokemonNameId);
         }
       } catch (err) {
         console.log(err);

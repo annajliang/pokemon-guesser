@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
-export const StyledPokemonImage = styled.div<{ showPokemon: boolean }>`
+export const StyledPokemonImage = styled.div<{
+  showPokemon: boolean;
+}>`
   margin: ${theme.spacing.l} 0;
 
   img {

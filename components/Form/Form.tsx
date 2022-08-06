@@ -8,28 +8,23 @@ import {
   allPokemonState,
   randomIndexState,
   scoreState,
+  previouslyShownIndicesState,
   showPokemonState,
 } from '../../utils/globalState';
-import { PokemonData } from '../../utils/types/interfaces';
 import { StyledForm, StyledContainer } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
 import wrong from '../../public/sounds/wrong.mp3';
-
-const getFilteredPokemon = (
-  allPokemon: PokemonData[],
-  currentPokemon: string
-) => {
-  return allPokemon.filter((pokemon) => {
-    return pokemon.name !== currentPokemon;
-  });
-};
+import { getRandomIndex } from '../../utils/helpers';
 
 export const Form = () => {
   const [guess, setGuess] = useState('');
-  const randomIndex = useRecoilValue(randomIndexState);
+  const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
+  const [showPokemon, setShowPokemon] = useRecoilState(showPokemonState);
   const [score, setScore] = useRecoilState(scoreState);
-  const [showPokemon, setshowPokemon] = useRecoilState(showPokemonState);
+  const [previouslyShownIndices, setPreviouslyShownIndices] = useRecoilState(
+    previouslyShownIndicesState
+  );
   const [wrongAudio, setWrongAudio] = useState<HTMLAudioElement>();
   const [correctAudio, setCorrectAudio] = useState<HTMLAudioElement>();
   const currentPokemon = allPokemon[randomIndex]?.name;
@@ -43,7 +38,6 @@ export const Form = () => {
   const evaluateGuess = () => {
     const answer = currentPokemon.toLowerCase();
     const levenshteinDistance = levenshtein(guess, answer);
-    setshowPokemon(true);
 
     if (levenshteinDistance < 2) {
       correctAudio?.play();
@@ -56,26 +50,24 @@ export const Form = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     evaluateGuess();
-    setGuess('');
 
+    setShowPokemon(true);
     setTimeout(() => {
-      // remove pokemon that just appeared from allPokemon array to ensure no pokemon appears twice
-      const filteredPokemon = getFilteredPokemon(allPokemon, currentPokemon);
-      setallPokemon(filteredPokemon);
-      setshowPokemon(false);
-    }, 1000);
+      setRandomIndex(getRandomIndex(allPokemon));
+      setShowPokemon(false);
+    }, 1200);
+
+    setGuess('');
   };
 
   const handleSkip = () => {
     evaluateGuess();
-    setGuess('');
-
+    setShowPokemon(true);
     setTimeout(() => {
-      // remove pokemon that just appeared from allPokemon array to ensure no pokemon appears twice
-      const filteredPokemon = getFilteredPokemon(allPokemon, currentPokemon);
-      setallPokemon(filteredPokemon);
-      setshowPokemon(false);
-    }, 1000);
+      setRandomIndex(getRandomIndex(allPokemon));
+      setShowPokemon(false);
+    }, 1200);
+    setGuess('');
   };
 
   return (

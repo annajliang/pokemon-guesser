@@ -1,12 +1,12 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
-import { showPokemonState, timerState } from '../../utils/globalState';
+import { timerState, showPokemonState } from '../../utils/globalState';
 import { StyledTimer, StyledClockIcon } from './Timer.styled';
 import Image from 'next/image';
 
 export const Timer = () => {
-  const [timer, setTimer] = useRecoilState(timerState);
   const showPokemon = useRecoilValue(showPokemonState);
+  const [timer, setTimer] = useRecoilState(timerState);
 
   useEffect(() => {
     let countdown: NodeJS.Timeout;

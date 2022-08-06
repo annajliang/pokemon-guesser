@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { showPokemonState } from '../utils/globalState';
 import { useApi } from '../utils/hooks/useApi';
 import { Pokemon } from '../components/Pokemon/Pokemon';
 import { Form } from '../components/Form/Form';
 import { Timer } from '../components/Timer/Timer';
 import { Score } from '../components/Score/Score';
-import { showPokemonState } from '../utils/globalState';
 import { theme } from '../styles/theme';
 
 const StyledStatus = styled.div`
