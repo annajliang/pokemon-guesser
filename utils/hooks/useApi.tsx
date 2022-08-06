@@ -23,18 +23,19 @@ const getPokemonId = (url: PokemonData['url']) => {
 
 const getReformattedName = (name: string) => {
   if (name === 'nidoran-f' || name === 'nidoran-m') {
-    return 'nidoran';
+    return 'Nidoran';
   }
 
   if (name === 'farfetchd') {
-    return `farfetch'd`;
+    return `Farfetch'd`;
   }
 
   if (name === 'mr-mime') {
-    return 'mr. mime';
+    return 'Mr. Mime';
   }
 
-  return name;
+  // capitalize first letter
+  return name.charAt(0).toUpperCase() + name.slice(1);
 };
 
 const getPokemonNameId = (results: PokemonData[]) => {
