@@ -1,7 +1,12 @@
 import Image from 'next/image';
+import React from 'react';
 import { StyledWrapper } from './Layout.styled';
 
-export const Layout: React.FC = ({ children }) => {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Image
