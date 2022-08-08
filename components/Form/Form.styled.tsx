@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
-export const StyledForm = styled.form`
+export const StyledForm = styled.form<{
+  isGuessCorrect: boolean | null | undefined;
+}>`
   border-radius: 6px 0 6px 6px;
   display: flex;
+  animation: ${({ isGuessCorrect }) =>
+    isGuessCorrect === false && 'shake 0.5s'};
 `;
 
 export const StyledContainer = styled.div`

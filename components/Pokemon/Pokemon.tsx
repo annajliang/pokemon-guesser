@@ -7,8 +7,9 @@ import {
   showPokemonState,
   unseenIdsState,
   chosenGenState,
+  isGuessCorrectState,
 } from '../../utils/globalState';
-import { StyledPokemonImage } from './Pokemon.styled';
+import { StyledPokemonImage, StyledName } from './Pokemon.styled';
 import { getRandomIndex } from '../../utils/helpers';
 
 export const Pokemon = () => {
@@ -17,6 +18,7 @@ export const Pokemon = () => {
   const unseenIds = useRecoilValue(unseenIdsState);
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const showPokemon = useRecoilValue(showPokemonState);
+  const isGuessCorrect = useRecoilValue(isGuessCorrectState);
 
   useEffect(() => {
     setRandomIndex(getRandomIndex(unseenIds));
@@ -29,7 +31,11 @@ export const Pokemon = () => {
     <div>
       {allPokemon[randomIndex] && (
         <>
-          {showPokemon && <h1>{allPokemon[randomIndex].name}</h1>}
+          {showPokemon && (
+            <StyledName isGuessCorrect={isGuessCorrect}>
+              {allPokemon[randomIndex].name}
+            </StyledName>
+          )}
           <picture>
             <source
               srcSet={require(`../../public/pokemon/gen${allPokemon[randomIndex].gen}/${allPokemon[randomIndex].id}.png?webp`)}

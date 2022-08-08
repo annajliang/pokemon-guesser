@@ -35,3 +35,9 @@ export const chosenGenState = atom({
   key: 'chosenGenState',
   default: 1 as number | string,
 });
+
+export const isGuessCorrectState = atom({
+  key: 'isGuessCorrectState',
+  default: null as null | boolean,
+});
+

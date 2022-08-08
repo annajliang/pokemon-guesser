@@ -29,7 +29,7 @@ export const StyledScore = styled.div`
   }
 `;
 
-const StyledAddedPoints = styled.p`
+export const StyledAddedPoints = styled.p`
   position: absolute;
   right: -3.5rem;
   bottom: 0;

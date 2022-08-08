@@ -10,6 +10,7 @@ import {
   scoreState,
   showPokemonState,
   unseenIdsState,
+  isGuessCorrectState,
 } from '../../utils/globalState';
 import { StyledForm, StyledContainer } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
@@ -33,6 +34,8 @@ export const Form = ({ isSoundOn }: FormProps) => {
   const [guess, setGuess] = useState('');
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
+  const [isGuessCorrect, setIsGuessCorrect] =
+    useRecoilState(isGuessCorrectState);
   const allPokemon = useRecoilValue(allPokemonState);
   const [showPokemon, setShowPokemon] = useRecoilState(showPokemonState);
   const [score, setScore] = useRecoilState(scoreState);
@@ -52,9 +55,11 @@ export const Form = ({ isSoundOn }: FormProps) => {
 
     if (levenshteinDistance < 2) {
       isSoundOn && correctAudio?.play();
+      setIsGuessCorrect(true);
       return setScore((prevScore) => prevScore + 5);
     }
 
+    setIsGuessCorrect(false);
     return isSoundOn && wrongAudio?.play();
   };
 
@@ -68,6 +73,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
       setUnseenIds(filteredUnseenIds);
       setRandomIndex(getRandomIndex(filteredUnseenIds));
       setShowPokemon(false);
+      setIsGuessCorrect(null);
     }, 1200);
 
     setGuess('');
@@ -76,11 +82,14 @@ export const Form = ({ isSoundOn }: FormProps) => {
   const handleSkip = () => {
     evaluateGuess();
     setShowPokemon(true);
+    setIsGuessCorrect(false);
+
     setTimeout(() => {
       const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
       setUnseenIds(filteredUnseenIds);
       setRandomIndex(getRandomIndex(filteredUnseenIds));
       setShowPokemon(false);
+      setIsGuessCorrect(null);
     }, 1200);
 
     setGuess('');
@@ -89,7 +98,11 @@ export const Form = ({ isSoundOn }: FormProps) => {
   return (
     <StyledContainer>
       <Skip handleSkip={handleSkip} />
-      <StyledForm action="submit" onSubmit={handleSubmit}>
+      <StyledForm
+        action="submit"
+        onSubmit={handleSubmit}
+        isGuessCorrect={isGuessCorrect}
+      >
         <Input setGuess={setGuess} guess={guess} />
         <Button />
       </StyledForm>

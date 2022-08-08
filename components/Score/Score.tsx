@@ -1,10 +1,15 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Image from 'next/image';
-import { scoreState } from '../../utils/globalState';
-import { StyledScore, StyledScoreIcon } from './Score.styled';
+import { scoreState, isGuessCorrectState } from '../../utils/globalState';
+import {
+  StyledScore,
+  StyledScoreIcon,
+  StyledAddedPoints,
+} from './Score.styled';
 
 export const Score = () => {
   const score = useRecoilValue(scoreState);
+  const isGuessCorrect = useRecoilValue(isGuessCorrectState);
 
   return (
     <StyledScore>
@@ -19,7 +24,7 @@ export const Score = () => {
       </StyledScoreIcon>
       <h3>Score</h3>
       <p>{score}</p>
-      {/* {isGuessCorrect && <StyledAddedPoints>+5</StyledAddedPoints>} */}
+      {isGuessCorrect && <StyledAddedPoints>+5</StyledAddedPoints>}
     </StyledScore>
   );
 };

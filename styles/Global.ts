@@ -22,6 +22,8 @@ body {
    position: relative;
    font-size: 2rem;
    color: ${theme.colors.midBlue};
+   display: flex;
+   align-items: center;
 
    @media (max-width: 1045px) {
     background-position: right;

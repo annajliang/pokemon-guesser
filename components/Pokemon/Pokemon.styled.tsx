@@ -26,3 +26,9 @@ export const StyledPokemonImage = styled.div<{
     }
   }
 `;
+
+export const StyledName = styled.h1<{ isGuessCorrect: boolean | null }>`
+  /* color: ${({ isGuessCorrect }) => (isGuessCorrect ? 'green' : 'red')}; */
+  -webkit-text-stroke-color: ${({ isGuessCorrect }) =>
+    isGuessCorrect ? 'green' : 'red'};
+`;
