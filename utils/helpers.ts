@@ -1,3 +1,4 @@
 export const getRandomIndex = (arr: any[]) => {
-  return Math.floor(Math.random() * arr.length);
+  console.log('index', Math.floor(Math.random() * arr.length));
+  return arr[Math.floor(Math.random() * arr.length)];
 };

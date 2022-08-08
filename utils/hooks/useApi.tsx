@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { allPokemonState } from '../globalState';
+import { allPokemonState, unseenIdsState } from '../globalState';
 import { PokemonData } from '../types/interfaces';
 
 const getPokemonId = (url: PokemonData['url']) => {
@@ -47,8 +47,15 @@ const getPokemonNameId = (results: PokemonData[]) => {
   });
 };
 
+const getPokemonIds = (results: PokemonData[]) => {
+  return results.map((result: PokemonData, i) => {
+    return i;
+  });
+};
+
 export const useApi = (url: string) => {
   const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
+  const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
 
   useEffect(() => {
     const getPokemon = async () => {
@@ -65,6 +72,8 @@ export const useApi = (url: string) => {
         if (data) {
           const pokemonNameId = getPokemonNameId(results);
           setallPokemon([...pokemonNameId]);
+          const pokemonIds = getPokemonIds(results);
+          setUnseenIds([...pokemonIds]);
         }
       } catch (err) {
         console.log(err);
@@ -74,7 +83,7 @@ export const useApi = (url: string) => {
     if (allPokemon.length === 0) {
       getPokemon();
     }
-  }, [allPokemon, setallPokemon, url]);
+  }, [allPokemon, setallPokemon, url, setUnseenIds]);
 
   return [allPokemon, setallPokemon];
 };
