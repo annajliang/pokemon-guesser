@@ -30,3 +30,8 @@ export const unseenIdsState = atom({
   key: 'unseenIdsState',
   default: [] as (number | undefined)[],
 });
+
+export const chosenGenState = atom({
+  key: 'chosenGenState',
+  default: 1 as number | string,
+});

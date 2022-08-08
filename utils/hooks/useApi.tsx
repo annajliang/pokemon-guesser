@@ -43,6 +43,7 @@ const getPokemonNameId = (results: PokemonData[]) => {
     return {
       name: getReformattedName(result.name),
       id: getPokemonId(result.url),
+      gen: result.url && parseInt(result.url.split('/')[6]) <= 151 ? 1 : 2,
     };
   });
 };
@@ -67,12 +68,14 @@ export const useApi = (url: string) => {
         }
 
         const data = await response.json();
-        const { results } = data;
+        console.log('data', data);
+        const { pokemon_species } = data;
 
         if (data) {
-          const pokemonNameId = getPokemonNameId(results);
+          console.log('results', pokemon_species);
+          const pokemonNameId = getPokemonNameId(pokemon_species);
           setallPokemon([...pokemonNameId]);
-          const pokemonIds = getPokemonIds(results);
+          const pokemonIds = getPokemonIds(pokemon_species);
           setUnseenIds([...pokemonIds]);
         }
       } catch (err) {

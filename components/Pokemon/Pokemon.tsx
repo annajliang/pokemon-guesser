@@ -6,12 +6,14 @@ import {
   randomIndexState,
   showPokemonState,
   unseenIdsState,
+  chosenGenState,
 } from '../../utils/globalState';
 import { StyledPokemonImage } from './Pokemon.styled';
 import { getRandomIndex } from '../../utils/helpers';
 
 export const Pokemon = () => {
   const allPokemon = useRecoilValue(allPokemonState);
+  const chosenGen = useRecoilValue(chosenGenState);
   const unseenIds = useRecoilValue(unseenIdsState);
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const showPokemon = useRecoilValue(showPokemonState);
@@ -21,8 +23,7 @@ export const Pokemon = () => {
   }, [unseenIds, setRandomIndex]);
 
   // console.log('randomIndex', randomIndex);
-  console.log('unseenIds', unseenIds);
-  console.log('allPokemon', allPokemon[randomIndex]);
+  console.log('chosenGen', chosenGen);
 
   return (
     <div>
@@ -31,12 +32,12 @@ export const Pokemon = () => {
           {showPokemon && <h1>{allPokemon[randomIndex].name}</h1>}
           <picture>
             <source
-              srcSet={require(`../../public/pokemon/gen1/${allPokemon[randomIndex].id}.png?webp`)}
+              srcSet={require(`../../public/pokemon/gen${allPokemon[randomIndex].gen}/${allPokemon[randomIndex].id}.png?webp`)}
               type="image/webp"
             />
             <StyledPokemonImage showPokemon={showPokemon}>
               <Image
-                src={`/pokemon/gen1/${allPokemon[randomIndex].id}.png`}
+                src={`/pokemon/gen${allPokemon[randomIndex].gen}/${allPokemon[randomIndex].id}.png`}
                 alt={`${allPokemon[randomIndex].name}`}
                 width={400}
                 height={400}

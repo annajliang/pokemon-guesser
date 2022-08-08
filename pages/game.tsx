@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { showPokemonState } from '../utils/globalState';
+import { showPokemonState, chosenGenState } from '../utils/globalState';
 import { useApi } from '../utils/hooks/useApi';
 import { Pokemon } from '../components/Pokemon/Pokemon';
 import { Form } from '../components/Form/Form';
@@ -47,8 +47,9 @@ export const StyledContainer = styled.div`
 
 const Game: NextPage = () => {
   const showPokemon = useRecoilValue(showPokemonState);
+  const chosenGen = useRecoilValue(chosenGenState);
 
-  useApi('https://pokeapi.co/api/v2/pokemon?limit=5');
+  useApi(`https://pokeapi.co/api/v2/generation/${chosenGen}`);
 
   return (
     <StyledContainer>

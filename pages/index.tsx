@@ -1,7 +1,9 @@
 import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
+import { useRecoilState } from 'recoil';
 import Link from 'next/link';
 import startGame from '../public/sounds/startGame.mp3';
+import { chosenGenState } from '../utils/globalState';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 
@@ -29,7 +31,7 @@ const StyledIntro = styled.div`
   height: calc(100vh - 4rem);
 
   * {
-    padding-bottom: 2rem;
+    margin-bottom: 2rem;
   }
 `;
 
@@ -47,10 +49,15 @@ const StyledStartGame = styled.a`
 
 const Home: NextPage = () => {
   const [startGameAudio, setStartGameAudio] = useState<HTMLAudioElement>();
+  const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
 
   useEffect(() => {
     setStartGameAudio(new Audio(startGame));
   }, []);
+
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setChooseGen(e.target.value);
+  };
 
   return (
     <StyledContainer>
@@ -65,6 +72,16 @@ const Home: NextPage = () => {
           the Pokemon Elites.
         </p>
         <p>Time starts once you click the start button!</p>
+
+        <label htmlFor="generation">Choose your generation:</label>
+
+        <select name="generation" id="generation" onChange={handleChange}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="all">All</option>
+        </select>
         <Link href="/game" passHref>
           <StyledStartGame onClick={() => startGameAudio?.play()}>
             Start
