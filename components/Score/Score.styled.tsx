@@ -11,7 +11,6 @@ export const StyledScore = styled.div`
   font-size: 1.3rem;
   width: 132px;
   text-align: right;
-  margin-top: 4rem;
 
   h3 {
     position: absolute;
@@ -49,4 +48,5 @@ export const StyledScoreIcon = styled.span`
   padding: 7px;
   border-radius: 50%;
   width: 50px;
+  display: flex;
 `;

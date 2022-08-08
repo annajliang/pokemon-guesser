@@ -44,4 +44,5 @@ export const StyledClockIcon = styled.span`
   padding: 7px;
   border-radius: 50%;
   width: 50px;
+  display: flex;
 `;

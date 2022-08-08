@@ -25,7 +25,11 @@ const getFilteredUnseenIds = (
   });
 };
 
-export const Form = () => {
+interface FormProps {
+  isSoundOn: boolean;
+}
+
+export const Form = ({ isSoundOn }: FormProps) => {
   const [guess, setGuess] = useState('');
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
@@ -47,11 +51,11 @@ export const Form = () => {
     const levenshteinDistance = levenshtein(guess, answer);
 
     if (levenshteinDistance < 2) {
-      correctAudio?.play();
+      isSoundOn && correctAudio?.play();
       return setScore((prevScore) => prevScore + 5);
     }
 
-    return wrongAudio?.play();
+    return isSoundOn && wrongAudio?.play();
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
