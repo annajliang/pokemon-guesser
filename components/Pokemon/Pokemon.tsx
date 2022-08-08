@@ -48,6 +48,7 @@ export const Pokemon = () => {
                 width={400}
                 height={400}
                 priority={true}
+                draggable="false"
               />
             </StyledPokemonImage>
           </picture>
