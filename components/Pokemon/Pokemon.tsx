@@ -16,9 +16,9 @@ export const Pokemon = () => {
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const showPokemon = useRecoilValue(showPokemonState);
 
-  // useEffect(() => {
-  //   setRandomIndex(getRandomIndex(unseenIds));
-  // }, [unseenIds, setRandomIndex]);
+  useEffect(() => {
+    setRandomIndex(getRandomIndex(unseenIds));
+  }, [unseenIds, setRandomIndex]);
 
   // console.log('randomIndex', randomIndex);
   console.log('unseenIds', unseenIds);
