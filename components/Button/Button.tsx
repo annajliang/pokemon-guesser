@@ -1,5 +1,13 @@
 import { StyledButton } from './Button.styled';
 
-export const Button = () => {
-  return <StyledButton type="submit">Guess</StyledButton>;
+interface ButtonProps {
+  showPokemon: boolean;
+}
+
+export const Button = ({ showPokemon }: ButtonProps) => {
+  return (
+    <StyledButton type="submit" disabled={showPokemon}>
+      Guess
+    </StyledButton>
+  );
 };

@@ -97,14 +97,14 @@ export const Form = ({ isSoundOn }: FormProps) => {
 
   return (
     <StyledContainer>
-      <Skip handleSkip={handleSkip} />
+      <Skip handleSkip={handleSkip} showPokemon={showPokemon} />
       <StyledForm
         action="submit"
         onSubmit={handleSubmit}
         isGuessCorrect={isGuessCorrect}
       >
         <Input setGuess={setGuess} guess={guess} />
-        <Button />
+        <Button showPokemon={showPokemon} />
       </StyledForm>
     </StyledContainer>
   );
