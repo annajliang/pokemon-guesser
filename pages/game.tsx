@@ -1,8 +1,12 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
-import { showPokemonState, chosenGenState } from '../utils/globalState';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import {
+  showPokemonState,
+  chosenGenState,
+  startGameAudioStaate,
+} from '../utils/globalState';
 import { useApi } from '../utils/hooks/useApi';
 import { Pokemon } from '../components/Pokemon/Pokemon';
 import { Form } from '../components/Form/Form';
@@ -57,12 +61,15 @@ const StyledSoundIcon = styled.button`
   padding: 10px;
   border-radius: 50%;
   display: flex;
+  box-shadow: 4px 4px 0px ${theme.colors.midBlue};
 `;
 
 const Game: NextPage = () => {
   const showPokemon = useRecoilValue(showPokemonState);
   const chosenGen = useRecoilValue(chosenGenState);
   const [isSoundOn, setIsSoundOn] = useState(true);
+  const [startGameAudio, setStartGameAudio] =
+    useRecoilState(startGameAudioStaate);
 
   useApi(`https://pokeapi.co/api/v2/generation/${chosenGen}`);
 
@@ -71,7 +78,12 @@ const Game: NextPage = () => {
       <div>
         {!showPokemon && <h1>Who&apos;s that Pokemon?</h1>}
         <StyledStatus>
-          <StyledSoundIcon onClick={() => setIsSoundOn(false)}>
+          <StyledSoundIcon
+            onClick={() => {
+              startGameAudio?.pause();
+              setIsSoundOn((isSoundOn) => !isSoundOn);
+            }}
+          >
             <Image
               src={`/assets/${isSoundOn ? 'soundOn' : 'soundOff'}.svg`}
               alt=""

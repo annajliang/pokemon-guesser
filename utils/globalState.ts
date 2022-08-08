@@ -41,3 +41,7 @@ export const isGuessCorrectState = atom({
   default: null as null | boolean,
 });
 
+export const startGameAudioStaate = atom({
+  key: 'startGameAudioStaate',
+  default: null as null | HTMLAudioElement,
+});

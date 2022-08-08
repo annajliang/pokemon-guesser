@@ -3,7 +3,7 @@ import { useEffect, useState, ChangeEvent } from 'react';
 import { useRecoilState } from 'recoil';
 import Link from 'next/link';
 import startGame from '../public/sounds/startGame.mp3';
-import { chosenGenState } from '../utils/globalState';
+import { chosenGenState, startGameAudioStaate } from '../utils/globalState';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 
@@ -48,12 +48,13 @@ const StyledStartGame = styled.a`
 `;
 
 const Home: NextPage = () => {
-  const [startGameAudio, setStartGameAudio] = useState<HTMLAudioElement>();
+  const [startGameAudio, setStartGameAudio] =
+    useRecoilState(startGameAudioStaate);
   const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
 
   useEffect(() => {
     setStartGameAudio(new Audio(startGame));
-  }, []);
+  }, [setStartGameAudio]);
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setChooseGen(e.target.value);
