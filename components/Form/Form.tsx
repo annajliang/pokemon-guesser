@@ -74,7 +74,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
       setRandomIndex(getRandomIndex(filteredUnseenIds));
       setShowPokemon(false);
       setIsGuessCorrect(null);
-    }, 1200);
+    }, 1000);
 
     setGuess('');
   };
@@ -90,7 +90,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
       setRandomIndex(getRandomIndex(filteredUnseenIds));
       setShowPokemon(false);
       setIsGuessCorrect(null);
-    }, 1200);
+    }, 1000);
 
     setGuess('');
   };
