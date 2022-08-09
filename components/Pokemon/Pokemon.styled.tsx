@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { theme } from '../../styles/theme';
 
 export const StyledPokemonImage = styled.div<{
   showPokemon: boolean;
+  isGuessCorrect: boolean | null;
 }>`
   margin: ${theme.spacing.l} 0;
 
@@ -13,6 +14,16 @@ export const StyledPokemonImage = styled.div<{
     margin: 4rem 0;
     object-fit: contain;
     height: 400px;
+
+    ${({ isGuessCorrect }) =>
+      isGuessCorrect === null &&
+      css`
+        opacity: 1;
+        animation-name: fadeInOpacity;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in;
+        animation-duration: 0.5s;
+      `}
 
     @media (max-width: 1337px) {
       height: 350px;
