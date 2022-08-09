@@ -67,12 +67,13 @@ export const Form = ({ isSoundOn }: FormProps) => {
     e.preventDefault();
     evaluateGuess();
     setShowPokemon(true);
+    const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
+    const index = getRandomIndex(filteredUnseenIds);
 
     setTimeout(() => {
       setShowPokemon(false);
-      const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
       setUnseenIds(filteredUnseenIds);
-      setRandomIndex(getRandomIndex(filteredUnseenIds));
+      setRandomIndex(index);
       setIsGuessCorrect(null);
     }, 1000);
 
@@ -83,12 +84,14 @@ export const Form = ({ isSoundOn }: FormProps) => {
     evaluateGuess();
     setShowPokemon(true);
     setIsGuessCorrect(false);
+    const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
+    const index = getRandomIndex(filteredUnseenIds);
 
     setTimeout(() => {
       setShowPokemon(false);
-      const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
       setUnseenIds(filteredUnseenIds);
-      setRandomIndex(getRandomIndex(filteredUnseenIds));
+      setRandomIndex(index);
+
       setIsGuessCorrect(null);
     }, 1000);
 
