@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { allPokemonState, unseenIdsState } from '../globalState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  allPokemonState,
+  unseenIdsState,
+  isGameStartedState,
+} from '../globalState';
 import { PokemonData } from '../types/interfaces';
 
 const getPokemonId = (url: PokemonData['url']) => {
@@ -55,8 +59,10 @@ const getPokemonIds = (results: PokemonData[]) => {
 };
 
 export const useApi = (url: string) => {
+  console.log('url', url);
   const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
+  const [isGameStarted, setIsGameStarted] = useRecoilState(isGameStartedState);
 
   useEffect(() => {
     const getPokemon = async () => {
@@ -83,10 +89,10 @@ export const useApi = (url: string) => {
       }
     };
 
-    if (allPokemon.length === 0) {
+    if (isGameStarted) {
       getPokemon();
     }
-  }, [allPokemon, setallPokemon, url, setUnseenIds]);
+  }, [allPokemon, setallPokemon, url, setUnseenIds, isGameStarted]);
 
   return [allPokemon, setallPokemon];
 };

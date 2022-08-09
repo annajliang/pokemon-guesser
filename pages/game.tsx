@@ -7,7 +7,6 @@ import {
   chosenGenState,
   startGameAudioStaate,
 } from '../utils/globalState';
-import { useApi } from '../utils/hooks/useApi';
 import { Pokemon } from '../components/Pokemon/Pokemon';
 import { Form } from '../components/Form/Form';
 import { Timer } from '../components/Timer/Timer';
@@ -66,12 +65,9 @@ const StyledSoundIcon = styled.button`
 
 const Game: NextPage = () => {
   const showPokemon = useRecoilValue(showPokemonState);
-  const chosenGen = useRecoilValue(chosenGenState);
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [startGameAudio, setStartGameAudio] =
     useRecoilState(startGameAudioStaate);
-
-  useApi(`https://pokeapi.co/api/v2/generation/${chosenGen}`);
 
   return (
     <StyledContainer>

@@ -1,9 +1,14 @@
 import type { NextPage } from 'next';
 import { useEffect, useState, ChangeEvent } from 'react';
+import { useApi } from '../utils/hooks/useApi';
 import { useRecoilState } from 'recoil';
 import Link from 'next/link';
 import startGame from '../public/sounds/startGame.mp3';
-import { chosenGenState, startGameAudioStaate } from '../utils/globalState';
+import {
+  chosenGenState,
+  startGameAudioStaate,
+  isGameStartedState,
+} from '../utils/globalState';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 
@@ -51,6 +56,7 @@ const Home: NextPage = () => {
   const [startGameAudio, setStartGameAudio] =
     useRecoilState(startGameAudioStaate);
   const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
+  const [isGameStarted, setIsGameStarted] = useRecoilState(isGameStartedState);
 
   useEffect(() => {
     setStartGameAudio(new Audio(startGame));
@@ -59,6 +65,8 @@ const Home: NextPage = () => {
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setChooseGen(e.target.value);
   };
+
+  useApi(`https://pokeapi.co/api/v2/generation/${chosenGen}`);
 
   return (
     <StyledContainer>
@@ -84,7 +92,12 @@ const Home: NextPage = () => {
           <option value="all">All</option>
         </select>
         <Link href="/game" passHref>
-          <StyledStartGame onClick={() => startGameAudio?.play()}>
+          <StyledStartGame
+            onClick={() => {
+              startGameAudio?.play();
+              setIsGameStarted(true);
+            }}
+          >
             Start
           </StyledStartGame>
         </Link>
