@@ -69,10 +69,10 @@ export const Form = ({ isSoundOn }: FormProps) => {
     setShowPokemon(true);
 
     setTimeout(() => {
+      setShowPokemon(false);
       const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
       setUnseenIds(filteredUnseenIds);
       setRandomIndex(getRandomIndex(filteredUnseenIds));
-      setShowPokemon(false);
       setIsGuessCorrect(null);
     }, 1000);
 
@@ -85,10 +85,10 @@ export const Form = ({ isSoundOn }: FormProps) => {
     setIsGuessCorrect(false);
 
     setTimeout(() => {
+      setShowPokemon(false);
       const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
       setUnseenIds(filteredUnseenIds);
       setRandomIndex(getRandomIndex(filteredUnseenIds));
-      setShowPokemon(false);
       setIsGuessCorrect(null);
     }, 1000);
 
