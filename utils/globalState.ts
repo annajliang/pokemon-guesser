@@ -50,3 +50,8 @@ export const isGameStartedState = atom({
   key: 'isGameStartedState',
   default: false as boolean,
 });
+
+export const prevRandomIndexState = atom({
+  key: 'prevRandomIndexState',
+  default: 0 as number,
+});

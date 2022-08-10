@@ -11,6 +11,7 @@ import {
   showPokemonState,
   unseenIdsState,
   isGuessCorrectState,
+  prevRandomIndexState,
 } from '../../utils/globalState';
 import { StyledForm, StyledContainer } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
@@ -34,6 +35,8 @@ export const Form = ({ isSoundOn }: FormProps) => {
   const [guess, setGuess] = useState('');
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
+  const [prevRandomIndex, setPrevRandomIndex] =
+    useRecoilState(prevRandomIndexState);
   const [isGuessCorrect, setIsGuessCorrect] =
     useRecoilState(isGuessCorrectState);
   const allPokemon = useRecoilValue(allPokemonState);
@@ -68,16 +71,15 @@ export const Form = ({ isSoundOn }: FormProps) => {
     evaluateGuess();
     setShowPokemon(true);
     const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
+    console.log('randomIndex', randomIndex);
+    setPrevRandomIndex(randomIndex);
     const index = getRandomIndex(filteredUnseenIds);
 
     setTimeout(() => {
-      // setShowPokemon(false);
+      setShowPokemon(false);
       setUnseenIds(filteredUnseenIds);
       setRandomIndex(index);
       setIsGuessCorrect(null);
-      if (isGuessCorrect === null) {
-        setShowPokemon(false);
-      }
     }, 1000);
 
     setGuess('');
@@ -91,13 +93,10 @@ export const Form = ({ isSoundOn }: FormProps) => {
     const index = getRandomIndex(filteredUnseenIds);
 
     setTimeout(() => {
-      // setShowPokemon(false);
+      setShowPokemon(false);
       setUnseenIds(filteredUnseenIds);
       setRandomIndex(index);
       setIsGuessCorrect(null);
-      if (isGuessCorrect === null) {
-        setShowPokemon(false);
-      }
     }, 1000);
 
     setGuess('');

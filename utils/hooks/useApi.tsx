@@ -59,7 +59,6 @@ const getPokemonIds = (results: PokemonData[]) => {
 };
 
 export const useApi = (url: string) => {
-  console.log('url', url);
   const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
   const [isGameStarted, setIsGameStarted] = useRecoilState(isGameStartedState);
@@ -74,11 +73,9 @@ export const useApi = (url: string) => {
         }
 
         const data = await response.json();
-        console.log('data', data);
         const { pokemon_species } = data;
 
         if (data) {
-          console.log('results', pokemon_species);
           const pokemonNameId = getPokemonNameId(pokemon_species);
           setallPokemon([...pokemonNameId]);
           const pokemonIds = getPokemonIds(pokemon_species);
