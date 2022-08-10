@@ -8,6 +8,7 @@ import {
   unseenIdsState,
   chosenGenState,
   isGuessCorrectState,
+  prevRandomIndexState,
 } from '../../utils/globalState';
 import { StyledPokemonImage, StyledName } from './Pokemon.styled';
 import { getRandomIndex } from '../../utils/helpers';
@@ -19,13 +20,14 @@ export const Pokemon = () => {
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const showPokemon = useRecoilValue(showPokemonState);
   const isGuessCorrect = useRecoilValue(isGuessCorrectState);
+  const [prevRandomIndex, setPrevRandomIndex] =
+    useRecoilState(prevRandomIndexState);
 
   useEffect(() => {
     setRandomIndex(getRandomIndex(unseenIds));
   }, [unseenIds, setRandomIndex]);
 
-  // console.log('randomIndex', randomIndex);
-  console.log('chosenGen', chosenGen);
+  console.log('randomIndex', randomIndex);
 
   return (
     <div>
@@ -42,7 +44,7 @@ export const Pokemon = () => {
               type="image/webp"
             />
             <StyledPokemonImage
-              showPokemon={showPokemon}
+              showPokemon={prevRandomIndex === randomIndex}
               isGuessCorrect={isGuessCorrect}
             >
               <Image
