@@ -8,6 +8,7 @@ import {
   unseenIdsState,
   chosenGenState,
   isGuessCorrectState,
+  isProcessingState,
 } from '../../utils/globalState';
 import { StyledPokemonImage, StyledName } from './Pokemon.styled';
 import { getRandomIndex } from '../../utils/helpers';
@@ -17,15 +18,23 @@ export const Pokemon = () => {
   const chosenGen = useRecoilValue(chosenGenState);
   const unseenIds = useRecoilValue(unseenIdsState);
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
-  const showPokemon = useRecoilValue(showPokemonState);
+  const [showPokemon, setShowPokemon] = useRecoilState(showPokemonState);
+  const [isProcessing, setIsProcessing] = useRecoilState(isProcessingState);
   const isGuessCorrect = useRecoilValue(isGuessCorrectState);
 
   useEffect(() => {
     setRandomIndex(getRandomIndex(unseenIds));
   }, [unseenIds, setRandomIndex]);
 
-  // console.log('randomIndex', randomIndex);
-  console.log('chosenGen', chosenGen);
+  useEffect(() => {
+    if (isProcessing) {
+      setShowPokemon(true);
+    } else {
+      setShowPokemon(false);
+    }
+  }, [setShowPokemon, isProcessing]);
+
+  console.log('isProcessing', isProcessing);
 
   return (
     <div>
@@ -41,7 +50,10 @@ export const Pokemon = () => {
               srcSet={require(`../../public/pokemon/gen${allPokemon[randomIndex].gen}/${allPokemon[randomIndex].id}.png?webp`)}
               type="image/webp"
             />
-            <StyledPokemonImage showPokemon={showPokemon}>
+            <StyledPokemonImage
+              showPokemon={showPokemon}
+              isGuessCorrect={isGuessCorrect}
+            >
               <Image
                 src={`/pokemon/gen${allPokemon[randomIndex].gen}/${allPokemon[randomIndex].id}.png`}
                 alt={`${allPokemon[randomIndex].name}`}

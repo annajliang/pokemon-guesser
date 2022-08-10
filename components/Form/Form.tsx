@@ -11,6 +11,7 @@ import {
   showPokemonState,
   unseenIdsState,
   isGuessCorrectState,
+  isProcessingState,
 } from '../../utils/globalState';
 import { StyledForm, StyledContainer } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
@@ -36,6 +37,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
   const [isGuessCorrect, setIsGuessCorrect] =
     useRecoilState(isGuessCorrectState);
+  const [isProcessing, setIsProcessing] = useRecoilState(isProcessingState);
   const allPokemon = useRecoilValue(allPokemonState);
   const [showPokemon, setShowPokemon] = useRecoilState(showPokemonState);
   const [score, setScore] = useRecoilState(scoreState);
@@ -66,31 +68,37 @@ export const Form = ({ isSoundOn }: FormProps) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     evaluateGuess();
-    setShowPokemon(true);
+    setIsProcessing(true);
+    // setShowPokemon(true);
+    const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
+    const index = getRandomIndex(filteredUnseenIds);
 
     setTimeout(() => {
-      const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
+      // setShowPokemon(false);
       setUnseenIds(filteredUnseenIds);
-      setRandomIndex(getRandomIndex(filteredUnseenIds));
-      setShowPokemon(false);
+      setRandomIndex(index);
       setIsGuessCorrect(null);
-    }, 1200);
+      setIsProcessing(false);
+    }, 1000);
 
     setGuess('');
   };
 
   const handleSkip = () => {
     evaluateGuess();
-    setShowPokemon(true);
+    setIsProcessing(true);
+    // setShowPokemon(true);
     setIsGuessCorrect(false);
+    const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
+    const index = getRandomIndex(filteredUnseenIds);
 
     setTimeout(() => {
-      const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
+      // setShowPokemon(false);
       setUnseenIds(filteredUnseenIds);
-      setRandomIndex(getRandomIndex(filteredUnseenIds));
-      setShowPokemon(false);
+      setRandomIndex(index);
       setIsGuessCorrect(null);
-    }, 1200);
+      setIsProcessing(false);
+    }, 1000);
 
     setGuess('');
   };

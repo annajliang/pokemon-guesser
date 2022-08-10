@@ -45,3 +45,13 @@ export const startGameAudioStaate = atom({
   key: 'startGameAudioStaate',
   default: null as null | HTMLAudioElement,
 });
+
+export const isGameStartedState = atom({
+  key: 'isGameStartedState',
+  default: false as boolean,
+});
+
+export const isProcessingState = atom({
+  key: 'isProcessingState',
+  default: false as boolean,
+});
