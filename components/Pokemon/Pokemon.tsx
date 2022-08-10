@@ -38,7 +38,7 @@ export const Pokemon = () => {
 
   return (
     <div>
-      {allPokemon[randomIndex] && (
+      {allPokemon && (
         <>
           {showPokemon && (
             <StyledName isGuessCorrect={isGuessCorrect}>
