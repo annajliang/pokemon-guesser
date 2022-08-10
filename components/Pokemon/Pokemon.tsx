@@ -9,6 +9,7 @@ import {
   chosenGenState,
   isGuessCorrectState,
   isProcessingState,
+  pokemonUrlState,
 } from '../../utils/globalState';
 import { StyledPokemonImage, StyledName } from './Pokemon.styled';
 import { getRandomIndex } from '../../utils/helpers';
@@ -18,6 +19,7 @@ export const Pokemon = () => {
   const chosenGen = useRecoilValue(chosenGenState);
   const unseenIds = useRecoilValue(unseenIdsState);
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
+  const [pokemonUrl, setPokemonUrl] = useRecoilState(pokemonUrlState);
   const [showPokemon, setShowPokemon] = useRecoilState(showPokemonState);
   const [isProcessing, setIsProcessing] = useRecoilState(isProcessingState);
   const isGuessCorrect = useRecoilValue(isGuessCorrectState);
@@ -31,18 +33,22 @@ export const Pokemon = () => {
   useEffect(() => {
     if (isProcessing) {
       setShowPokemon(true);
-      url = `/pokemon/gen${allPokemon[randomIndex].gen}/${allPokemon[randomIndex].id}.png`;
+      setPokemonUrl(
+        `/pokemon/gen${allPokemon[randomIndex]?.gen}/${allPokemon[randomIndex]?.id}.png`
+      );
     } else {
       setShowPokemon(false);
-      url = `/pokemon/gen${allPokemon[randomIndex].gen}/${allPokemon[randomIndex].id}.png`;
+      setPokemonUrl(
+        `/pokemon/gen${allPokemon[randomIndex]?.gen}/${allPokemon[randomIndex]?.id}.png`
+      );
     }
-  }, [setShowPokemon, isProcessing]);
+  }, [setShowPokemon, isProcessing, allPokemon, randomIndex, setPokemonUrl]);
 
   console.log('isProcessing', isProcessing);
 
   return (
     <div>
-      {allPokemon[randomIndex] && (
+      {pokemonUrl && (
         <>
           {showPokemon && (
             <StyledName isGuessCorrect={isGuessCorrect}>
@@ -56,10 +62,9 @@ export const Pokemon = () => {
           >
             <Image
               src={
-                url ||
-                `/pokemon/gen${allPokemon[randomIndex].gen}/${allPokemon[randomIndex].id}.png`
+                pokemonUrl || `/pokemon/gen1/${allPokemon[randomIndex].id}.png`
               }
-              alt={`${allPokemon[randomIndex].name}`}
+              alt={`${allPokemon[randomIndex]?.name}`}
               width={400}
               height={400}
               priority={true}

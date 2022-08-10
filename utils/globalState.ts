@@ -55,3 +55,8 @@ export const isProcessingState = atom({
   key: 'isProcessingState',
   default: false as boolean,
 });
+
+export const pokemonUrlState = atom({
+  key: 'pokemonUrlState',
+  default: '' as string | undefined,
+});
