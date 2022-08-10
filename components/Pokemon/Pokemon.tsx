@@ -32,7 +32,7 @@ export const Pokemon = () => {
     } else {
       setShowPokemon(false);
     }
-  }, [unseenIds, setShowPokemon, isProcessing, isGuessCorrect]);
+  }, [setShowPokemon, isProcessing]);
 
   console.log('isProcessing', isProcessing);
 
