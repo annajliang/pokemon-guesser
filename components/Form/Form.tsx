@@ -11,7 +11,7 @@ import {
   showPokemonState,
   unseenIdsState,
   isGuessCorrectState,
-  prevRandomIndexState,
+  isProcessingState,
 } from '../../utils/globalState';
 import { StyledForm, StyledContainer } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
@@ -35,10 +35,9 @@ export const Form = ({ isSoundOn }: FormProps) => {
   const [guess, setGuess] = useState('');
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
-  const [prevRandomIndex, setPrevRandomIndex] =
-    useRecoilState(prevRandomIndexState);
   const [isGuessCorrect, setIsGuessCorrect] =
     useRecoilState(isGuessCorrectState);
+  const [isProcessing, setIsProcessing] = useRecoilState(isProcessingState);
   const allPokemon = useRecoilValue(allPokemonState);
   const [showPokemon, setShowPokemon] = useRecoilState(showPokemonState);
   const [score, setScore] = useRecoilState(scoreState);
@@ -69,17 +68,17 @@ export const Form = ({ isSoundOn }: FormProps) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     evaluateGuess();
-    setShowPokemon(true);
+    setIsProcessing(true);
+    // setShowPokemon(true);
     const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
-    console.log('randomIndex', randomIndex);
-    setPrevRandomIndex(randomIndex);
     const index = getRandomIndex(filteredUnseenIds);
 
     setTimeout(() => {
-      setShowPokemon(false);
+      // setShowPokemon(false);
       setUnseenIds(filteredUnseenIds);
       setRandomIndex(index);
       setIsGuessCorrect(null);
+      setIsProcessing(false);
     }, 1000);
 
     setGuess('');
@@ -87,16 +86,18 @@ export const Form = ({ isSoundOn }: FormProps) => {
 
   const handleSkip = () => {
     evaluateGuess();
-    setShowPokemon(true);
+    setIsProcessing(true);
+    // setShowPokemon(true);
     setIsGuessCorrect(false);
     const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
     const index = getRandomIndex(filteredUnseenIds);
 
     setTimeout(() => {
-      setShowPokemon(false);
+      // setShowPokemon(false);
       setUnseenIds(filteredUnseenIds);
       setRandomIndex(index);
       setIsGuessCorrect(null);
+      setIsProcessing(false);
     }, 1000);
 
     setGuess('');

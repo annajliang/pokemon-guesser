@@ -51,7 +51,7 @@ export const isGameStartedState = atom({
   default: false as boolean,
 });
 
-export const prevRandomIndexState = atom({
-  key: 'prevRandomIndexState',
-  default: 0 as number,
+export const isProcessingState = atom({
+  key: 'isProcessingState',
+  default: false as boolean,
 });
