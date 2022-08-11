@@ -22,9 +22,9 @@ export const Pokemon = () => {
   const [isProcessing, setIsProcessing] = useRecoilState(isProcessingState);
   const isGuessCorrect = useRecoilValue(isGuessCorrectState);
 
-  useEffect(() => {
-    setRandomIndex(getRandomIndex(unseenIds));
-  }, [unseenIds, setRandomIndex]);
+  // useEffect(() => {
+  //   setRandomIndex(getRandomIndex(unseenIds));
+  // }, [unseenIds, setRandomIndex]);
 
   useEffect(() => {
     if (isProcessing) {
@@ -34,7 +34,8 @@ export const Pokemon = () => {
     }
   }, [setShowPokemon, isProcessing]);
 
-  console.log('isProcessing', isProcessing);
+  console.log('randomIndex', randomIndex);
+  console.log('allPokemon', allPokemon[randomIndex]);
 
   return (
     <div>
