@@ -26,9 +26,9 @@ export const Pokemon = () => {
 
   let url;
 
-  useEffect(() => {
-    setRandomIndex(getRandomIndex(unseenIds));
-  }, [unseenIds, setRandomIndex]);
+  // useEffect(() => {
+  //   setRandomIndex(getRandomIndex(unseenIds));
+  // }, [unseenIds, setRandomIndex]);
 
   useEffect(() => {
     if (isProcessing) {
