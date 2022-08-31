@@ -59,7 +59,7 @@ interface IndexProps {
   pokemon_species: PokemonData[];
 }
 
-const Home = ({ pokemon_species }: IndexProps) => {
+const Home: NextPage = () => {
   const [startGameAudio, setStartGameAudio] =
     useRecoilState(startGameAudioStaate);
   const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
@@ -67,67 +67,7 @@ const Home = ({ pokemon_species }: IndexProps) => {
   const dynamicRoute = useRouter().asPath;
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
 
-  const getPokemonId = (url: PokemonData['url']) => {
-    const id = url?.split('/')[6];
-
-    if (!id) {
-      return;
-    }
-
-    if (parseInt(id) <= 9) {
-      return '00' + id;
-    }
-
-    if (parseInt(id) >= 10 && parseInt(id) < 100) {
-      return '0' + id;
-    }
-
-    return id;
-  };
-
-  const getReformattedName = (name: string) => {
-    if (name === 'nidoran-f' || name === 'nidoran-m') {
-      return 'Nidoran';
-    }
-
-    if (name === 'farfetchd') {
-      return `Farfetch'd`;
-    }
-
-    if (name === 'mr-mime') {
-      return 'Mr. Mime';
-    }
-
-    // capitalize first letter
-    return name.charAt(0).toUpperCase() + name.slice(1);
-  };
-
-  const getPokemonNameId = (results: PokemonData[]) => {
-    return results.map((result: PokemonData) => {
-      return {
-        name: getReformattedName(result.name),
-        id: getPokemonId(result.url),
-        gen: result.url && parseInt(result.url.split('/')[6]) <= 151 ? 1 : 2,
-      };
-    });
-  };
-
-  const getPokemonIds = (results: PokemonData[]) => {
-    return results.map((result: PokemonData, i) => {
-      return i;
-    });
-  };
-
-  useEffect(() => {
-    if (pokemon_species) {
-      const pokemonNameId = getPokemonNameId(pokemon_species);
-      setallPokemon([...pokemonNameId]);
-      const pokemonIds = getPokemonIds(pokemon_species);
-      setUnseenIds([...pokemonIds]);
-    }
-  }, []);
-
-  // useApi(`https://pokeapi.co/api/v2/generation/${chosenGen}`);
+  useApi(`https://pokeapi.co/api/v2/generation/${chosenGen}`);
 
   useEffect(() => {
     setStartGameAudio(new Audio(startGame));
@@ -186,20 +126,3 @@ const Home = ({ pokemon_species }: IndexProps) => {
 };
 
 export default Home;
-
-export async function getStaticProps() {
-  const res = await fetch(`https://pokeapi.co/api/v2/generation/1`);
-  const data = await res.json();
-
-  const { pokemon_species } = data;
-
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: { pokemon_species }, // will be passed to the page component as props
-  };
-}
