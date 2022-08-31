@@ -43,6 +43,34 @@ class MyDocument extends Document {
             rel="stylesheet"
             type="text/css"
           />
+          <link rel="preload" as="image" href={`/pokemon/gen1/001.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/002.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/003.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/004.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/005.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/006.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/007.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/008.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/009.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/010.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/011.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/012.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/013.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/014.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/015.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/016.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/017.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/018.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/019.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/020.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/021.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/022.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/023.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/024.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/025.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/026.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/027.png`} />
+          <link rel="preload" as="image" href={`/pokemon/gen1/028.png`} />
         </Head>
         <body>
           <script>0</script>
