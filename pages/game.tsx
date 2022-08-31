@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { useRecoilValue, useRecoilState } from 'recoil';
@@ -7,12 +8,13 @@ import {
   chosenGenState,
   startGameAudioStaate,
 } from '../utils/globalState';
+import { useApi } from '../utils/hooks/useApi';
 import { Pokemon } from '../components/Pokemon/Pokemon';
 import { Form } from '../components/Form/Form';
 import { Timer } from '../components/Timer/Timer';
 import { Score } from '../components/Score/Score';
 import { theme } from '../styles/theme';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const StyledStatus = styled.div`
   display: flex;
@@ -68,6 +70,16 @@ const Game: NextPage = () => {
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [startGameAudio, setStartGameAudio] =
     useRecoilState(startGameAudioStaate);
+  const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
+  const dynamicRoute = useRouter().asPath;
+
+  // useApi(`https://pokeapi.co/api/v2/generation/${chosenGen}`);
+
+  useEffect(() => {
+    if (dynamicRoute === '/game') {
+      setChooseGen(1);
+    }
+  }, [dynamicRoute, setChooseGen]);
 
   return (
     <StyledContainer>

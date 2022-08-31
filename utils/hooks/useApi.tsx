@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   allPokemonState,
   unseenIdsState,
-  isGameStartedState,
+  chosenGenState,
 } from '../globalState';
 import { PokemonData } from '../types/interfaces';
 
@@ -61,7 +61,13 @@ const getPokemonIds = (results: PokemonData[]) => {
 export const useApi = (url: string) => {
   const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
-  const [isGameStarted, setIsGameStarted] = useRecoilState(isGameStartedState);
+  const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
+
+  useEffect(() => {
+    if (allPokemon.length !== 0) {
+      setallPokemon([]);
+    }
+  }, [chosenGen, setallPokemon]);
 
   useEffect(() => {
     const getPokemon = async () => {
@@ -74,6 +80,7 @@ export const useApi = (url: string) => {
 
         const data = await response.json();
         const { pokemon_species } = data;
+        // console.log('data', data);
 
         if (data) {
           const pokemonNameId = getPokemonNameId(pokemon_species);
@@ -86,10 +93,10 @@ export const useApi = (url: string) => {
       }
     };
 
-    if (isGameStarted) {
+    if (allPokemon.length === 0) {
       getPokemon();
     }
-  }, [allPokemon, setallPokemon, url, setUnseenIds, isGameStarted]);
+  }, [allPokemon, setallPokemon, url, setUnseenIds, chosenGen]);
 
   return [allPokemon, setallPokemon];
 };

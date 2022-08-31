@@ -56,13 +56,14 @@ export const Form = ({ isSoundOn }: FormProps) => {
     const levenshteinDistance = levenshtein(guess, answer);
 
     if (levenshteinDistance < 2) {
-      isSoundOn && correctAudio?.play();
+      // isSoundOn && correctAudio?.play();
       setIsGuessCorrect(true);
       return setScore((prevScore) => prevScore + 5);
     }
 
     setIsGuessCorrect(false);
-    return isSoundOn && wrongAudio?.play();
+    // return isSoundOn && wrongAudio?.play();
+    // isSoundOn && wrongAudio?.play();
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

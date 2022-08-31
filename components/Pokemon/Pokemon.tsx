@@ -34,8 +34,8 @@ export const Pokemon = () => {
     }
   }, [setShowPokemon, isProcessing]);
 
-  console.log('randomIndex', randomIndex);
-  console.log('allPokemon', allPokemon[randomIndex]);
+  // console.log('randomIndex', randomIndex);
+  // console.log('allPokemon', allPokemon[randomIndex]);
 
   return (
     <div>
