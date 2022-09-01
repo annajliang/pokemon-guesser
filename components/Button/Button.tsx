@@ -10,12 +10,14 @@ type ButtonProps = {
   label: string;
   size?: Size;
   href?: string;
+  playSound?: () => void;
 };
 
 export const Button = ({
   showPokemon,
   label,
   href,
+  playSound,
   kind = 'primary',
   size = 'medium',
 }: ButtonProps) => {
@@ -32,7 +34,7 @@ export const Button = ({
         </StyledButton>
       ) : (
         <Link href={`${href}`} passHref>
-          <StyledButton kind={kind} size={size}>
+          <StyledButton kind={kind} size={size} onClick={playSound}>
             {label}
           </StyledButton>
         </Link>

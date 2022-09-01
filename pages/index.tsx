@@ -106,14 +106,14 @@ const Home: NextPage = () => {
           <option value="all">All</option>
         </select>
 
-        <Button kind="cta" label="Start" href="/game" />
-        {/* <StyledStartGame
-          // onClick={() => {
-          //   startGameAudio?.play();
-          // }}
-          >
-            Start
-          </StyledStartGame> */}
+        <Button
+          kind="cta"
+          label="Start"
+          href="/game"
+          playSound={() => {
+            startGameAudio?.play();
+          }}
+        />
       </StyledIntro>
     </StyledContainer>
   );
