@@ -7,7 +7,7 @@ const preloadedPokemonImages = nums.map((num) => {
   if (num < 10) {
     return (
       <link
-        rel="preload"
+        rel="prefetch"
         as="image"
         href={`/pokemon/gen1/00${num}.png`}
         key={`/pokemon/gen1/00${num}.png`}
@@ -16,22 +16,29 @@ const preloadedPokemonImages = nums.map((num) => {
   } else if (num >= 10 && num < 100) {
     return (
       <link
-        rel="preload"
+        rel="prefetch"
         as="image"
         href={`/pokemon/gen1/0${num}.png`}
-        key={`/pokemon/gen1/00${num}.png`}
+        key={`/pokemon/gen1/0${num}.png`}
       />
     );
-  } else if (num >= 151 && num < 252) {
+  } else if (num > 100 && num <= 151) {
     return (
-      <>
-        <link
-          rel="preload"
-          as="image"
-          href={`/pokemon/gen2/${num}.png`}
-          key={`/pokemon/gen1/00${num}.png`}
-        />
-      </>
+      <link
+        rel="prefetch"
+        as="image"
+        href={`/pokemon/gen1/${num}.png`}
+        key={`/pokemon/gen1/${num}.png`}
+      />
+    );
+  } else if (num > 151) {
+    return (
+      <link
+        rel="prefetch"
+        as="image"
+        href={`/pokemon/gen2/${num}.png`}
+        key={`/pokemon/gen2/${num}.png`}
+      />
     );
   }
 });
@@ -75,8 +82,9 @@ class MyDocument extends Document {
           />
           <link
             href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Sen:wght@400;700&display=swap"
-            rel="stylesheet"
+            rel="stylesheet preload prefetch"
             type="text/css"
+            as="style"
           />
           {preloadedPokemonImages}
         </Head>
