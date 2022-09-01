@@ -74,11 +74,18 @@ export const Form = ({ isSoundOn }: FormProps) => {
     setTimeout(() => {
       setShowPokemon(false);
       setUnseenIds(filteredUnseenIds);
-      setRandomIndex(index);
-      setIsGuessCorrect(null);
+      // setRandomIndex(index);
+      // setIsGuessCorrect(null);
+      // setGuess('');
     }, 1000);
 
-    setGuess('');
+    setTimeout(() => {
+      // setShowPokemon(false);
+      // setUnseenIds(filteredUnseenIds);
+      setRandomIndex(index);
+      setIsGuessCorrect(null);
+      setGuess('');
+    }, 1000);
   };
 
   const handleSkip = () => {
@@ -94,9 +101,8 @@ export const Form = ({ isSoundOn }: FormProps) => {
       setUnseenIds(filteredUnseenIds);
       setRandomIndex(index);
       setIsGuessCorrect(null);
+      setGuess('');
     }, 1000);
-
-    setGuess('');
   };
 
   return (
