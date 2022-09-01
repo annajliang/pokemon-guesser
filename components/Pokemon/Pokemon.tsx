@@ -8,7 +8,6 @@ import {
   unseenIdsState,
   chosenGenState,
   isGuessCorrectState,
-  isProcessingState,
 } from '../../utils/globalState';
 import { StyledPokemonImage, StyledName } from './Pokemon.styled';
 import { getRandomIndex } from '../../utils/helpers';
@@ -19,16 +18,8 @@ export const Pokemon = () => {
   const unseenIds = useRecoilValue(unseenIdsState);
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const [showPokemon, setShowPokemon] = useRecoilState(showPokemonState);
-  const [isProcessing, setIsProcessing] = useRecoilState(isProcessingState);
-  const isGuessCorrect = useRecoilValue(isGuessCorrectState);
 
-  useEffect(() => {
-    if (isProcessing) {
-      setShowPokemon(true);
-    } else {
-      setShowPokemon(false);
-    }
-  }, [setShowPokemon, isProcessing]);
+  const isGuessCorrect = useRecoilValue(isGuessCorrectState);
 
   console.log(randomIndex);
   return (
