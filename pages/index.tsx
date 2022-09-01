@@ -12,6 +12,7 @@ import {
 } from '../utils/globalState';
 import styled from 'styled-components';
 import { Button } from '../components/Button/Button';
+import { theme } from '../styles/theme';
 
 const StyledContainer = styled.div`
   position: relative;
@@ -29,7 +30,7 @@ const StyledContainer = styled.div`
 const StyledIntro = styled.div`
   position: relative;
   text-align: center;
-  padding: 0 5rem;
+  padding: 0 6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,6 +39,12 @@ const StyledIntro = styled.div`
 
   * {
     margin-bottom: 2rem;
+  }
+
+  label {
+    text-transform: uppercase;
+    font-family: ${theme.fonts.pressStart};
+    font-size: 1.5rem;
   }
 `;
 
@@ -48,7 +55,11 @@ const Home: NextPage = () => {
   const dynamicRoute = useRouter().asPath;
   const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
 
-  useApi(`https://pokeapi.co/api/v2/generation/${chosenGen}`);
+  useApi(
+    chosenGen === 'all'
+      ? 'https://pokeapi.co/api/v2/pokemon?limit=251'
+      : `https://pokeapi.co/api/v2/generation/${chosenGen}`
+  );
 
   useEffect(() => {
     setStartGameAudio(new Audio(startGame));
@@ -64,6 +75,7 @@ const Home: NextPage = () => {
   }, [dynamicRoute, setallPokemon]);
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value);
     setChooseGen(e.target.value);
 
     if (chosenGen !== e.target.value) {
@@ -71,15 +83,14 @@ const Home: NextPage = () => {
     }
   };
 
-  console.log(allPokemon);
-
   return (
     <StyledContainer>
       <StyledIntro>
         <h1>Who&apos;s that Pokemon?</h1>
+
         <p>
-          It’s a race against the clock to correctly guess which one of the
-          first generation 151 Pokemon is behind the mysterious dark silhouette!
+          It’s a race against the clock to correctly guess which Pokemon is
+          behind the mysterious dark silhouette!
         </p>
         <p>
           Earn a high score to enter the leaderboard and rank with the rest of
@@ -92,10 +103,9 @@ const Home: NextPage = () => {
         <select name="generation" id="generation" onChange={handleChange}>
           <option value="1">1</option>
           <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
           <option value="all">All</option>
         </select>
+
         <Button kind="cta" label="Start" href="/game" />
         {/* <StyledStartGame
           // onClick={() => {

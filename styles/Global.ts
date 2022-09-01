@@ -45,8 +45,9 @@ h1, h2 {
 }
 
 p {
-   font-family: ${theme.fonts.sen};
-   line-height: 1.5;
+   font-family: ${theme.fonts.pressStart};
+   line-height: 1.7;
+   font-size: 1.2rem;
 } 
 
 img {

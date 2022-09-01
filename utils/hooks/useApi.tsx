@@ -68,13 +68,21 @@ export const useApi = (url: string) => {
         }
 
         const data = await response.json();
-        const { pokemon_species } = data;
+        console.log(data);
 
-        if (data) {
-          const pokemonNameId = getPokemonNameId(pokemon_species);
+        if (url.includes('generation')) {
+          const { pokemon_species } = data;
+
+          if (data) {
+            const pokemonNameId = getPokemonNameId(pokemon_species);
+            setallPokemon([...pokemonNameId]);
+            const pokemonIds = getPokemonIds(pokemon_species);
+            setUnseenIds([...pokemonIds]);
+          }
+        } else {
+          const { results } = data;
+          const pokemonNameId = getPokemonNameId(results);
           setallPokemon([...pokemonNameId]);
-          const pokemonIds = getPokemonIds(pokemon_species);
-          setUnseenIds([...pokemonIds]);
         }
       } catch (err) {
         console.log(err);

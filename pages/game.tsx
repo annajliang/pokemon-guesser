@@ -74,6 +74,7 @@ const StyledErrorContainer = styled.div`
 
 const StyledErrorMessage = styled.p`
   margin: 1rem 0 2rem 0;
+  font-size: 1.5rem;
 `;
 
 const Game: NextPage = () => {
@@ -81,15 +82,17 @@ const Game: NextPage = () => {
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [startGameAudio, setStartGameAudio] =
     useRecoilState(startGameAudioStaate);
-  const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
-  const dynamicRoute = useRouter().asPath;
+  // const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
+  // const dynamicRoute = useRouter().asPath;
   const allPokemon = useRecoilValue(allPokemonState);
 
-  useEffect(() => {
-    if (dynamicRoute === '/game') {
-      setChooseGen(1);
-    }
-  }, [dynamicRoute, setChooseGen]);
+  // useEffect(() => {
+  //   if (dynamicRoute === '/game') {
+  //     setChooseGen(1);
+  //   }
+  // }, [dynamicRoute, setChooseGen]);
+
+  console.log(allPokemon);
 
   return (
     <StyledContainer>
