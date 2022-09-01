@@ -15,8 +15,8 @@ export const StyledPokemonImage = styled.div<{
     object-fit: contain;
     height: 400px;
 
-    ${({ isGuessCorrect }) =>
-      isGuessCorrect === null &&
+    ${({ showPokemon }) =>
+      !showPokemon &&
       css`
         opacity: 1;
         animation-name: fadeInOpacity;
