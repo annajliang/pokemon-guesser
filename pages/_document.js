@@ -1,35 +1,37 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
-const nums = Array.from(Array(151), (_, index) => index + 1);
+const nums = Array.from(Array(251), (_, index) => index + 1);
 
-const preloadedPokemonImages = nums.map((preloadedImage) => {
-  if (preloadedImage < 10) {
+const preloadedPokemonImages = nums.map((num) => {
+  if (num < 10) {
     return (
       <link
         rel="preload"
         as="image"
-        href={`/pokemon/gen1/00${preloadedImage}.png`}
-        key={preloadedImage}
+        href={`/pokemon/gen1/00${num}.png`}
+        key={`/pokemon/gen1/00${num}.png`}
       />
     );
-  } else if (preloadedImage >= 10 && preloadedImage < 100) {
+  } else if (num >= 10 && num < 100) {
     return (
       <link
         rel="preload"
         as="image"
-        href={`/pokemon/gen1/0${preloadedImage}.png`}
-        key={preloadedImage}
+        href={`/pokemon/gen1/0${num}.png`}
+        key={`/pokemon/gen1/00${num}.png`}
       />
     );
-  } else {
+  } else if (num >= 151 && num < 252) {
     return (
-      <link
-        rel="preload"
-        as="image"
-        href={`/pokemon/gen1/${preloadedImage}.png`}
-        key={preloadedImage}
-      />
+      <>
+        <link
+          rel="preload"
+          as="image"
+          href={`/pokemon/gen2/${num}.png`}
+          key={`/pokemon/gen1/00${num}.png`}
+        />
+      </>
     );
   }
 });
