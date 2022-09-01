@@ -75,7 +75,6 @@ const Home: NextPage = () => {
   }, [dynamicRoute, setallPokemon]);
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     setChooseGen(e.target.value);
 
     if (chosenGen !== e.target.value) {

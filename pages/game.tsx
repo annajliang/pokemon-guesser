@@ -1,22 +1,18 @@
 import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   showPokemonState,
-  chosenGenState,
   startGameAudioStaate,
   allPokemonState,
 } from '../utils/globalState';
-import { useApi } from '../utils/hooks/useApi';
 import { Pokemon } from '../components/Pokemon/Pokemon';
 import { Form } from '../components/Form/Form';
 import { Timer } from '../components/Timer/Timer';
 import { Score } from '../components/Score/Score';
 import { theme } from '../styles/theme';
-import { useEffect, useState } from 'react';
-import { Button } from '../components/Button/Button';
+import { useState } from 'react';
 import Link from 'next/link';
 
 const StyledStatus = styled.div`
@@ -82,17 +78,7 @@ const Game: NextPage = () => {
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [startGameAudio, setStartGameAudio] =
     useRecoilState(startGameAudioStaate);
-  // const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
-  // const dynamicRoute = useRouter().asPath;
   const allPokemon = useRecoilValue(allPokemonState);
-
-  // useEffect(() => {
-  //   if (dynamicRoute === '/game') {
-  //     setChooseGen(1);
-  //   }
-  // }, [dynamicRoute, setChooseGen]);
-
-  console.log(allPokemon);
 
   return (
     <StyledContainer>

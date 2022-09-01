@@ -1,27 +1,20 @@
 import Image from 'next/image';
-import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import {
   allPokemonState,
   randomIndexState,
   showPokemonState,
-  unseenIdsState,
-  chosenGenState,
   isGuessCorrectState,
 } from '../../utils/globalState';
 import { StyledPokemonImage, StyledName } from './Pokemon.styled';
-import { getRandomIndex } from '../../utils/helpers';
 
 export const Pokemon = () => {
   const allPokemon = useRecoilValue(allPokemonState);
-  const chosenGen = useRecoilValue(chosenGenState);
-  const unseenIds = useRecoilValue(unseenIdsState);
-  const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
-  const [showPokemon, setShowPokemon] = useRecoilState(showPokemonState);
+  const randomIndex = useRecoilValue(randomIndexState);
+  const showPokemon = useRecoilValue(showPokemonState);
 
   const isGuessCorrect = useRecoilValue(isGuessCorrectState);
 
-  console.log(randomIndex);
   return (
     <div>
       {allPokemon[randomIndex] && (

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { allPokemonState, unseenIdsState } from '../globalState';
 import { PokemonData } from '../types/interfaces';
 
@@ -59,6 +59,13 @@ export const useApi = (url: string) => {
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
 
   useEffect(() => {
+    const setupPokemonData = (data: PokemonData[]) => {
+      const pokemonNameId = getPokemonNameId(data);
+      setallPokemon([...pokemonNameId]);
+      const pokemonIds = getPokemonIds(data);
+      setUnseenIds([...pokemonIds]);
+    };
+
     const getPokemon = async () => {
       try {
         const response = await fetch(url);
@@ -68,21 +75,15 @@ export const useApi = (url: string) => {
         }
 
         const data = await response.json();
-        console.log(data);
+
+        if (!data) return;
 
         if (url.includes('generation')) {
           const { pokemon_species } = data;
-
-          if (data) {
-            const pokemonNameId = getPokemonNameId(pokemon_species);
-            setallPokemon([...pokemonNameId]);
-            const pokemonIds = getPokemonIds(pokemon_species);
-            setUnseenIds([...pokemonIds]);
-          }
+          setupPokemonData(pokemon_species);
         } else {
           const { results } = data;
-          const pokemonNameId = getPokemonNameId(results);
-          setallPokemon([...pokemonNameId]);
+          setupPokemonData(results);
         }
       } catch (err) {
         console.log(err);
