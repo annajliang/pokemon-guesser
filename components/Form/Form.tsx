@@ -113,7 +113,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
         isGuessCorrect={isGuessCorrect}
       >
         <Input setGuess={setGuess} guess={guess} />
-        <Button showPokemon={showPokemon} />
+        <Button showPokemon={showPokemon} label="Guess" size="large" />
       </StyledForm>
     </StyledContainer>
   );

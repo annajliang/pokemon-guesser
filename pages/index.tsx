@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState, ChangeEvent } from 'react';
+import { useEffect, ChangeEvent } from 'react';
 import { useApi } from '../utils/hooks/useApi';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Link from 'next/link';
@@ -9,11 +9,9 @@ import {
   chosenGenState,
   startGameAudioStaate,
   allPokemonState,
-  unseenIdsState,
 } from '../utils/globalState';
 import styled from 'styled-components';
-import { theme } from '../styles/theme';
-import { PokemonData } from '../utils/types/interfaces';
+import { Button } from '../components/Button/Button';
 
 const StyledContainer = styled.div`
   position: relative;
@@ -43,29 +41,12 @@ const StyledIntro = styled.div`
   }
 `;
 
-const StyledStartGame = styled.a`
-  text-decoration: none;
-  font-family: ${theme.fonts.pressStart};
-  padding: 1.5rem 2.5rem;
-  background: ${theme.colors.supernova};
-  border: 2px solid #3664ae;
-  box-shadow: 0px 4px 0px ${theme.colors.midBlue};
-  border-radius: 6px;
-  text-transform: uppercase;
-  color: ${theme.colors.midBlue};
-`;
-
-interface IndexProps {
-  pokemon_species: PokemonData[];
-}
-
 const Home: NextPage = () => {
   const [startGameAudio, setStartGameAudio] =
     useRecoilState(startGameAudioStaate);
   const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
-  const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
   const dynamicRoute = useRouter().asPath;
-  const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
+  const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
 
   useApi(`https://pokeapi.co/api/v2/generation/${chosenGen}`);
 
@@ -76,17 +57,21 @@ const Home: NextPage = () => {
     setChooseGen(1);
   }, [setStartGameAudio, dynamicRoute, setChooseGen]);
 
-  // Reset Gen to 1 on dynamic route change.
-  // useEffect(() => {
-  //   setChooseGen(1);
-  // }, [dynamicRoute, setChooseGen]);
+  useEffect(() => {
+    if (dynamicRoute === '/') {
+      setallPokemon([]);
+    }
+  }, [dynamicRoute, setallPokemon]);
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setChooseGen(e.target.value);
+
+    if (chosenGen !== e.target.value) {
+      setallPokemon([]);
+    }
   };
 
-  // console.log('allPokemon', allPokemon);
-  console.log('chosenGen', chosenGen);
+  console.log(allPokemon);
 
   return (
     <StyledContainer>
@@ -111,15 +96,14 @@ const Home: NextPage = () => {
           <option value="4">4</option>
           <option value="all">All</option>
         </select>
-        <Link href="/game" passHref>
-          <StyledStartGame
+        <Button kind="cta" label="Start" href="/game" />
+        {/* <StyledStartGame
           // onClick={() => {
           //   startGameAudio?.play();
           // }}
           >
             Start
-          </StyledStartGame>
-        </Link>
+          </StyledStartGame> */}
       </StyledIntro>
     </StyledContainer>
   );

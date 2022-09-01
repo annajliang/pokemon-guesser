@@ -7,6 +7,7 @@ import {
   showPokemonState,
   chosenGenState,
   startGameAudioStaate,
+  allPokemonState,
 } from '../utils/globalState';
 import { useApi } from '../utils/hooks/useApi';
 import { Pokemon } from '../components/Pokemon/Pokemon';
@@ -15,6 +16,8 @@ import { Timer } from '../components/Timer/Timer';
 import { Score } from '../components/Score/Score';
 import { theme } from '../styles/theme';
 import { useEffect, useState } from 'react';
+import { Button } from '../components/Button/Button';
+import Link from 'next/link';
 
 const StyledStatus = styled.div`
   display: flex;
@@ -65,6 +68,14 @@ const StyledSoundIcon = styled.button`
   box-shadow: 4px 4px 0px ${theme.colors.midBlue};
 `;
 
+const StyledErrorContainer = styled.div`
+  width: 500px;
+`;
+
+const StyledErrorMessage = styled.p`
+  margin: 1rem 0 2rem 0;
+`;
+
 const Game: NextPage = () => {
   const showPokemon = useRecoilValue(showPokemonState);
   const [isSoundOn, setIsSoundOn] = useState(true);
@@ -72,8 +83,7 @@ const Game: NextPage = () => {
     useRecoilState(startGameAudioStaate);
   const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
   const dynamicRoute = useRouter().asPath;
-
-  // useApi(`https://pokeapi.co/api/v2/generation/${chosenGen}`);
+  const allPokemon = useRecoilValue(allPokemonState);
 
   useEffect(() => {
     if (dynamicRoute === '/game') {
@@ -83,29 +93,44 @@ const Game: NextPage = () => {
 
   return (
     <StyledContainer>
-      <div>
-        {!showPokemon && <h1>Who&apos;s that Pokemon?</h1>}
-        <StyledStatus>
-          <StyledSoundIcon
-            onClick={() => {
-              startGameAudio?.pause();
-              setIsSoundOn((isSoundOn) => !isSoundOn);
-            }}
-          >
-            <Image
-              src={`/assets/${isSoundOn ? 'soundOn' : 'soundOff'}.svg`}
-              alt=""
-              width={40}
-              height={40}
-              priority
-            />
-          </StyledSoundIcon>
-          <Timer />
-          <Score />
-        </StyledStatus>
-      </div>
-      <Pokemon />
-      <Form isSoundOn={isSoundOn} />
+      {allPokemon.length > 0 ? (
+        <>
+          <div>
+            {!showPokemon && <h1>Who&apos;s that Pokémon?</h1>}
+            <StyledStatus>
+              <StyledSoundIcon
+                onClick={() => {
+                  startGameAudio?.pause();
+                  setIsSoundOn((isSoundOn) => !isSoundOn);
+                }}
+              >
+                <Image
+                  src={`/assets/${isSoundOn ? 'soundOn' : 'soundOff'}.svg`}
+                  alt=""
+                  width={40}
+                  height={40}
+                  priority
+                />
+              </StyledSoundIcon>
+              <Timer />
+              <Score />
+            </StyledStatus>
+          </div>
+          <Pokemon />
+          <Form isSoundOn={isSoundOn} />
+        </>
+      ) : (
+        <StyledErrorContainer>
+          {<h1>Error Occurred!</h1>}
+          <StyledErrorMessage>
+            Uh-oh! Looks like you were trying to play the game without selecting
+            a Pokémon generation first. Please go{' '}
+            <Link href="/">back to the homepage</Link> and pick your generation
+            before you play.
+          </StyledErrorMessage>
+          {/* <Button label="Back" kind="cta" href="/" /> */}
+        </StyledErrorContainer>
+      )}
     </StyledContainer>
   );
 };
