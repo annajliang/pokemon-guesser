@@ -106,7 +106,7 @@ const Home: NextPage = () => {
         </select>
 
         <Button
-          kind="cta"
+          variant="cta"
           label="Start"
           href="/game"
           playSound={() => {

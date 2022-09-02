@@ -117,7 +117,7 @@ const Game: NextPage = () => {
             <Link href="/">back to the homepage</Link> and pick your generation
             before you play.
           </StyledErrorMessage>
-          {/* <Button label="Back" kind="cta" href="/" /> */}
+          {/* <Button label="Back" variant="cta" href="/" /> */}
         </StyledErrorContainer>
       )}
     </StyledContainer>
