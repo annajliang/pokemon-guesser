@@ -26,12 +26,12 @@ export const Pokemon = () => {
           )}
           <picture>
             <source
-              srcSet={require(`../../public/pokemon/gen${allPokemon[randomIndex].gen}/${allPokemon[randomIndex].id}.png?webp`)}
+              srcSet={require(`../../public/pokemon/gen1/001.png?webp`)}
               type="image/webp"
             />
             <StyledPokemonImage showPokemon={showPokemon}>
               <Image
-                src={`/pokemon/gen${allPokemon[randomIndex].gen}/${allPokemon[randomIndex].id}.png`}
+                src={`/pokemon/gen1/001.png`}
                 alt={`${allPokemon[randomIndex].name}`}
                 width={400}
                 height={400}

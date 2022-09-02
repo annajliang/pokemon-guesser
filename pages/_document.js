@@ -85,7 +85,8 @@ class MyDocument extends Document {
             rel="stylesheet"
             type="text/css"
           />
-          {preloadedPokemonImages}
+          {/* {preloadedPokemonImages} */}
+          <link rel="prefetch" as="image" href={`/pokemon/gen1/001.png`} />
         </Head>
         <body>
           <script>0</script>
