@@ -10,7 +10,7 @@ export const Navigation = () => {
 
   return (
     <StyledNav>
-      <Modal showDialog={showDialog} closeModal={close} />
+      <Modal showDialog={showDialog} closeModal={close} variant="leaderboard" />
       <Button label="Leaderboard" variant="modal" openModal={open} />
     </StyledNav>
   );
