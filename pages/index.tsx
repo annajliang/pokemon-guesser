@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { useEffect, ChangeEvent } from 'react';
 import { useApi } from '../utils/hooks/useApi';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import Link from 'next/link';
 import startGame from '../public/sounds/startGame.mp3';
 import {
   chosenGenState,
@@ -12,7 +11,7 @@ import {
   allPokemonState,
 } from '../utils/globalState';
 import styled from 'styled-components';
-import { Button } from '../components/Button/Button';
+import { BlockLink } from '../components/BlockLink/BlockLink';
 import { theme } from '../styles/theme';
 
 const StyledContainer = styled.div`
@@ -118,12 +117,10 @@ const Home: NextPage = () => {
           <option value="2">2</option>
           <option value="all">All</option>
         </select>
-
-        <Button
-          variant="cta"
+        <BlockLink
           label="Start"
           href="/game"
-          playSound={() => {
+          onClick={() => {
             startGameAudio?.play();
           }}
         />
