@@ -12,6 +12,7 @@ import {
 import { timerState } from '../../utils/globalState';
 import { SubmitScore } from '../SubmitScore/SubmitScore';
 import { Leaderboard } from '../Leaderboard/Leaderboard';
+import { GameOver } from '../GameOver/GameOver';
 
 interface ModalProps {
   showDialog: boolean;
@@ -63,7 +64,8 @@ export const Modal = ({
           </StyledWhiteBorder>
         </StyledModalHeader>
         {/* <SubmitScore /> */}
-        <Leaderboard />
+        <GameOver />
+        {/* <Leaderboard /> */}
       </StyledDialog>
     </StyledContainer>
   );
