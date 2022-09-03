@@ -12,6 +12,7 @@ type ButtonProps = {
   href?: string;
   playSound?: () => void;
   showModal?: () => void;
+  openModal?: () => void;
 };
 
 export const Button = ({
@@ -19,7 +20,7 @@ export const Button = ({
   label,
   href,
   playSound,
-  showModal,
+  openModal,
   variant = 'primary',
   size = 'medium',
 }: ButtonProps) => {
@@ -37,7 +38,7 @@ export const Button = ({
         </StyledButton>
       )}
       {variant === 'modal' && (
-        <StyledButton variant={variant} size={size} onClick={showModal}>
+        <StyledButton variant={variant} size={size} onClick={openModal}>
           {label}
         </StyledButton>
       )}
