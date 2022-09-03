@@ -16,6 +16,7 @@ export const theme: Theme = {
     gunsmoke: '#858585',
     cloud: '#C4C4C4',
     eggshell: '#EEE9DD',
+    rubyRed: '#EF3729',
   },
   fonts: {
     pokemon: `'Pokemon', 'sans-serif'`,
