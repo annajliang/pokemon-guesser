@@ -33,10 +33,11 @@ export const StyledLabel = styled.label`
   }
 `;
 
-export const ScoreContainer = styled.div`
+export const StyledScore = styled.div`
   background-color: ${theme.colors.eggshell};
   padding: 1rem;
   width: 28rem;
+  margin-bottom: ${theme.spacing.l};
 
   span {
     font-family: ${theme.fonts.sen};
