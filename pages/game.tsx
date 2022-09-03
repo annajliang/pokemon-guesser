@@ -34,7 +34,7 @@ export const StyledContainer = styled.div`
   position: relative;
   width: 58vw;
   text-align: center;
-  height: 100vh;
+  height: 94vh;
 
   display: flex;
   flex-direction: column;
