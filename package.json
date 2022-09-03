@@ -10,6 +10,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
+    "@reach/dialog": "^0.17.0",
     "js-levenshtein": "^1.1.6",
     "next": "^12.2.4",
     "next-optimized-images": "^2.6.2",
