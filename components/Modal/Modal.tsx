@@ -8,6 +8,7 @@ import {
   StyledWhiteBorder,
 } from './Modal.styled';
 import { SubmitScore } from '../SubmitScore/SubmitScore';
+import { Leaderboard } from '../Leaderboard/Leaderboard';
 
 interface ModalProps {
   showDialog: boolean;
@@ -43,7 +44,8 @@ export const Modal = ({ showDialog, closeModal, variant }: ModalProps) => {
             />
           </StyledWhiteBorder>
         </StyledModalHeader>
-        <SubmitScore />
+        {/* <SubmitScore /> */}
+        <Leaderboard />
       </StyledDialog>
     </StyledContainer>
   );
