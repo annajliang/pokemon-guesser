@@ -12,9 +12,10 @@ import { SubmitScore } from '../SubmitScore/SubmitScore';
 interface ModalProps {
   showDialog: boolean;
   closeModal: () => void;
+  variant: 'submitScore' | 'leaderboard';
 }
 
-export const Modal = ({ showDialog, closeModal }: ModalProps) => {
+export const Modal = ({ showDialog, closeModal, variant }: ModalProps) => {
   return (
     <StyledContainer>
       <StyledDialog isOpen={showDialog} onDismiss={closeModal}>
@@ -30,7 +31,11 @@ export const Modal = ({ showDialog, closeModal }: ModalProps) => {
         <StyledModalHeader>
           <StyledWhiteBorder>
             <Image
-              src="/assets/yellowPokeball.svg"
+              src={
+                variant === 'leaderboard'
+                  ? `/assets/starIcon.svg`
+                  : `/assets/yellowPokeball.svg`
+              }
               alt=""
               width={50}
               height={50}
