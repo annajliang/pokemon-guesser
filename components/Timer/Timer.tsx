@@ -21,7 +21,7 @@ export const Timer = () => {
   }, [timer, setTimer]);
 
   return (
-    <StyledTimer>
+    <StyledTimer timer={timer} paused={showPokemon}>
       <StyledClockIcon>
         <Image src="/assets/clock.svg" alt="" width={50} height={50} priority />
       </StyledClockIcon>
