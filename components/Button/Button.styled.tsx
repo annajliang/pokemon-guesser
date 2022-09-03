@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { theme } from '../../styles/theme';
 
-export const StyledButton = styled.button<{ kind: string; size: string }>`
+export const StyledButton = styled.button<{ variant: string; size: string }>`
   text-decoration: none;
   font-family: ${theme.fonts.pressStart};
   padding: 1.5rem 2.5rem;
@@ -12,6 +12,16 @@ export const StyledButton = styled.button<{ kind: string; size: string }>`
   text-transform: uppercase;
   color: ${theme.colors.midBlue};
   font-size: 1.5rem;
+
+  ${({ variant }) =>
+    variant === 'modal' &&
+    css`
+      background: none;
+      color: ${theme.colors.supernova};
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+    `}
 
   ${({ size }) =>
     size === 'large' &&

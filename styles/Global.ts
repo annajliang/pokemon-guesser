@@ -23,7 +23,7 @@ body {
    font-size: 2rem;
    color: ${theme.colors.midBlue};
    display: flex;
-   align-items: center;
+   align-items: flex-end;
 
    @media (max-width: 1045px) {
     background-position: right;

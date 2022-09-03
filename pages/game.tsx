@@ -34,7 +34,7 @@ export const StyledContainer = styled.div`
   position: relative;
   width: 58vw;
   text-align: center;
-  height: 100vh;
+  height: 96vh;
 
   display: flex;
   flex-direction: column;
@@ -85,7 +85,16 @@ const Game: NextPage = () => {
       {allPokemon.length > 0 ? (
         <>
           <div>
-            {!showPokemon && <h1>Who&apos;s that Pokémon?</h1>}
+            {!showPokemon && (
+              <Image
+                src={'/assets/pokemonTitleDesktop.svg'}
+                width={550}
+                height={90}
+                priority={true}
+                draggable="false"
+                alt="Who's that Pokemon?"
+              />
+            )}
             <StyledStatus>
               <StyledSoundIcon
                 onClick={() => {
@@ -117,7 +126,7 @@ const Game: NextPage = () => {
             <Link href="/">back to the homepage</Link> and pick your generation
             before you play.
           </StyledErrorMessage>
-          {/* <Button label="Back" kind="cta" href="/" /> */}
+          {/* <Button label="Back" variant="cta" href="/" /> */}
         </StyledErrorContainer>
       )}
     </StyledContainer>

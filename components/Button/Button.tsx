@@ -5,12 +5,13 @@ type Size = 'small' | 'medium' | 'large';
 
 type ButtonProps = {
   showPokemon?: boolean;
-  kind?: 'primary' | 'cta';
+  variant?: 'primary' | 'cta' | 'modal';
   link?: boolean;
   label: string;
   size?: Size;
   href?: string;
   playSound?: () => void;
+  showModal?: () => void;
 };
 
 export const Button = ({
@@ -18,23 +19,31 @@ export const Button = ({
   label,
   href,
   playSound,
-  kind = 'primary',
+  showModal,
+  variant = 'primary',
   size = 'medium',
 }: ButtonProps) => {
   return (
     <>
-      {kind === 'primary' ? (
+      {/* TODO breaak tthis up intoo 3 buttons */}
+      {variant === 'primary' && (
         <StyledButton
           type="submit"
           disabled={showPokemon}
-          kind={kind}
+          variant={variant}
           size={size}
         >
           {label}
         </StyledButton>
-      ) : (
+      )}
+      {variant === 'modal' && (
+        <StyledButton variant={variant} size={size} onClick={showModal}>
+          {label}
+        </StyledButton>
+      )}
+      {variant === 'cta' && (
         <Link href={`${href}`} passHref>
-          <StyledButton kind={kind} size={size} onClick={playSound}>
+          <StyledButton variant={variant} size={size} onClick={playSound}>
             {label}
           </StyledButton>
         </Link>

@@ -80,6 +80,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
     }, 1000);
   };
 
+  //  TODO Just use the handleSubmit, maybe modified
   const handleSkip = () => {
     evaluateGuess();
 
@@ -106,6 +107,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
         isGuessCorrect={isGuessCorrect}
       >
         <Input setGuess={setGuess} guess={guess} />
+        {/* TODO change to disabled */}
         <Button showPokemon={showPokemon} label="Guess" size="large" />
       </StyledForm>
     </StyledContainer>
