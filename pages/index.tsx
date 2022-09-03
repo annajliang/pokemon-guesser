@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, ChangeEvent } from 'react';
 import { useApi } from '../utils/hooks/useApi';
@@ -27,6 +28,10 @@ const StyledContainer = styled.div`
   }
 `;
 
+const StyledH1 = styled.h1`
+  display: flex;
+`;
+
 const StyledIntro = styled.div`
   position: relative;
   text-align: center;
@@ -37,7 +42,7 @@ const StyledIntro = styled.div`
   justify-content: center;
   height: calc(100vh - 4rem);
 
-  * {
+  *:not(:first-child) {
     margin-bottom: 2rem;
   }
 
@@ -85,7 +90,16 @@ const Home: NextPage = () => {
   return (
     <StyledContainer>
       <StyledIntro>
-        <h1>Who&apos;s that Pokemon?</h1>
+        <StyledH1>
+          <Image
+            src={'/assets/pokemonTitleDesktop.svg'}
+            width={650}
+            height={100}
+            priority={true}
+            draggable="false"
+            alt="Who's that Pokemon?"
+          />
+        </StyledH1>
 
         <p>
           It’s a race against the clock to correctly guess which Pokemon is
