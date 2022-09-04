@@ -85,16 +85,6 @@ const Game: NextPage = () => {
       {allPokemon.length > 0 ? (
         <>
           <div>
-            {!showPokemon && (
-              <Image
-                src={'/assets/pokemonTitleDesktop.svg'}
-                width={550}
-                height={90}
-                priority={true}
-                draggable="false"
-                alt="Who's that Pokemon?"
-              />
-            )}
             <StyledStatus>
               <StyledSoundIcon
                 onClick={() => {
