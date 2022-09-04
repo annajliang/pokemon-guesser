@@ -1,7 +1,7 @@
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import {
   scoreState,
-  showDialogState,
+  showModalsState,
   timerState,
 } from '../../utils/globalState';
 import {
@@ -14,7 +14,7 @@ import { SubmitScore } from '../SubmitScore/SubmitScore';
 import { BlockLink } from '../BlockLink/BlockLink';
 
 const Score = ({ score }: { score: number }) => {
-  const setShowDialog = useSetRecoilState(showDialogState);
+  const [showModals, setShowModals] = useRecoilState(showModalsState);
   const setTimer = useSetRecoilState(timerState);
 
   return (
@@ -27,7 +27,7 @@ const Score = ({ score }: { score: number }) => {
         label="Replay"
         href="/"
         onClick={() => {
-          setShowDialog(false);
+          setShowModals({ ...showModals, gameOver: false });
           setTimer(60);
         }}
       />

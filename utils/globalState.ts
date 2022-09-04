@@ -18,7 +18,7 @@ export const scoreState = atom({
 
 export const timerState = atom({
   key: 'timerState',
-  default: 60 as number,
+  default: 60 as number | string,
 });
 
 export const showPokemonState = atom({
@@ -46,7 +46,10 @@ export const startGameAudioStaate = atom({
   default: null as null | HTMLAudioElement,
 });
 
-export const showDialogState = atom({
-  key: 'showDialogState',
-  default: false as boolean,
+export const showModalsState = atom({
+  key: 'showModalsState',
+  default: {
+    leaderboard: false,
+    gameOver: false,
+  } as { leaderboard: boolean; gameOver: boolean },
 });

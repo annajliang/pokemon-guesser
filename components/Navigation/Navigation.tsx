@@ -1,22 +1,30 @@
 import { useRecoilState } from 'recoil';
-import { showDialogState } from '../../utils/globalState';
+import { showModalsState } from '../../utils/globalState';
 import { StyledNav } from './Navigation.styled';
 import { Button } from '../Button/Button';
 import { Modal } from '../Modal/Modal';
+import { Leaderboard } from '../Leaderboard/Leaderboard';
 
 export const Navigation = () => {
-  const [showDialog, setShowDialog] = useRecoilState(showDialogState);
-  const open = () => setShowDialog(true);
-  const close = () => setShowDialog(false);
+  const [showModals, setShowModals] = useRecoilState(showModalsState);
+  const open = () => {
+    setShowModals({ ...showModals, leaderboard: true });
+  };
+  const close = () => {
+    setShowModals({ ...showModals, leaderboard: false });
+  };
 
   return (
     <StyledNav>
-      <Modal
-        showDialog={showDialog}
-        setShowDialog={setShowDialog}
-        closeModal={close}
-        variant="leaderboard"
-      />
+      {showModals.leaderboard && (
+        <Modal
+          showDialog={showModals.leaderboard}
+          closeModal={close}
+          variant="leaderboard"
+        >
+          <Leaderboard />
+        </Modal>
+      )}
       <Button label="Leaderboard" variant="modal" onClick={open} />
     </StyledNav>
   );

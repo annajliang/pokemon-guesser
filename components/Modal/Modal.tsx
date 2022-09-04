@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import { useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import '@reach/dialog/styles.css';
 import {
   StyledContainer,
@@ -9,32 +8,23 @@ import {
   StyledCloseBtn,
   StyledWhiteBorder,
 } from './Modal.styled';
-import { timerState } from '../../utils/globalState';
-import { SubmitScore } from '../SubmitScore/SubmitScore';
-import { Leaderboard } from '../Leaderboard/Leaderboard';
-import { GameOver } from '../GameOver/GameOver';
+import { timerState, showModalsState } from '../../utils/globalState';
 
 interface ModalProps {
   showDialog: boolean;
   closeModal: () => void;
   variant: 'submitScore' | 'leaderboard';
-  setShowDialog: (param: boolean) => void;
+  children: JSX.Element;
 }
 
 export const Modal = ({
   showDialog,
   closeModal,
   variant,
-  setShowDialog,
+  children,
 }: ModalProps) => {
   const timer = useRecoilValue(timerState);
-  console.log('showDialog', showDialog);
-
-  useEffect(() => {
-    if (timer === 0) {
-      setShowDialog(true);
-    }
-  }, [timer, setShowDialog]);
+  const [showModals, setShowModals] = useRecoilState(showModalsState);
 
   return (
     <StyledContainer>
@@ -63,9 +53,7 @@ export const Modal = ({
             />
           </StyledWhiteBorder>
         </StyledModalHeader>
-        {/* <SubmitScore /> */}
-        <GameOver />
-        {/* <Leaderboard /> */}
+        {children}
       </StyledDialog>
     </StyledContainer>
   );
