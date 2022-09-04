@@ -1,7 +1,7 @@
 import { useState, FormEvent, useEffect } from 'react';
 import levenshtein from 'js-levenshtein';
 import { Input } from '../Input/Input';
-import { Button } from '../Button/Button';
+import { Guess } from '../Button/GuessButton/GuessButton';
 import { Skip } from '../Skip/Skip';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
@@ -108,7 +108,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
       >
         <Input setGuess={setGuess} guess={guess} />
         {/* TODO change to disabled */}
-        <Button showPokemon={showPokemon} label="Guess" size="large" />
+        <Guess showPokemon={showPokemon} label="Guess" size="large" />
       </StyledForm>
     </StyledContainer>
   );
