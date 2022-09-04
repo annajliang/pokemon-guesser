@@ -19,10 +19,19 @@ export const Pokemon = () => {
     <div>
       {allPokemon[randomIndex] && (
         <>
-          {showPokemon && (
+          {showPokemon ? (
             <StyledName isGuessCorrect={isGuessCorrect}>
               {allPokemon[randomIndex].name}
             </StyledName>
+          ) : (
+            <Image
+              src={'/assets/pokemonTitleDesktop.svg'}
+              width={550}
+              height={70}
+              priority={true}
+              draggable="false"
+              alt="Who's that Pokemon?"
+            />
           )}
           <picture>
             <source

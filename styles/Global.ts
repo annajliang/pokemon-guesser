@@ -30,7 +30,7 @@ body {
    }
 }
 
-h1, h2 {
+h1 {
    font-family: ${theme.fonts.pokemon};
    color: ${theme.colors.supernova};
    font-size: 5rem;
@@ -44,9 +44,16 @@ h1, h2 {
    }
 }
 
+h2 {
+   font-family: ${theme.fonts.pressStart};
+   font-size: 2.5rem;
+   text-transform: uppercase;
+   color: ${theme.colors.midBlue};
+}
+
 p {
    font-family: ${theme.fonts.pressStart};
-   line-height: 1.7;
+   line-height: 1.5;
    font-size: 1.2rem;
 } 
 

@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
 export const StyledTimer = styled.div<{
-  counter?: string | number | undefined;
+  timer: number | string;
+  paused: boolean;
 }>`
   background-color: ${theme.colors.white};
   box-shadow: 4px 4px 0px rgba(54, 100, 174, 0.3);
@@ -13,10 +14,8 @@ export const StyledTimer = styled.div<{
   font-size: 1.3rem;
   width: 132px;
   text-align: right;
-  animation: ${({ counter }) =>
-    counter !== undefined && counter <= 10 && counter !== 0
-      ? 'pulse 1s ease infinite'
-      : 'none'};
+  animation: ${({ timer }) =>
+    timer && timer <= 10 && timer !== 0 ? 'pulse 1s ease infinite' : 'none'};
 
   h3 {
     position: absolute;
@@ -27,11 +26,8 @@ export const StyledTimer = styled.div<{
 
   p {
     font-family: ${theme.fonts.pressStart};
-    color: ${({ counter }) =>
-      (counter !== undefined && counter <= 10 && counter !== 0) ||
-      counter === 'Paused'
-        ? 'red'
-        : 'inherit'};
+    color: ${({ timer, paused }) =>
+      (timer && timer <= 10 && timer !== 0) || paused ? 'red' : 'inherit'};
   }
 `;
 

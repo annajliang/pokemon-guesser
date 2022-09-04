@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { useEffect } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { useRecoilValue, useRecoilState } from 'recoil';
@@ -81,55 +82,46 @@ const Game: NextPage = () => {
   const allPokemon = useRecoilValue(allPokemonState);
 
   return (
-    <StyledContainer>
-      {allPokemon.length > 0 ? (
-        <>
-          <div>
-            {!showPokemon && (
-              <Image
-                src={'/assets/pokemonTitleDesktop.svg'}
-                width={550}
-                height={90}
-                priority={true}
-                draggable="false"
-                alt="Who's that Pokemon?"
-              />
-            )}
-            <StyledStatus>
-              <StyledSoundIcon
-                onClick={() => {
-                  startGameAudio?.pause();
-                  setIsSoundOn((isSoundOn) => !isSoundOn);
-                }}
-              >
-                <Image
-                  src={`/assets/${isSoundOn ? 'soundOn' : 'soundOff'}.svg`}
-                  alt=""
-                  width={40}
-                  height={40}
-                  priority
-                />
-              </StyledSoundIcon>
-              <Timer />
-              <Score />
-            </StyledStatus>
-          </div>
-          <Pokemon />
-          <Form isSoundOn={isSoundOn} />
-        </>
-      ) : (
-        <StyledErrorContainer>
-          {<h1>Error Occurred!</h1>}
-          <StyledErrorMessage>
-            Uh-oh! Looks like you were trying to play the game without selecting
-            a Pokémon generation first. Please go{' '}
-            <Link href="/">back to the homepage</Link> and pick your generation
-            before you play.
-          </StyledErrorMessage>
-          {/* <Button label="Back" variant="cta" href="/" /> */}
-        </StyledErrorContainer>
-      )}
-    </StyledContainer>
+    <>
+      <StyledContainer>
+        {allPokemon.length > 0 ? (
+          <>
+            <div>
+              <StyledStatus>
+                <StyledSoundIcon
+                  onClick={() => {
+                    startGameAudio?.pause();
+                    setIsSoundOn((isSoundOn) => !isSoundOn);
+                  }}
+                >
+                  <Image
+                    src={`/assets/${isSoundOn ? 'soundOn' : 'soundOff'}.svg`}
+                    alt=""
+                    width={40}
+                    height={40}
+                    priority
+                  />
+                </StyledSoundIcon>
+                <Timer />
+                <Score />
+              </StyledStatus>
+            </div>
+            <Pokemon />
+            <Form isSoundOn={isSoundOn} />
+          </>
+        ) : (
+          <StyledErrorContainer>
+            {<h1>Error Occurred!</h1>}
+            <StyledErrorMessage>
+              Uh-oh! Looks like you were trying to play the game without
+              selecting a Pokémon generation first. Please go{' '}
+              <Link href="/">back to the homepage</Link> and pick your
+              generation before you play.
+            </StyledErrorMessage>
+          </StyledErrorContainer>
+        )}
+      </StyledContainer>
+    </>
   );
 };
 
