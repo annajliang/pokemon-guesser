@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
 export const StyledTimer = styled.div<{
-  timer: number;
+  timer: number | string;
   paused: boolean;
 }>`
   background-color: ${theme.colors.white};
