@@ -1,54 +1,36 @@
 import { StyledButton } from './Button.styled';
-import Link from 'next/link';
+import { timerState } from '../../utils/globalState';
+import { useRecoilValue } from 'recoil';
 
 type Size = 'small' | 'medium' | 'large';
 
 type ButtonProps = {
   showPokemon?: boolean;
-  variant?: 'primary' | 'cta' | 'modal';
-  link?: boolean;
+  variant?: 'primary' | 'modal';
   label: string;
   size?: Size;
-  href?: string;
-  playSound?: () => void;
-  showModal?: () => void;
-  openModal?: () => void;
+  onClick?: () => void;
 };
 
 export const Button = ({
   showPokemon,
   label,
-  href,
-  playSound,
-  openModal,
+  onClick,
   variant = 'primary',
   size = 'medium',
 }: ButtonProps) => {
+  const timer = useRecoilValue(timerState);
+
   return (
     <>
-      {/* TODO breaak tthis up intoo 3 buttons */}
-      {variant === 'primary' && (
-        <StyledButton
-          type="submit"
-          disabled={showPokemon}
-          variant={variant}
-          size={size}
-        >
-          {label}
-        </StyledButton>
-      )}
-      {variant === 'modal' && (
-        <StyledButton variant={variant} size={size} onClick={openModal}>
-          {label}
-        </StyledButton>
-      )}
-      {variant === 'cta' && (
-        <Link href={`${href}`} passHref>
-          <StyledButton variant={variant} size={size} onClick={playSound}>
-            {label}
-          </StyledButton>
-        </Link>
-      )}
+      <StyledButton
+        variant={variant}
+        disabled={showPokemon || timer === 0}
+        size={size}
+        onClick={onClick}
+      >
+        {label}
+      </StyledButton>
     </>
   );
 };
