@@ -45,3 +45,8 @@ export const startGameAudioStaate = atom({
   key: 'startGameAudioStaate',
   default: null as null | HTMLAudioElement,
 });
+
+export const showDialogState = atom({
+  key: 'showDialogState',
+  default: false as boolean,
+});

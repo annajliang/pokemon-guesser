@@ -1,5 +1,7 @@
-import { useRecoilValue } from 'recoil';
-import { scoreState } from '../../utils/globalState';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import {
+  scoreState,
+  showDialogState,
 import {
   StyledContainer,
   StyledLabel,
@@ -10,13 +12,14 @@ import { SubmitScore } from '../SubmitScore/SubmitScore';
 import { Button } from '../Button/Button';
 
 const Score = ({ score }: { score: number }) => {
+  const setShowDialog = useSetRecoilState(showDialogState);
   return (
     <StyledContainer>
       <StyledLabel>Your Score</StyledLabel>
       <StyledScore>
         <span>{score}</span>
       </StyledScore>
-      <Button label="Replay" onClick={() => window.location.reload()} />
+          setShowDialog(false);
     </StyledContainer>
   );
 };

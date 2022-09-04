@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { showDialogState } from '../../utils/globalState';
 import { StyledNav } from './Navigation.styled';
 import { Button } from '../Button/Button';
 import { Modal } from '../Modal/Modal';
 
 export const Navigation = () => {
-  const [showDialog, setShowDialog] = useState(false);
+  const [showDialog, setShowDialog] = useRecoilState(showDialogState);
   const open = () => setShowDialog(true);
   const close = () => setShowDialog(false);
 
