@@ -20,7 +20,7 @@ export const Guess = ({
     <>
       <StyledButton
         variant={variant}
-        disabled={showPokemon || timer === 0}
+        disabled={showPokemon || timer === 'Ended!'}
         size={size}
         onClick={onClick}
       >

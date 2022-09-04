@@ -21,7 +21,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
   if (timer === 0) {
     setShowModals({ ...showModals, gameOver: true });
-    setTimer("Time's up!");
+    setTimer('Ended!');
   }
 
   return (

@@ -15,7 +15,7 @@ export const StyledTimer = styled.div<{
   width: 132px;
   text-align: right;
   animation: ${({ timer }) =>
-    timer && timer <= 10 && timer !== 0 ? 'pulse 1s ease infinite' : 'none'};
+    timer <= 10 && timer !== 0 ? 'pulse 1s ease infinite' : 'none'};
 
   h3 {
     position: absolute;
@@ -27,7 +27,9 @@ export const StyledTimer = styled.div<{
   p {
     font-family: ${theme.fonts.pressStart};
     color: ${({ timer, paused }) =>
-      (timer && timer <= 10 && timer !== 0) || paused ? 'red' : 'inherit'};
+      (timer <= 10 && timer !== 0) || paused || timer === 'Ended!'
+        ? 'red'
+        : 'inherit'};
   }
 `;
 
