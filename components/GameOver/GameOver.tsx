@@ -2,6 +2,8 @@ import { useSetRecoilState, useRecoilValue } from 'recoil';
 import {
   scoreState,
   showDialogState,
+  timerState,
+} from '../../utils/globalState';
 import {
   StyledContainer,
   StyledLabel,
@@ -9,17 +11,26 @@ import {
   StyledText,
 } from './GameOver.styled';
 import { SubmitScore } from '../SubmitScore/SubmitScore';
-import { Button } from '../Button/Button';
+import { BlockLink } from '../BlockLink/BlockLink';
 
 const Score = ({ score }: { score: number }) => {
   const setShowDialog = useSetRecoilState(showDialogState);
+  const setTimer = useSetRecoilState(timerState);
+
   return (
     <StyledContainer>
       <StyledLabel>Your Score</StyledLabel>
       <StyledScore>
         <span>{score}</span>
       </StyledScore>
+      <BlockLink
+        label="Replay"
+        href="/"
+        onClick={() => {
           setShowDialog(false);
+          setTimer(60);
+        }}
+      />
     </StyledContainer>
   );
 };
