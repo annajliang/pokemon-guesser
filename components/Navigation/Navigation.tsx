@@ -16,7 +16,7 @@ export const Navigation = () => {
         closeModal={close}
         variant="leaderboard"
       />
-      <Button label="Leaderboard" variant="modal" openModal={open} />
+      <Button label="Leaderboard" variant="modal" onClick={open} />
     </StyledNav>
   );
 };
