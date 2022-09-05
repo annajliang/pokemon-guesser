@@ -39,7 +39,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <Modal
           showDialog={showModals.gameOver}
           closeModal={close}
-          variant="leaderboard"
+          variant="gameOver"
         >
           <GameOver />
         </Modal>

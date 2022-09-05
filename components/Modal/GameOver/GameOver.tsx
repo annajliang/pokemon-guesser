@@ -5,7 +5,7 @@ import { SubmitScore } from '../SubmitScore/SubmitScore';
 import { BlockLink } from '../../BlockLink/BlockLink';
 import { Label } from '../../Form/Label/Label';
 
-const Score = ({ score }: { score: number }) => {
+const FinalScore = ({ score }: { score: number }) => {
   const [showModals, setShowModals] = useRecoilState(showModalsState);
   const setTimer = useSetRecoilState(timerState);
 
@@ -28,48 +28,20 @@ const Score = ({ score }: { score: number }) => {
 };
 
 const GameOverMessage = ({ score }: { score: number }) => {
-  if (score <= 20) {
-    return (
-      <>
-        <h2>Oof!</h2>
-        <StyledText>
-          Better brush up on your Pokémon knowledge and try again when
-          you&apos;re ready.
-        </StyledText>
-        <Score score={score} />
-      </>
-    );
-  }
-
-  if (score >= 25 && score <= 35) {
-    return (
-      <>
-        <h2>You tried!</h2>
-        <StyledText>
-          There was an attempt... but c&apos;mon you can do better than that!
-        </StyledText>
-        <Score score={score} />
-      </>
-    );
-  }
-
-  // if (score >= 40) {
-  //   return (
-  //     <>
-  //       <h2>Noice!</h2>
-  //       <StyledText>
-  //         Not bad, but not quite leaderboard material yet! Try again and
-  //         you&apos;ll be there in no time!
-  //       </StyledText>
-  //     </>
-  //   );
-  // }
-
   if (score > 40) {
     return <SubmitScore />;
   }
 
-  return <></>;
+  return (
+    <>
+      <h2>Try again!</h2>
+      <StyledText>
+        You didn&apos;t quite make it to the leaderboard. Better brush up on
+        your Pokémon knowledge and try again next time!
+      </StyledText>
+      <FinalScore score={score} />
+    </>
+  );
 };
 
 export const GameOver = () => {

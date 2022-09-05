@@ -64,8 +64,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
     isSoundOn && wrongAudio?.play();
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleNextPokemon = () => {
     evaluateGuess();
     setShowPokemon(true);
     const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
@@ -80,27 +79,14 @@ export const Form = ({ isSoundOn }: FormProps) => {
     }, 1000);
   };
 
-  //  TODO Just use the handleSubmit, maybe modified
-  const handleSkip = () => {
-    evaluateGuess();
-
-    setShowPokemon(true);
-    setIsGuessCorrect(false);
-    const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
-    const index = getRandomIndex(filteredUnseenIds);
-
-    setTimeout(() => {
-      setShowPokemon(false);
-      setUnseenIds(filteredUnseenIds);
-      setRandomIndex(index);
-      setIsGuessCorrect(null);
-      setGuess('');
-    }, 1000);
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleNextPokemon();
   };
 
   return (
     <StyledContainer>
-      <Skip handleSkip={handleSkip} showPokemon={showPokemon} />
+      <Skip handleSkip={handleNextPokemon} showPokemon={showPokemon} />
       <StyledForm
         action="submit"
         onSubmit={handleSubmit}

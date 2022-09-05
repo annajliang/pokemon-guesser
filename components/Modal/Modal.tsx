@@ -11,7 +11,7 @@ import {
 interface ModalProps {
   showDialog: boolean;
   closeModal: () => void;
-  variant: 'submitScore' | 'leaderboard';
+  variant: 'gameOver' | 'leaderboard';
   children: JSX.Element;
 }
 
@@ -42,8 +42,8 @@ export const Modal = ({
                   : `/assets/yellowPokeball.svg`
               }
               alt=""
-              width={50}
-              height={50}
+              width={65}
+              height={65}
               priority
             />
           </StyledWhiteBorder>
