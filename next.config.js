@@ -24,6 +24,7 @@ module.exports = {
   },
 };
 
+//source: https://github.com/facebookexperimental/Recoil/issues/733#issuecomment-923492445
 const intercept = require('intercept-stdout');
 
 // safely ignore recoil warning messages in dev (triggered by HMR)
