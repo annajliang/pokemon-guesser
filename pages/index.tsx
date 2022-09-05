@@ -9,6 +9,7 @@ import {
   chosenGenState,
   startGameAudioState,
   allPokemonState,
+  timerState,
 } from '../recoil';
 import styled from 'styled-components';
 import { BlockLink } from '../components/BlockLink/BlockLink';
@@ -58,6 +59,7 @@ const Home: NextPage = () => {
   const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
   const dynamicRoute = useRouter().asPath;
   const setallPokemon = useSetRecoilState(allPokemonState);
+  const setTimer = useSetRecoilState(timerState);
 
   useApi(
     chosenGen === 'all'
@@ -70,7 +72,9 @@ const Home: NextPage = () => {
 
     // Reset Gen to 1 on dynamic route change.
     setChooseGen(1);
-  }, [setStartGameAudio, dynamicRoute, setChooseGen]);
+    // Reset timer to 60s on dynamic route change.
+    setTimer(60);
+  }, [setStartGameAudio, dynamicRoute, setChooseGen, setTimer]);
 
   useEffect(() => {
     if (dynamicRoute === '/') {
