@@ -1,17 +1,9 @@
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
-import {
-  scoreState,
-  showModalsState,
-  timerState,
-} from '../../utils/globalState';
-import {
-  StyledContainer,
-  StyledLabel,
-  StyledScore,
-  StyledText,
-} from './GameOver.styled';
+import { scoreState, showModalsState, timerState } from '../../../recoil';
+import { StyledContainer, StyledScore, StyledText } from './GameOver.styled';
 import { SubmitScore } from '../SubmitScore/SubmitScore';
-import { BlockLink } from '../BlockLink/BlockLink';
+import { BlockLink } from '../../BlockLink/BlockLink';
+import { Label } from '../../Form/Label/Label';
 
 const Score = ({ score }: { score: number }) => {
   const [showModals, setShowModals] = useRecoilState(showModalsState);
@@ -19,7 +11,7 @@ const Score = ({ score }: { score: number }) => {
 
   return (
     <StyledContainer>
-      <StyledLabel>Your Score</StyledLabel>
+      <Label label="Your Score" forValue="score" />
       <StyledScore>
         <span>{score}</span>
       </StyledScore>

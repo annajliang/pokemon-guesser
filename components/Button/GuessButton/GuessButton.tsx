@@ -1,5 +1,5 @@
 import { StyledButton } from '../Button.styled';
-import { timerState } from '../../../utils/globalState';
+import { timerState } from '../../../recoil';
 import { useRecoilValue } from 'recoil';
 import { ButtonProps } from '../Button';
 

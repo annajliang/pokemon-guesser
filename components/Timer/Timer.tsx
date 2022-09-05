@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
-import { timerState, showPokemonState } from '../../utils/globalState';
+import { timerState, showPokemonState } from '../../recoil';
 import { StyledTimer, StyledClockIcon } from './Timer.styled';
 import Image from 'next/image';
 

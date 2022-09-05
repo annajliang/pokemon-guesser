@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import Image from 'next/image';
-import { scoreState, isGuessCorrectState } from '../../utils/globalState';
+import { scoreState, isGuessCorrectState } from '../../recoil';
 import {
   StyledScore,
   StyledScoreIcon,

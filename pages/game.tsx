@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { startGameAudioStaate, allPokemonState } from '../utils/globalState';
+import { startGameAudioStaate, allPokemonState } from '../recoil';
 import { Pokemon } from '../components/Pokemon/Pokemon';
 import { Form } from '../components/Form/Form';
 import { Timer } from '../components/Timer/Timer';

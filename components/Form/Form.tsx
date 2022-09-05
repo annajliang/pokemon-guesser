@@ -1,6 +1,6 @@
 import { useState, FormEvent, useEffect } from 'react';
 import levenshtein from 'js-levenshtein';
-import { Input } from '../Input/Input';
+import { Input } from './Input/Input';
 import { Guess } from '../Button/GuessButton/GuessButton';
 import { Skip } from '../Skip/Skip';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -11,11 +11,11 @@ import {
   showPokemonState,
   unseenIdsState,
   isGuessCorrectState,
-} from '../../utils/globalState';
+} from '../../recoil';
 import { StyledForm, StyledContainer } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
 import wrong from '../../public/sounds/wrong.mp3';
-import { getRandomIndex } from '../../utils/helpers';
+import { getRandomIndex } from '../../services';
 
 const getFilteredUnseenIds = (
   unseenIds: (number | undefined)[],

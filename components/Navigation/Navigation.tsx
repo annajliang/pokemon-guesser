@@ -1,9 +1,9 @@
 import { useRecoilState } from 'recoil';
-import { showModalsState } from '../../utils/globalState';
+import { showModalsState } from '../../recoil';
 import { StyledNav } from './Navigation.styled';
 import { Button } from '../Button/Button';
 import { Modal } from '../Modal/Modal';
-import { Leaderboard } from '../Leaderboard/Leaderboard';
+import { Leaderboard } from '../Modal/Leaderboard/Leaderboard';
 
 export const Navigation = () => {
   const [showModals, setShowModals] = useRecoilState(showModalsState);

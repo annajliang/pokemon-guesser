@@ -2,14 +2,14 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, ChangeEvent } from 'react';
-import { useApi } from '../utils/hooks/useApi';
+import { useApi } from '../hooks/useApi';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import startGame from '../public/sounds/startGame.mp3';
 import {
   chosenGenState,
   startGameAudioStaate,
   allPokemonState,
-} from '../utils/globalState';
+} from '../recoil';
 import styled from 'styled-components';
 import { BlockLink } from '../components/BlockLink/BlockLink';
 import { theme } from '../styles/theme';
