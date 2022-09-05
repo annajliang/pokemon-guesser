@@ -1,9 +1,9 @@
 import { atom } from 'recoil';
-import { PokemonData } from '../types';
+import { Pokemon, Modal } from '../types';
 
 export const allPokemonState = atom({
   key: 'allPokemonState',
-  default: [] as PokemonData[],
+  default: [] as Pokemon[],
 });
 
 export const randomIndexState = atom({
@@ -41,8 +41,8 @@ export const isGuessCorrectState = atom({
   default: null as null | boolean,
 });
 
-export const startGameAudioStaate = atom({
-  key: 'startGameAudioStaate',
+export const startGameAudioState = atom({
+  key: 'startGameAudioState',
   default: null as null | HTMLAudioElement,
 });
 
@@ -51,5 +51,5 @@ export const showModalsState = atom({
   default: {
     leaderboard: false,
     gameOver: false,
-  } as { leaderboard: boolean; gameOver: boolean },
+  } as Modal,
 });

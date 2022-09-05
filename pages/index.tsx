@@ -7,7 +7,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import startGame from '../public/sounds/startGame.mp3';
 import {
   chosenGenState,
-  startGameAudioStaate,
+  startGameAudioState,
   allPokemonState,
 } from '../recoil';
 import styled from 'styled-components';
@@ -54,7 +54,7 @@ const StyledIntro = styled.div`
 
 const Home: NextPage = () => {
   const [startGameAudio, setStartGameAudio] =
-    useRecoilState(startGameAudioStaate);
+    useRecoilState(startGameAudioState);
   const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
   const dynamicRoute = useRouter().asPath;
   const setallPokemon = useSetRecoilState(allPokemonState);
