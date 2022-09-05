@@ -13,7 +13,7 @@ export const SubmitScore = () => {
 
   return (
     <>
-      <h2>High Score</h2>
+      <h2 id="modalHeading">High Score</h2>
       <StyledText>
         Congrats! You&apos;ve made it to the leaderboard and scored {score}{' '}
         points! Submit your score below.

@@ -9,7 +9,7 @@ import {
 export const Leaderboard = () => {
   return (
     <>
-      <h2>Leaderboard</h2>
+      <h2 id="modalHeading">Leaderboard</h2>
       <StyledRanking>
         <StyledPlayer>
           {/* TODO: Use hardcoded data for now, remove later and use data from DB */}

@@ -23,7 +23,11 @@ export const Modal = ({
 }: ModalProps) => {
   return (
     <StyledContainer>
-      <StyledDialog isOpen={showDialog} onDismiss={closeModal}>
+      <StyledDialog
+        isOpen={showDialog}
+        onDismiss={closeModal}
+        aria-labelledby="modalHeading"
+      >
         <StyledCloseBtn onClick={closeModal}>
           <Image
             src="/assets/closeBtn.svg"
