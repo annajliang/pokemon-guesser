@@ -1,7 +1,11 @@
 import { Pokemon } from '../types';
 
 export const getRandomIndex = (arr: any[]) => {
-  return arr[Math.floor(Math.random() * arr.length)];
+  return Math.floor(Math.random() * arr.length);
+};
+
+export const getRandomItem = (arr: any[]) => {
+  return arr[getRandomIndex(arr)];
 };
 
 const getPokemonId = (url: Pokemon['url']) => {

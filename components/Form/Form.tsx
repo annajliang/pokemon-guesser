@@ -15,7 +15,7 @@ import {
 import { StyledForm, StyledContainer } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
 import wrong from '../../public/sounds/wrong.mp3';
-import { getRandomIndex } from '../../services';
+import { getRandomItem } from '../../services';
 
 const getFilteredUnseenIds = (
   unseenIds: (number | undefined)[],
@@ -68,12 +68,12 @@ export const Form = ({ isSoundOn }: FormProps) => {
     evaluateGuess();
     setShowPokemon(true);
     const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
-    const index = getRandomIndex(filteredUnseenIds);
+    const unseenId = getRandomItem(filteredUnseenIds);
 
     setTimeout(() => {
       setShowPokemon(false);
       setUnseenIds(filteredUnseenIds);
-      setRandomIndex(index);
+      setRandomIndex(unseenId);
       setIsGuessCorrect(null);
       setGuess('');
     }, 1000);

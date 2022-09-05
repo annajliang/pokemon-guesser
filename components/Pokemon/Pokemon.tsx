@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   allPokemonState,
   randomIndexState,
@@ -7,13 +7,17 @@ import {
   isGuessCorrectState,
 } from '../../recoil';
 import { StyledPokemonImage, StyledName } from './Pokemon.styled';
+import { getRandomIndex } from '../../services';
 
 export const Pokemon = () => {
   const allPokemon = useRecoilValue(allPokemonState);
-  const randomIndex = useRecoilValue(randomIndexState);
+  const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const showPokemon = useRecoilValue(showPokemonState);
-
   const isGuessCorrect = useRecoilValue(isGuessCorrectState);
+
+  if (randomIndex === 0) {
+    setRandomIndex(getRandomIndex(allPokemon));
+  }
 
   return (
     <div>
