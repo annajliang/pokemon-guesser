@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import Image from 'next/image';
 import { scoreState, isGuessCorrectState } from '../../utils/globalState';
 import {

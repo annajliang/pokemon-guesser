@@ -3,7 +3,7 @@ import levenshtein from 'js-levenshtein';
 import { Input } from '../Input/Input';
 import { Guess } from '../Button/GuessButton/GuessButton';
 import { Skip } from '../Skip/Skip';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   allPokemonState,
   randomIndexState,
@@ -39,7 +39,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
 
   const allPokemon = useRecoilValue(allPokemonState);
   const [showPokemon, setShowPokemon] = useRecoilState(showPokemonState);
-  const [score, setScore] = useRecoilState(scoreState);
+  const setScore = useSetRecoilState(scoreState);
   const [wrongAudio, setWrongAudio] = useState<HTMLAudioElement>();
   const [correctAudio, setCorrectAudio] = useState<HTMLAudioElement>();
   const currentPokemon = allPokemon[randomIndex]?.name;
@@ -107,8 +107,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
         isGuessCorrect={isGuessCorrect}
       >
         <Input setGuess={setGuess} guess={guess} />
-        {/* TODO change to disabled */}
-        <Guess showPokemon={showPokemon} label="Guess" size="large" />
+        <Guess isDisabled={showPokemon} label="Guess" size="large" />
       </StyledForm>
     </StyledContainer>
   );

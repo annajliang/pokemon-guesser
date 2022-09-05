@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, ChangeEvent } from 'react';
 import { useApi } from '../utils/hooks/useApi';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import startGame from '../public/sounds/startGame.mp3';
 import {
   chosenGenState,
@@ -57,7 +57,7 @@ const Home: NextPage = () => {
     useRecoilState(startGameAudioStaate);
   const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
   const dynamicRoute = useRouter().asPath;
-  const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
+  const setallPokemon = useSetRecoilState(allPokemonState);
 
   useApi(
     chosenGen === 'all'

@@ -4,11 +4,11 @@ import { useRecoilValue } from 'recoil';
 import { ButtonProps } from '../Button';
 
 interface GuessProps extends ButtonProps {
-  showPokemon?: boolean;
+  isDisabled?: boolean;
 }
 
 export const Guess = ({
-  showPokemon,
+  isDisabled,
   label,
   onClick,
   variant = 'primary',
@@ -20,7 +20,7 @@ export const Guess = ({
     <>
       <StyledButton
         variant={variant}
-        disabled={showPokemon || timer === 'Ended!'}
+        disabled={isDisabled || timer === 'Ended!'}
         size={size}
         onClick={onClick}
       >

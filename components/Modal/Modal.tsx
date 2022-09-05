@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useRecoilValue, useRecoilState } from 'recoil';
 import '@reach/dialog/styles.css';
 import {
   StyledContainer,
@@ -8,7 +7,6 @@ import {
   StyledCloseBtn,
   StyledWhiteBorder,
 } from './Modal.styled';
-import { timerState, showModalsState } from '../../utils/globalState';
 
 interface ModalProps {
   showDialog: boolean;
@@ -23,9 +21,6 @@ export const Modal = ({
   variant,
   children,
 }: ModalProps) => {
-  const timer = useRecoilValue(timerState);
-  const [showModals, setShowModals] = useRecoilState(showModalsState);
-
   return (
     <StyledContainer>
       <StyledDialog isOpen={showDialog} onDismiss={closeModal}>

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
 export const StyledContainer = styled.div`
-  /* position: absolute; */
   bottom: 6rem;
   left: 0;
   display: flex;
