@@ -7,9 +7,9 @@ import { Pokemon } from '../components/Pokemon/Pokemon';
 import { Form } from '../components/Form/Form';
 import { Timer } from '../components/Timer/Timer';
 import { Score } from '../components/Score/Score';
+import { Error } from '../components/Error/Error';
 import { theme } from '../styles/theme';
 import { useState } from 'react';
-import Link from 'next/link';
 
 const StyledStatus = styled.div`
   display: flex;
@@ -60,15 +60,6 @@ const StyledSoundIcon = styled.button`
   box-shadow: 4px 4px 0px ${theme.colors.midBlue};
 `;
 
-const StyledErrorContainer = styled.div`
-  width: 500px;
-`;
-
-const StyledErrorMessage = styled.p`
-  margin: 1rem 0 2rem 0;
-  font-size: 1.5rem;
-`;
-
 const Game: NextPage = () => {
   const [isSoundOn, setIsSoundOn] = useState(true);
   const startGameAudio = useRecoilValue(startGameAudioState);
@@ -103,15 +94,7 @@ const Game: NextPage = () => {
             <Form isSoundOn={isSoundOn} />
           </>
         ) : (
-          <StyledErrorContainer>
-            {<h1>Error Occurred!</h1>}
-            <StyledErrorMessage>
-              Uh-oh! Looks like you were trying to play the game without
-              selecting a Pokémon generation first. Please go{' '}
-              <Link href="/">back to the homepage</Link> and pick your
-              generation before you play.
-            </StyledErrorMessage>
-          </StyledErrorContainer>
+          <Error />
         )}
       </StyledContainer>
     </>
