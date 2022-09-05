@@ -1,13 +1,8 @@
 import type { NextPage } from 'next';
-import { useEffect } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import {
-  showPokemonState,
-  startGameAudioStaate,
-  allPokemonState,
-} from '../utils/globalState';
+import { useRecoilValue } from 'recoil';
+import { startGameAudioStaate, allPokemonState } from '../recoil';
 import { Pokemon } from '../components/Pokemon/Pokemon';
 import { Form } from '../components/Form/Form';
 import { Timer } from '../components/Timer/Timer';
@@ -75,10 +70,8 @@ const StyledErrorMessage = styled.p`
 `;
 
 const Game: NextPage = () => {
-  const showPokemon = useRecoilValue(showPokemonState);
   const [isSoundOn, setIsSoundOn] = useState(true);
-  const [startGameAudio, setStartGameAudio] =
-    useRecoilState(startGameAudioStaate);
+  const startGameAudio = useRecoilValue(startGameAudioStaate);
   const allPokemon = useRecoilValue(allPokemonState);
 
   return (

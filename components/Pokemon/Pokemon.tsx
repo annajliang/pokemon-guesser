@@ -5,7 +5,7 @@ import {
   randomIndexState,
   showPokemonState,
   isGuessCorrectState,
-} from '../../utils/globalState';
+} from '../../recoil';
 import { StyledPokemonImage, StyledName } from './Pokemon.styled';
 
 export const Pokemon = () => {

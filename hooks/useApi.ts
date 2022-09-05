@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { allPokemonState, unseenIdsState } from '../globalState';
-import { PokemonData } from '../types/interfaces';
+import { allPokemonState, unseenIdsState } from '../recoil';
+import { PokemonData } from '../types';
 
 const getPokemonId = (url: PokemonData['url']) => {
   const id = url?.split('/')[6];

@@ -3,10 +3,10 @@ import {
   StyledText,
   StyledForm,
   StyledPlayerInput,
-  StyledLabel,
 } from './SubmitScore.styled';
-import { scoreState } from '../../utils/globalState';
-import { Button } from '../Button/Button';
+import { scoreState } from '../../../recoil';
+import { Button } from '../../Button/Button';
+import { Label } from '../../Form/Label/Label';
 
 export const SubmitScore = () => {
   const score = useRecoilValue(scoreState);
@@ -19,7 +19,7 @@ export const SubmitScore = () => {
         points! Submit your score below.
       </StyledText>
       <StyledForm onSubmit={(e) => e.preventDefault()}>
-        <StyledLabel htmlFor="playerName">Your Name</StyledLabel>
+        <Label forValue="playerName" label="Your Name" />
         <StyledPlayerInput
           type="text"
           placeholder=""

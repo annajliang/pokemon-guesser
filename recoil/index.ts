@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { PokemonData } from './types/interfaces';
+import { PokemonData } from '../types';
 
 export const allPokemonState = atom({
   key: 'allPokemonState',

@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { timerState, showModalsState } from '../../utils/globalState';
+import { timerState, showModalsState } from '../../recoil';
 import { StyledWrapper } from './Layout.styled';
 import { Navigation } from '../Navigation/Navigation';
 import { Modal } from '../Modal/Modal';
-import { GameOver } from '../GameOver/GameOver';
+import { GameOver } from '../Modal/GameOver/GameOver';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -39,7 +39,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <Modal
           showDialog={showModals.gameOver}
           closeModal={close}
-          variant="leaderboard"
+          variant="gameOver"
         >
           <GameOver />
         </Modal>

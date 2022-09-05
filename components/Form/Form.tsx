@@ -1,9 +1,9 @@
 import { useState, FormEvent, useEffect } from 'react';
 import levenshtein from 'js-levenshtein';
-import { Input } from '../Input/Input';
+import { Input } from './Input/Input';
 import { Guess } from '../Button/GuessButton/GuessButton';
 import { Skip } from '../Skip/Skip';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   allPokemonState,
   randomIndexState,
@@ -11,11 +11,11 @@ import {
   showPokemonState,
   unseenIdsState,
   isGuessCorrectState,
-} from '../../utils/globalState';
+} from '../../recoil';
 import { StyledForm, StyledContainer } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
 import wrong from '../../public/sounds/wrong.mp3';
-import { getRandomIndex } from '../../utils/helpers';
+import { getRandomIndex } from '../../services';
 
 const getFilteredUnseenIds = (
   unseenIds: (number | undefined)[],
@@ -39,7 +39,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
 
   const allPokemon = useRecoilValue(allPokemonState);
   const [showPokemon, setShowPokemon] = useRecoilState(showPokemonState);
-  const [score, setScore] = useRecoilState(scoreState);
+  const setScore = useSetRecoilState(scoreState);
   const [wrongAudio, setWrongAudio] = useState<HTMLAudioElement>();
   const [correctAudio, setCorrectAudio] = useState<HTMLAudioElement>();
   const currentPokemon = allPokemon[randomIndex]?.name;
@@ -64,8 +64,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
     isSoundOn && wrongAudio?.play();
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleNextPokemon = () => {
     evaluateGuess();
     setShowPokemon(true);
     const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
@@ -80,35 +79,21 @@ export const Form = ({ isSoundOn }: FormProps) => {
     }, 1000);
   };
 
-  //  TODO Just use the handleSubmit, maybe modified
-  const handleSkip = () => {
-    evaluateGuess();
-
-    setShowPokemon(true);
-    setIsGuessCorrect(false);
-    const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
-    const index = getRandomIndex(filteredUnseenIds);
-
-    setTimeout(() => {
-      setShowPokemon(false);
-      setUnseenIds(filteredUnseenIds);
-      setRandomIndex(index);
-      setIsGuessCorrect(null);
-      setGuess('');
-    }, 1000);
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleNextPokemon();
   };
 
   return (
     <StyledContainer>
-      <Skip handleSkip={handleSkip} showPokemon={showPokemon} />
+      <Skip handleSkip={handleNextPokemon} showPokemon={showPokemon} />
       <StyledForm
         action="submit"
         onSubmit={handleSubmit}
         isGuessCorrect={isGuessCorrect}
       >
         <Input setGuess={setGuess} guess={guess} />
-        {/* TODO change to disabled */}
-        <Guess showPokemon={showPokemon} label="Guess" size="large" />
+        <Guess isDisabled={showPokemon} label="Guess" size="large" />
       </StyledForm>
     </StyledContainer>
   );
