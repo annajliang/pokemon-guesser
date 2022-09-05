@@ -1,48 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
-const nums = Array.from(Array(251), (_, index) => index + 1);
-
-const preloadedPokemonImages = nums.map((num) => {
-  if (num < 10) {
-    return (
-      <link
-        rel="prefetch"
-        as="image"
-        href={`/pokemon/gen1/00${num}.png`}
-        key={`/pokemon/gen1/00${num}.png`}
-      />
-    );
-  } else if (num >= 10 && num < 100) {
-    return (
-      <link
-        rel="prefetch"
-        as="image"
-        href={`/pokemon/gen1/0${num}.png`}
-        key={`/pokemon/gen1/0${num}.png`}
-      />
-    );
-  } else if (num > 100 && num <= 151) {
-    return (
-      <link
-        rel="prefetch"
-        as="image"
-        href={`/pokemon/gen1/${num}.png`}
-        key={`/pokemon/gen1/${num}.png`}
-      />
-    );
-  } else if (num > 151) {
-    return (
-      <link
-        rel="prefetch"
-        as="image"
-        href={`/pokemon/gen2/${num}.png`}
-        key={`/pokemon/gen2/${num}.png`}
-      />
-    );
-  }
-});
-
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
@@ -85,7 +43,6 @@ class MyDocument extends Document {
             rel="stylesheet"
             type="text/css"
           />
-          {preloadedPokemonImages}
         </Head>
         <body>
           <script>0</script>
