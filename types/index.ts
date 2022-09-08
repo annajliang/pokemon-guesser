@@ -9,3 +9,9 @@ export interface Modal {
   leaderboard: boolean;
   gameOver: boolean;
 }
+
+export interface Leaderboard {
+  _id: string;
+  name: string;
+  score: number;
+}
