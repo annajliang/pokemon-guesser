@@ -1,0 +1,7 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 20 20" height="20px" width="20px">
+    <title>exclaimation-circle-red-20x20</title>
+    <g fill-rule="evenodd" fill="none" stroke-width="1" stroke="none" id="exclaimation-circle-red-20x20">
+        <circle r="7" cy="10" cx="10" stroke-width="1.5" stroke="#C61515" id="Oval"></circle>
+        <path fill="#C61515" id="!" d="M10.606675,11.4066859 L11.0066804,5.85994339 L8.99331957,5.85994339 L9.39332504,11.4066859 L10.606675,11.4066859 Z M9.99333324,14.1400566 C10.5800079,14.1400566 11.046681,13.6867171 11.046681,13.1133759 C11.046681,12.5267012 10.5800079,12.0733617 9.99333324,12.0733617 C9.40665855,12.0733617 8.95331902,12.5267012 8.95331902,13.1133759 C8.95331902,13.6867171 9.40665855,14.1400566 9.99333324,14.1400566 Z"></path>
+    </g>
+</svg>

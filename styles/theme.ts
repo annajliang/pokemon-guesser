@@ -17,6 +17,8 @@ export const theme: Theme = {
     cloud: '#C4C4C4',
     eggshell: '#EEE9DD',
     rubyRed: '#EF3729',
+    dawnPink: '#F6E8E7',
+    chiliPepper: '#c61515',
   },
   fonts: {
     pokemon: `'Pokemon', 'sans-serif'`,
