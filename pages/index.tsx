@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import { connectToDatabase } from '../lib/mongodb';
+import clientPromise from '../lib/mongodb';
 import { useRouter } from 'next/router';
 import { useEffect, ChangeEvent } from 'react';
 import { useApi } from '../hooks/useApi';
@@ -138,7 +138,7 @@ export default Home;
 
 export async function getServerSideProps() {
   try {
-    await connectToDatabase;
+    await clientPromise;
     // `await clientPromise` will use the default database passed in the MONGODB_URI
     // However you can use another database (e.g. myDatabase) by replacing the `await clientPromise` with the following code:
     //
