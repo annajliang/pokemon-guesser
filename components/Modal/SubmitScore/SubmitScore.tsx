@@ -21,7 +21,6 @@ export const SubmitScore = () => {
   const submitScore = () => {
     if (playerName.trim()) {
       setIsScoreSubmitted(true);
-      setPlayerName(playerName);
     } else {
       setToolTip(true);
     }
@@ -45,6 +44,7 @@ export const SubmitScore = () => {
           id="playerName"
           name="playerName"
           maxLength={12}
+          onChange={(e) => setPlayerName(e.target.value)}
         />
         {isScoreSubmitted ? (
           <StyledSubmitStatus>Score successfully submitted!</StyledSubmitStatus>
