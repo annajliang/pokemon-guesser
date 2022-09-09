@@ -28,10 +28,10 @@ export const SubmitScore = () => {
 
   return (
     <>
-      <h2 id="modalHeading">High Score</h2>
+      <h2 id="modalHeading">Congratulations!</h2>
       <StyledText>
-        Congrats! You&apos;ve made it to the leaderboard and scored {score}{' '}
-        points! Submit your score below.
+        You&apos;ve made it to the leaderboard and scored {score} points! Submit
+        your score below.
       </StyledText>
       <StyledForm
         onSubmit={(e) => e.preventDefault()}
