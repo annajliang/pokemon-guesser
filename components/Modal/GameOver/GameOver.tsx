@@ -34,10 +34,9 @@ const GameOverMessage = ({ score }: { score: number }) => {
 
   return (
     <>
-      <h2 id="modalHeading">Try again!</h2>
+      <h2 id="modalHeading">Game Over</h2>
       <StyledText>
-        You didn&apos;t quite make it to the leaderboard. Better brush up on
-        your Pokémon knowledge and try again next time!
+        Better brush up on your Pokémon knowledge and try again next time!
       </StyledText>
       <FinalScore score={score} />
     </>
