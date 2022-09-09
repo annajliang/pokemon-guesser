@@ -62,6 +62,7 @@ export const Form = ({ isSoundOn }: FormProps) => {
 
     setIsGuessCorrect(false);
     isSoundOn && wrongAudio?.play();
+    setScore((prevScore) => prevScore - 5);
   };
 
   const handleNextPokemon = () => {

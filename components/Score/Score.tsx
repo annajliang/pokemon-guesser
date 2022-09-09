@@ -1,6 +1,10 @@
 import { useRecoilValue } from 'recoil';
 import Image from 'next/image';
-import { scoreState, isGuessCorrectState } from '../../recoil';
+import {
+  scoreState,
+  isGuessCorrectState,
+  showPokemonState,
+} from '../../recoil';
 import {
   StyledScore,
   StyledScoreIcon,
@@ -10,6 +14,7 @@ import {
 export const Score = () => {
   const score = useRecoilValue(scoreState);
   const isGuessCorrect = useRecoilValue(isGuessCorrectState);
+  const showPokemon = useRecoilValue(showPokemonState);
 
   return (
     <StyledScore>
@@ -25,6 +30,9 @@ export const Score = () => {
       <h3>Score</h3>
       <p>{score}</p>
       {isGuessCorrect && <StyledAddedPoints>+5</StyledAddedPoints>}
+      {!isGuessCorrect && showPokemon && (
+        <StyledAddedPoints>-5</StyledAddedPoints>
+      )}
     </StyledScore>
   );
 };
