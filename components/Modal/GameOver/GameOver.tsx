@@ -1,5 +1,10 @@
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
-import { scoreState, showModalsState, timerState } from '../../../recoil';
+import {
+  scoreState,
+  showModalsState,
+  timerState,
+  leaderboardState,
+} from '../../../recoil';
 import { StyledContainer, StyledScore, StyledText } from './GameOver.styled';
 import { SubmitScore } from '../SubmitScore/SubmitScore';
 import { BlockLink } from '../../BlockLink/BlockLink';
@@ -28,7 +33,16 @@ const FinalScore = ({ score }: { score: number }) => {
 };
 
 const GameOverMessage = ({ score }: { score: number }) => {
-  if (score > 40) {
+  const leaderboard = useRecoilValue(leaderboardState);
+  const MAX_CAPACITY = 10;
+  const isLeaderboardFull = leaderboard.length === MAX_CAPACITY;
+  const lowestScore = leaderboard[leaderboard.length - 1]?.score || 0;
+
+  // players only make it to the leaderboard if their score is higher than any of the current high scores OR if the leaderboard has available space (and their score is greater than 0)
+  if (
+    (isLeaderboardFull && score > lowestScore) ||
+    (!isLeaderboardFull && score > 0)
+  ) {
     return <SubmitScore />;
   }
 
