@@ -15,14 +15,22 @@ import { Label } from '../../Form/Label/Label';
 export const SubmitScore = () => {
   const [playerName, setPlayerName] = useState('');
   const [isScoreSubmitted, setIsScoreSubmitted] = useState(false);
-  const [showToolTip, setToolTip] = useState(false);
+  const [tooltip, setToolTip] = useState({
+    message: '',
+    isShown: false,
+  });
   const score = useRecoilValue(scoreState);
 
   const submitScore = () => {
-    if (playerName.trim()) {
+    const trimmedPlayerName = playerName.trim();
+    if (trimmedPlayerName) {
       setIsScoreSubmitted(true);
+      setToolTip({
+        ...tooltip,
+        message: 'Score successfully submitted!',
+      });
     } else {
-      setToolTip(true);
+      setToolTip({ ...tooltip, isShown: true });
     }
   };
 
@@ -35,7 +43,7 @@ export const SubmitScore = () => {
       </StyledText>
       <StyledForm
         onSubmit={(e) => e.preventDefault()}
-        onFocus={() => setToolTip(false)}
+        onFocus={() => setToolTip({ ...tooltip, isShown: false })}
       >
         <Label forValue="playerName" label="Your Name" />
         <StyledPlayerInput
@@ -47,11 +55,11 @@ export const SubmitScore = () => {
           onChange={(e) => setPlayerName(e.target.value)}
         />
         {isScoreSubmitted ? (
-          <StyledSubmitStatus>Score successfully submitted!</StyledSubmitStatus>
+          <StyledSubmitStatus>{tooltip.message}</StyledSubmitStatus>
         ) : (
           <Button label="Submit" onClick={submitScore} />
         )}
-        {showToolTip && (
+        {tooltip.isShown && (
           <StyledToolTip>
             <Image
               src="/assets/error.svg"
