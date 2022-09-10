@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import clientPromise from '../lib/mongodb';
 import { useRouter } from 'next/router';
-import { useEffect, ChangeEvent } from 'react';
+import { useEffect } from 'react';
 import { useApi } from '../hooks/useApi';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import startGame from '../public/sounds/startGame.mp3';
@@ -15,6 +15,7 @@ import {
 import styled from 'styled-components';
 import { BlockLink } from '../components/BlockLink/BlockLink';
 import { theme } from '../styles/theme';
+import { Dropdown } from '../components/Dropdown/Dropdown';
 
 const StyledContainer = styled.div`
   position: relative;
@@ -54,6 +55,11 @@ const StyledIntro = styled.div`
   }
 `;
 
+const StyledDivider = styled.div`
+  border: 0.5px solid ${theme.colors.midBlue};
+  width: 80%;
+`;
+
 const Home: NextPage = () => {
   const [startGameAudio, setStartGameAudio] =
     useRecoilState(startGameAudioState);
@@ -83,14 +89,6 @@ const Home: NextPage = () => {
     }
   }, [dynamicRoute, setallPokemon]);
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setChooseGen(e.target.value);
-
-    if (chosenGen !== e.target.value) {
-      setallPokemon([]);
-    }
-  };
-
   return (
     <StyledContainer>
       <StyledIntro>
@@ -115,13 +113,10 @@ const Home: NextPage = () => {
         </p>
         <p>Time starts once you click the start button!</p>
 
-        <label htmlFor="generation">Choose your generation:</label>
+        <StyledDivider />
 
-        <select name="generation" id="generation" onChange={handleChange}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="all">All</option>
-        </select>
+        <label htmlFor="generation">Choose your generation:</label>
+        <Dropdown />
         <BlockLink
           label="Start"
           href="/game"
