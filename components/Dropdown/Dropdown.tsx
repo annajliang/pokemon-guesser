@@ -5,13 +5,13 @@ import { StyledDropdownContainer, StyledDropdown } from './Dropdown.styled';
 
 export const Dropdown = () => {
   const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
-  const setallPokemon = useSetRecoilState(allPokemonState);
+  const setAllPokemon = useSetRecoilState(allPokemonState);
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setChooseGen(e.target.value);
 
     if (chosenGen !== e.target.value) {
-      setallPokemon([]);
+      setAllPokemon([]);
     }
   };
 

@@ -4,7 +4,7 @@ import clientPromise from '../lib/mongodb';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useApi } from '../hooks/useApi';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState, useRecoilValue } from 'recoil';
 import startGame from '../public/sounds/startGame.mp3';
 import {
   chosenGenState,
@@ -63,10 +63,11 @@ const StyledDivider = styled.div`
 const Home: NextPage = () => {
   const [startGameAudio, setStartGameAudio] =
     useRecoilState(startGameAudioState);
-  const [chosenGen, setChooseGen] = useRecoilState(chosenGenState);
+  const chosenGen = useRecoilValue(chosenGenState);
+  const resetGen = useResetRecoilState(chosenGenState);
   const dynamicRoute = useRouter().asPath;
-  const setallPokemon = useSetRecoilState(allPokemonState);
-  const setTimer = useSetRecoilState(timerState);
+  const resetAllPokemon = useResetRecoilState(allPokemonState);
+  const resetTimer = useResetRecoilState(timerState);
 
   useApi(
     chosenGen === 'all'
@@ -75,19 +76,14 @@ const Home: NextPage = () => {
   );
 
   useEffect(() => {
-    setStartGameAudio(new Audio(startGame));
-
-    // Reset Gen to 1 on dynamic route change.
-    setChooseGen(1);
-    // Reset timer to 60s on dynamic route change.
-    setTimer(60);
-  }, [setStartGameAudio, dynamicRoute, setChooseGen, setTimer]);
-
-  useEffect(() => {
+    // Reset pokemon gen, all pokemon, timer and audio on base route change
     if (dynamicRoute === '/') {
-      setallPokemon([]);
+      setStartGameAudio(new Audio(startGame));
+      resetAllPokemon();
+      resetGen();
+      resetTimer();
     }
-  }, [dynamicRoute, setallPokemon]);
+  }, [resetAllPokemon, setStartGameAudio, dynamicRoute, resetGen, resetTimer]);
 
   return (
     <StyledContainer>

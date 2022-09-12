@@ -5,15 +5,15 @@ import { getPokemonNameId, getPokemonIds } from '../services';
 import { Pokemon } from '../types';
 
 export const useApi = (url: string) => {
-  const [allPokemon, setallPokemon] = useRecoilState(allPokemonState);
+  const [allPokemon, setAllPokemon] = useRecoilState(allPokemonState);
   const setUnseenIds = useSetRecoilState(unseenIdsState);
 
   useEffect(() => {
     const setupPokemonData = (data: Pokemon[]) => {
       const pokemonNameId = getPokemonNameId(data);
-      setallPokemon([...pokemonNameId]);
+      setAllPokemon(pokemonNameId);
       const pokemonIds = getPokemonIds(data);
-      setUnseenIds([...pokemonIds]);
+      setUnseenIds(pokemonIds);
     };
 
     const getPokemon = async () => {
@@ -43,7 +43,7 @@ export const useApi = (url: string) => {
     if (allPokemon.length === 0) {
       getPokemon();
     }
-  }, [allPokemon, setallPokemon, url, setUnseenIds]);
+  }, [allPokemon, setAllPokemon, url, setUnseenIds]);
 
-  return [allPokemon, setallPokemon];
+  return [allPokemon, setAllPokemon];
 };
