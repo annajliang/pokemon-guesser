@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { timerState, showModalsState } from '../../recoil';
+import { timerState, showModalsState, leaderboardState } from '../../recoil';
 import { StyledWrapper } from './Layout.styled';
 import { Navigation } from '../Navigation/Navigation';
 import { Modal } from '../Modal/Modal';
@@ -14,6 +14,29 @@ interface LayoutProps {
 export const Layout = ({ children }: LayoutProps) => {
   const [timer, setTimer] = useRecoilState(timerState);
   const [showModals, setShowModals] = useRecoilState(showModalsState);
+  const [leaderboard, setLeaderboard] = useRecoilState(leaderboardState);
+
+  useEffect(() => {
+    const fetchLeaderboardData = async () => {
+      try {
+        const response = await fetch('/api/leaderboard');
+
+        if (!response.ok) {
+          throw new Error();
+        }
+
+        const data = await response.json();
+
+        if (leaderboard.length === 0) {
+          setLeaderboard(data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchLeaderboardData();
+  }, [leaderboard, setLeaderboard]);
 
   const close = () => {
     setShowModals({ ...showModals, gameOver: false });
