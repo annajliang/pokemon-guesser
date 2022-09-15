@@ -32,17 +32,12 @@ const FinalScore = ({ score }: { score: number }) => {
   );
 };
 
-const GameOverMessage = ({ score }: { score: number }) => {
+export const GameOver = () => {
+  const score = useRecoilValue(scoreState);
   const leaderboard = useRecoilValue(leaderboardState);
-  const MAX_CAPACITY = 10;
-  const isLeaderboardFull = leaderboard.length === MAX_CAPACITY;
   const lowestScore = leaderboard[leaderboard.length - 1]?.score || 0;
 
-  // players only make it to the leaderboard if their score is higher than any of the current high scores OR if the leaderboard has available space (and their score is greater than 0)
-  if (
-    (isLeaderboardFull && score > lowestScore) ||
-    (!isLeaderboardFull && score > 0)
-  ) {
+  if (score > lowestScore || score > 0) {
     return <SubmitScore />;
   }
 
@@ -55,9 +50,4 @@ const GameOverMessage = ({ score }: { score: number }) => {
       <FinalScore score={score} />
     </>
   );
-};
-
-export const GameOver = () => {
-  const score = useRecoilValue(scoreState);
-  return <GameOverMessage score={score} />;
 };

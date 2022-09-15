@@ -1,6 +1,7 @@
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import Image from 'next/image';
+import { leaderboardState } from '../../../recoil';
 import {
   StyledText,
   StyledForm,
@@ -20,15 +21,55 @@ export const SubmitScore = () => {
     isShown: false,
   });
   const score = useRecoilValue(scoreState);
+  const setLeaderboard = useSetRecoilState(leaderboardState);
 
-  const submitScore = () => {
-    const trimmedPlayerName = playerName.trim();
-    if (trimmedPlayerName) {
+  const getScores = async () => {
+    try {
+      const response = await fetch('/api/leaderboard');
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const data = await response.json();
+      setLeaderboard(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addPlayerToDb = async (name: string, score: number) => {
+    try {
+      const response = await fetch('/api/leaderboard', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ name, score }),
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const { message } = await response.json();
+      setIsScoreSubmitted(true);
+      setToolTip({ ...tooltip, message });
+      getScores();
+    } catch (err) {
+      console.log(err);
       setIsScoreSubmitted(true);
       setToolTip({
         ...tooltip,
-        message: 'Score successfully submitted!',
+        message: 'Failed to submit score. Try again!',
       });
+    }
+  };
+
+  const submitScore = () => {
+    if (playerName.trim()) {
+      addPlayerToDb(playerName, score);
     } else {
       setToolTip({ ...tooltip, isShown: true });
     }
