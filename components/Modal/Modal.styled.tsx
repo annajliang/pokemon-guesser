@@ -7,27 +7,34 @@ export const StyledContainer = styled.div`
   z-index: 1000;
 `;
 
-export const StyledDialog = styled(Dialog)`
+export const StyledDialog = styled(Dialog)<{ variant: string }>`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 99;
-  overflow: hidden;
+  overflow: scroll;
   margin: 0;
   padding: 0;
-  width: 640px;
   padding-bottom: 4rem;
-
+  /* height: ${({ variant }) => variant === 'leaderboard' && '100%'}; */
   background-color: ${theme.colors.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   text-align: center;
+
+  @media (max-width: 970px) {
+    width: 80%;
+  }
+
+  @media (max-width: 500px) {
+    width: 100%;
+    height: ${({ variant }) => variant === 'leaderboard' && '100%'};
+  }
 `;
 
 export const StyledModalHeader = styled.div`
   position: relative;
-  width: 640px;
   height: 69px;
   left: 0;
   top: 0;

@@ -11,7 +11,6 @@ export const StyledButton = styled.button<{ variant: string; size: string }>`
   border-radius: 6px;
   text-transform: uppercase;
   color: ${theme.colors.midBlue};
-  font-size: 1.5rem;
 
   ${({ variant }) =>
     variant === 'modal' &&
@@ -37,7 +36,6 @@ export const StyledButton = styled.button<{ variant: string; size: string }>`
       @media (max-width: 1045px) {
         position: absolute;
         right: 0;
-        font-size: 12px;
         padding: 1.5rem 1rem;
         border-left: 2px solid ${theme.colors.midBlue};
       }

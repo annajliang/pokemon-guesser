@@ -26,7 +26,11 @@ body {
    align-items: flex-end;
 
    @media (max-width: 1045px) {
-    background-position: right;
+      background-position: right;
+   }
+
+   @media (max-width: 970px) {
+      justify-content: center;
    }
 }
 
@@ -42,6 +46,11 @@ h1 {
    @media (max-width: 1045px) {
       font-size: 5rem;
    }
+
+   @media (max-width: 675px) {
+      -webkit-text-stroke-width: 2.5px;
+      font-size: 4rem;
+   }
 }
 
 h2 {
@@ -49,15 +58,73 @@ h2 {
    font-size: 2.5rem;
    text-transform: uppercase;
    color: ${theme.colors.midBlue};
+
+   @media (max-width: 500px) {
+      font-size: 2rem;
+   }
 }
 
 p {
    font-family: ${theme.fonts.pressStart};
    line-height: 1.5;
-   font-size: 1.2rem;
+   font-size: 1.3rem;
+
+   @media (max-width: 420px) {
+    font-size: 1rem;
+  }
 } 
 
 img {
    max-width: 100%;
+} 
+
+button {
+   font-size: 1.5rem;
+
+   @media (max-width: 500px) {
+      font-size: 1.3rem;
+   }
+
+   @media (max-width: 420px) {
+      font-size: 1rem;
+   }
 }
+
+  label {
+    text-transform: uppercase;
+    font-family: ${theme.fonts.pressStart};
+    font-size: 1.5rem;
+
+   @media (max-width: 500px) {
+      font-size: 1.3rem;
+   }
+
+   @media (max-width: 420px) {
+      font-size: 1rem;
+   }
+  }
+
+  select {
+   font-family: ${theme.fonts.pressStart};
+   color: ${theme.colors.midBlue};
+   font-size: 2rem;
+
+   @media (max-width: 500px) {
+      font-size: 1.3rem;
+   }
+
+   @media (max-width: 420px) {
+      font-size: 1rem;
+   }
+  }
+
+  a {
+      font-family: ${theme.fonts.pressStart};
+      color: ${theme.colors.midBlue};
+      font-size: 1.3rem;
+
+   @media (max-width: 420px) {
+      font-size: 1rem;
+   }
+  }
 `;

@@ -10,9 +10,6 @@ export const StyledDropdown = styled.select`
   background-color: ${theme.colors.white};
   padding: 1rem;
   width: 19rem;
-  font-family: ${theme.fonts.pressStart};
-  color: ${theme.colors.midBlue};
-  font-size: 2rem;
 
   -moz-appearance: none;
   -webkit-appearance: none;

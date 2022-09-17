@@ -3,6 +3,7 @@ import levenshtein from 'js-levenshtein';
 import { Input } from './Input/Input';
 import { Guess } from '../Button/GuessButton/GuessButton';
 import { Skip } from '../Skip/Skip';
+import { SoundIcon } from '../Sound/Sound';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   allPokemonState,
@@ -12,7 +13,7 @@ import {
   unseenIdsState,
   isGuessCorrectState,
 } from '../../recoil';
-import { StyledForm, StyledContainer } from './Form.styled';
+import { StyledForm, StyledContainer, StyledSettings } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
 import wrong from '../../public/sounds/wrong.mp3';
 import { getRandomItem } from '../../services';
@@ -26,17 +27,13 @@ const getFilteredUnseenIds = (
   });
 };
 
-interface FormProps {
-  isSoundOn: boolean;
-}
-
-export const Form = ({ isSoundOn }: FormProps) => {
+export const Form = () => {
   const [guess, setGuess] = useState('');
   const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
   const [isGuessCorrect, setIsGuessCorrect] =
     useRecoilState(isGuessCorrectState);
-
+  const [isSoundOn, setIsSoundOn] = useState(true);
   const allPokemon = useRecoilValue(allPokemonState);
   const [showPokemon, setShowPokemon] = useRecoilState(showPokemonState);
   const setScore = useSetRecoilState(scoreState);
@@ -87,7 +84,11 @@ export const Form = ({ isSoundOn }: FormProps) => {
 
   return (
     <StyledContainer>
-      <Skip handleSkip={handleNextPokemon} showPokemon={showPokemon} />
+      <StyledSettings>
+        <Skip handleSkip={handleNextPokemon} showPokemon={showPokemon} />
+        &nbsp;|&nbsp;
+        <SoundIcon isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn} />
+      </StyledSettings>
       <StyledForm
         action="submit"
         onSubmit={handleSubmit}

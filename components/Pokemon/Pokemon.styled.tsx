@@ -40,5 +40,22 @@ export const StyledPokemonImage = styled.div<{
 export const StyledName = styled.h1<{ isGuessCorrect: boolean | null }>`
   -webkit-text-stroke-color: ${({ isGuessCorrect }) =>
     isGuessCorrect ? 'green' : 'red'};
-  height: 70px;
+
+  @media (max-width: 532px) {
+    height: 104px;
+    display: flex;
+    align-items: center;
+  }
+`;
+
+export const StyledPicture = styled.picture`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const StyledH1 = styled.h1`
+  @media (max-width: 600px) {
+    margin: 0 2rem;
+  }
 `;

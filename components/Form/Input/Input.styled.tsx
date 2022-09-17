@@ -15,7 +15,15 @@ export const StyledInput = styled.input`
   }
 
   @media (max-width: 1045px) {
+    font-size: 1.5rem;
     width: 100%;
-    font-size: 12px;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 420px) {
+    font-size: 1rem;
   }
 `;

@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import clientPromise from '../lib/mongodb';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useApi } from '../hooks/useApi';
+import { useWindowSize } from '../hooks/useWindowSize';
 import { useRecoilState, useResetRecoilState, useRecoilValue } from 'recoil';
 import startGame from '../public/sounds/startGame.mp3';
 import {
@@ -21,17 +21,13 @@ const StyledContainer = styled.div`
   position: relative;
   width: 58vw;
 
-  @media (max-width: 1337px) {
-    width: 50vw;
-  }
-
-  @media (max-width: 1045px) {
+  @media (max-width: 970px) {
     width: 100%;
   }
 `;
 
 const StyledH1 = styled.h1`
-  display: flex;
+  margin-bottom: 1rem;
 `;
 
 const StyledIntro = styled.div`
@@ -46,12 +42,6 @@ const StyledIntro = styled.div`
 
   *:not(:first-child) {
     margin-bottom: 2rem;
-  }
-
-  label {
-    text-transform: uppercase;
-    font-family: ${theme.fonts.pressStart};
-    font-size: 1.5rem;
   }
 `;
 
@@ -68,6 +58,7 @@ const Home: NextPage = () => {
   const dynamicRoute = useRouter().asPath;
   const resetAllPokemon = useResetRecoilState(allPokemonState);
   const resetTimer = useResetRecoilState(timerState);
+  const size = useWindowSize();
 
   useApi(
     chosenGen === 'all'
@@ -88,16 +79,7 @@ const Home: NextPage = () => {
   return (
     <StyledContainer>
       <StyledIntro>
-        <StyledH1>
-          <Image
-            src={'/assets/pokemonTitleDesktop.svg'}
-            width={650}
-            height={100}
-            priority={true}
-            draggable="false"
-            alt="Who's that Pokemon?"
-          />
-        </StyledH1>
+        <StyledH1>Who&apos;s That Pokémon?</StyledH1>
 
         <p>
           It’s a race against the clock to correctly guess which Pokemon is

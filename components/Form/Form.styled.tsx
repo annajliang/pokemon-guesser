@@ -8,6 +8,10 @@ export const StyledForm = styled.form<{
   display: flex;
   animation: ${({ isGuessCorrect }) =>
     isGuessCorrect === false && 'shake 0.5s'};
+
+  @media (max-width: 1045px) {
+    width: 100%;
+  }
 `;
 
 export const StyledContainer = styled.div`
@@ -16,17 +20,15 @@ export const StyledContainer = styled.div`
   flex-direction: column;
 
   @media (max-width: 1045px) {
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    margin: 1rem 0;
-  }
-
-  @media (max-width: 580px) {
-    margin: 1rem 6rem;
+    width: 70%;
   }
 
   @media (max-width: 420px) {
-    margin: 1rem 2rem;
+    width: 90%;
   }
+`;
+
+export const StyledSettings = styled.div`
+  display: flex;
+  margin-bottom: ${theme.spacing.s};
 `;
