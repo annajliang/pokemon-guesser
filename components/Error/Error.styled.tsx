@@ -12,5 +12,4 @@ export const StyledErrorContainer = styled.div`
 
 export const StyledErrorMessage = styled.p`
   margin: 1rem 3rem 2rem 3rem;
-  /* font-size: 1.5rem; */
 `;

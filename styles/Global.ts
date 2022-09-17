@@ -67,7 +67,7 @@ h2 {
 p {
    font-family: ${theme.fonts.pressStart};
    line-height: 1.5;
-   font-size: 1.2rem;
+   font-size: 1.3rem;
 
    @media (max-width: 420px) {
     font-size: 1rem;
@@ -121,11 +121,7 @@ button {
   a {
       font-family: ${theme.fonts.pressStart};
       color: ${theme.colors.midBlue};
-      font-size: 1.5rem;
-
-   @media (max-width: 500px) {
       font-size: 1.3rem;
-   }
 
    @media (max-width: 420px) {
       font-size: 1rem;
