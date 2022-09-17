@@ -27,6 +27,7 @@ export const Modal = ({
         isOpen={showDialog}
         onDismiss={closeModal}
         aria-labelledby="modalHeading"
+        variant={variant}
       >
         <StyledCloseBtn onClick={closeModal}>
           <Image

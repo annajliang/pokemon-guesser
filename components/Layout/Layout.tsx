@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
+import { useWindowSize } from '../../hooks/useWindowSize';
 import { timerState, showModalsState, leaderboardState } from '../../recoil';
 import { StyledWrapper } from './Layout.styled';
 import { Navigation } from '../Navigation/Navigation';
@@ -15,6 +16,7 @@ export const Layout = ({ children }: LayoutProps) => {
   const [timer, setTimer] = useRecoilState(timerState);
   const [showModals, setShowModals] = useRecoilState(showModalsState);
   const [leaderboard, setLeaderboard] = useRecoilState(leaderboardState);
+  const size = useWindowSize();
 
   useEffect(() => {
     const fetchLeaderboardData = async () => {
@@ -50,7 +52,11 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Image
-        src={`/assets/desktopBg.png`}
+        src={`/assets/${
+          size.width !== undefined && size.width <= 970
+            ? 'mobileBg'
+            : 'desktopBg'
+        }.png`}
         alt=""
         layout="fill"
         objectFit="cover"

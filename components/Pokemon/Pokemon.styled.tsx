@@ -34,6 +34,10 @@ export const StyledPokemonImage = styled.div<{
       margin: 3rem 0 5rem 0;
       height: auto;
     }
+
+    @media (max-width: 970px) {
+      width: 300px !important;
+    }
   }
 `;
 
@@ -41,4 +45,14 @@ export const StyledName = styled.h1<{ isGuessCorrect: boolean | null }>`
   -webkit-text-stroke-color: ${({ isGuessCorrect }) =>
     isGuessCorrect ? 'green' : 'red'};
   height: 70px;
+`;
+
+export const StyledImageDesktop = styled.div`
+  margin: 0 2rem;
+`;
+
+export const StyledPicture = styled.picture`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

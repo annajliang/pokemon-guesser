@@ -5,13 +5,6 @@ export const StyledContainer = styled.div`
   bottom: 6rem;
   left: 0;
   display: flex;
-
-  @media (max-width: 1045px) {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    margin-bottom: 0.5rem;
-  }
 `;
 
 export const StyledSkipBtn = styled.button`
@@ -25,7 +18,10 @@ export const StyledSkipBtn = styled.button`
   font-size: 1.3rem;
   letter-spacing: 1px;
   padding: 0;
-  margin-bottom: ${theme.spacing.s};
+
+  @media (max-width: 500px) {
+    font-size: 1rem;
+  }
 `;
 
 export const StyledSkipIcon = styled.div`

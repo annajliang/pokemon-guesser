@@ -18,6 +18,10 @@ export const StyledPlayer = styled.li`
     padding-bottom: 0;
     font-family: ${theme.fonts.sen};
     font-size: 2rem;
+
+    @media (max-width: 500px) {
+      font-size: 1.5rem;
+    }
   }
 
   div {

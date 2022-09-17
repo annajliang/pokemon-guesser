@@ -6,7 +6,12 @@ import {
   showPokemonState,
   isGuessCorrectState,
 } from '../../recoil';
-import { StyledPokemonImage, StyledName } from './Pokemon.styled';
+import {
+  StyledPokemonImage,
+  StyledName,
+  StyledImageDesktop,
+  StyledPicture,
+} from './Pokemon.styled';
 import { getRandomIndex } from '../../services';
 
 export const Pokemon = () => {
@@ -20,7 +25,7 @@ export const Pokemon = () => {
   }
 
   return (
-    <div>
+    <>
       {allPokemon[randomIndex] && (
         <>
           {showPokemon ? (
@@ -28,16 +33,20 @@ export const Pokemon = () => {
               {allPokemon[randomIndex].name}
             </StyledName>
           ) : (
-            <Image
-              src={'/assets/pokemonTitleDesktop.svg'}
-              width={550}
-              height={70}
-              priority={true}
-              draggable="false"
-              alt="Who's that Pokemon?"
-            />
+            <>
+              <StyledImageDesktop>
+                <Image
+                  src={'/assets/pokemonTitleDesktop.svg'}
+                  width={550}
+                  height={70}
+                  priority={true}
+                  draggable="false"
+                  alt="Who's that Pokemon?"
+                />
+              </StyledImageDesktop>
+            </>
           )}
-          <picture>
+          <StyledPicture>
             <source
               srcSet={require(`../../public/pokemon/gen${allPokemon[randomIndex].gen}/${allPokemon[randomIndex].id}.png?webp`)}
               type="image/webp"
@@ -52,9 +61,9 @@ export const Pokemon = () => {
                 draggable="false"
               />
             </StyledPokemonImage>
-          </picture>
+          </StyledPicture>
         </>
       )}
-    </div>
+    </>
   );
 };

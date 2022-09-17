@@ -11,12 +11,18 @@ export const StyledScore = styled.div`
   font-size: 1.3rem;
   width: 132px;
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
 
   h3 {
     position: absolute;
     bottom: 3.5rem;
     right: 0;
     text-transform: uppercase;
+
+    @media (max-width: 500px) {
+      font-size: 1rem;
+    }
   }
 
   p {
@@ -26,6 +32,10 @@ export const StyledScore = styled.div`
   @media (max-width: 1045px) {
     margin-top: 0;
     margin-left: 3rem;
+  }
+
+  @media (max-width: 420px) {
+    width: 100px;
   }
 `;
 
@@ -49,4 +59,8 @@ export const StyledScoreIcon = styled.span`
   border-radius: 50%;
   width: 50px;
   display: flex;
+
+  @media (max-width: 420px) {
+    width: 45px;
+  }
 `;
