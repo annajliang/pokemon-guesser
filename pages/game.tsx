@@ -23,6 +23,11 @@ export const StyledContainer = styled.div`
     display: flex;
   }
 
+  @media (max-width: 1130px) {
+    margin-left: 1rem;
+    width: 65vw;
+  }
+
   @media (max-width: 970px) {
     width: 100vw;
   }

@@ -46,6 +46,11 @@ h1 {
    @media (max-width: 1045px) {
       font-size: 5rem;
    }
+
+   @media (max-width: 675px) {
+      -webkit-text-stroke-width: 2.5px;
+      font-size: 4rem;
+   }
 }
 
 h2 {
@@ -65,7 +70,7 @@ p {
    font-size: 1.2rem;
 
    @media (max-width: 420px) {
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
 } 
 

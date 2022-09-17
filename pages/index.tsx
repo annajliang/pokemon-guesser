@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import clientPromise from '../lib/mongodb';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -28,7 +27,6 @@ const StyledContainer = styled.div`
 `;
 
 const StyledH1 = styled.h1`
-  display: flex;
   margin-bottom: 1rem;
 `;
 
@@ -81,22 +79,7 @@ const Home: NextPage = () => {
   return (
     <StyledContainer>
       <StyledIntro>
-        <StyledH1>
-          <Image
-            src={`/assets/${
-              size.width !== undefined && size.width <= 500
-                ? 'pokemonTitleTab'
-                : 'pokemonTitleDesktop'
-            }.svg`}
-            width={650}
-            height={`${
-              size.width !== undefined && size.width <= 500 ? 250 : 100
-            }`}
-            priority={true}
-            draggable="false"
-            alt="Who's that Pokemon?"
-          />
-        </StyledH1>
+        <StyledH1>Who&apos;s That Pokémon?</StyledH1>
 
         <p>
           It’s a race against the clock to correctly guess which Pokemon is

@@ -24,4 +24,8 @@ export const StyledText = styled.p`
   font-family: ${theme.fonts.sen};
   font-size: 2rem;
   color: ${theme.colors.gunsmoke};
+
+  @media (max-width: 500px) {
+    font-size: 1.5rem;
+  }
 `;
