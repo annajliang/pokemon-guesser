@@ -64,3 +64,10 @@ export const StyledNextPokemon = styled.div`
   position: absolute;
   visibility: hidden;
 `;
+
+export const StyledSpinner = styled.div`
+  height: 400px;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1.5rem 0;
+`;

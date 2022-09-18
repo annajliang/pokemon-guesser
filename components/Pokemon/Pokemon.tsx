@@ -15,6 +15,7 @@ import {
   StyledPicture,
   StyledH1,
   StyledNextPokemon,
+  StyledSpinner,
 } from './Pokemon.styled';
 import { getcurrentIndex } from '../../services';
 
@@ -35,24 +36,40 @@ const RandomPokemon = ({
   size,
 }: RandomPokemonProps) => {
   return (
-    <StyledPicture>
-      <source
-        srcSet={require(`../../public/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png?webp`)}
-        type="image/webp"
-      />
-      <StyledPokemonImage showPokemon={showPokemon}>
-        <Image
-          src={`/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png`}
-          alt={`${allPokemon[currentIndex].name}`}
-          width={`${size.width !== undefined && size.width <= 970 ? 300 : 400}`}
-          height={`${
-            size.width !== undefined && size.width <= 970 ? 300 : 400
-          }`}
-          priority={true}
-          draggable="false"
-        />
-      </StyledPokemonImage>
-    </StyledPicture>
+    <>
+      {allPokemon[currentIndex] ? (
+        <StyledPicture>
+          <source
+            srcSet={require(`../../public/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png?webp`)}
+            type="image/webp"
+          />
+          <StyledPokemonImage showPokemon={showPokemon}>
+            <Image
+              src={`/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png`}
+              alt={`${allPokemon[currentIndex].name}`}
+              width={`${
+                size.width !== undefined && size.width <= 970 ? 300 : 400
+              }`}
+              height={`${
+                size.width !== undefined && size.width <= 970 ? 300 : 400
+              }`}
+              priority={true}
+              draggable="false"
+            />
+          </StyledPokemonImage>
+        </StyledPicture>
+      ) : (
+        <StyledSpinner>
+          <Image
+            src="/assets/spinner.gif"
+            alt=""
+            height={200}
+            width={200}
+            priority
+          />
+        </StyledSpinner>
+      )}
+    </>
   );
 };
 
