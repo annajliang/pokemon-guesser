@@ -12,13 +12,12 @@ import {
   showPokemonState,
   unseenIdsState,
   isGuessCorrectState,
-  showNextPokemonState,
   nextIndexState,
 } from '../../recoil';
 import { StyledForm, StyledContainer, StyledSettings } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
 import wrong from '../../public/sounds/wrong.mp3';
-import { getRandomItem, getcurrentIndex } from '../../services';
+import { getRandomItem } from '../../services';
 
 const getFilteredUnseenIds = (
   unseenIds: (number | undefined)[],
@@ -42,8 +41,6 @@ export const Form = () => {
   const [wrongAudio, setWrongAudio] = useState<HTMLAudioElement>();
   const [correctAudio, setCorrectAudio] = useState<HTMLAudioElement>();
   const currentPokemon = allPokemon[currentIndex]?.name;
-  const [showNextPokemon, setShowNextPokemon] =
-    useRecoilState(showNextPokemonState);
   const [nextIndex, setNextIndex] = useRecoilState(nextIndexState);
 
   //https://github.com/vercel/next.js/discussions/17963
@@ -68,13 +65,11 @@ export const Form = () => {
   };
 
   const handleNextPokemon = () => {
-    // setCurrentIndex(nextIndex);
     evaluateGuess();
     setShowPokemon(true);
     const filteredUnseenIds = getFilteredUnseenIds(unseenIds, currentIndex);
     setUnseenIds(filteredUnseenIds);
     const unseenId = getRandomItem(filteredUnseenIds);
-    // setNextIndex(unseenId);
 
     setTimeout(() => {
       setNextIndex(unseenId);

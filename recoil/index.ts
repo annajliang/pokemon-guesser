@@ -63,8 +63,3 @@ export const leaderboardState = atom({
   key: 'leaderboardState',
   default: [] as Leaderboard[],
 });
-
-export const showNextPokemonState = atom({
-  key: 'showNextPokemonState',
-  default: false as boolean,
-});

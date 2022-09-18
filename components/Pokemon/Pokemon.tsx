@@ -7,7 +7,6 @@ import {
   currentIndexState,
   showPokemonState,
   isGuessCorrectState,
-  showNextPokemonState,
   nextIndexState,
 } from '../../recoil';
 import {
@@ -16,10 +15,8 @@ import {
   StyledPicture,
   StyledH1,
   StyledNextPokemon,
-  StyledCurrentPokemon,
 } from './Pokemon.styled';
 import { getcurrentIndex } from '../../services';
-import { useEffect } from 'react';
 
 interface RandomPokemonProps {
   allPokemon: PokemonProps[];
@@ -65,24 +62,12 @@ export const Pokemon = () => {
   const showPokemon = useRecoilValue(showPokemonState);
   const isGuessCorrect = useRecoilValue(isGuessCorrectState);
   const size = useWindowSize();
-  const [showNextPokemon, setShowNextPokemon] =
-    useRecoilState(showNextPokemonState);
   const [nextIndex, setNextIndex] = useRecoilState(nextIndexState);
 
   if (currentIndex === 0) {
     setCurrentIndex(getcurrentIndex(allPokemon));
     setNextIndex(getcurrentIndex(allPokemon));
   }
-
-  // useEffect(() => {
-  //   setCurrentIndex(nextIndex);
-  // }, [nextIndex, setCurrentIndex]);
-
-  console.log('current', allPokemon[currentIndex].name);
-  console.log('next', allPokemon[nextIndex].name);
-  console.log('------------------');
-
-  // console.log('isGuessCorrect', isGuessCorrect);
 
   return (
     <>
@@ -95,14 +80,12 @@ export const Pokemon = () => {
           ) : (
             <StyledH1>Who&apos;s That Pokémon?</StyledH1>
           )}
-          <StyledCurrentPokemon>
-            <RandomPokemon
-              allPokemon={allPokemon}
-              currentIndex={currentIndex}
-              showPokemon={showPokemon}
-              size={size}
-            />
-          </StyledCurrentPokemon>
+          <RandomPokemon
+            allPokemon={allPokemon}
+            currentIndex={currentIndex}
+            showPokemon={showPokemon}
+            size={size}
+          />
           <StyledNextPokemon>
             <RandomPokemon
               allPokemon={allPokemon}

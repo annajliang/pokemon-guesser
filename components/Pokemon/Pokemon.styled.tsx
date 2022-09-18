@@ -64,7 +64,3 @@ export const StyledNextPokemon = styled.div`
   position: absolute;
   visibility: hidden;
 `;
-
-export const StyledCurrentPokemon = styled.div`
-  display: block;
-`;
