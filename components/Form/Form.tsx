@@ -88,7 +88,7 @@ export const Form = () => {
   return (
     <StyledContainer>
       <StyledSettings>
-        <Skip handleSkip={handleNextPokemon} showPokemon={showPokemon} />
+        <Skip handleSkip={handleNextPokemon} isDisabled={showPokemon} />
         &nbsp;|&nbsp;
         <SoundIcon isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn} />
       </StyledSettings>

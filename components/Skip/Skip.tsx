@@ -1,14 +1,21 @@
 import Image from 'next/image';
 import { StyledSkipBtn, StyledSkipIcon } from './Skip.styled';
+import { timerState } from '../../recoil';
+import { useRecoilValue } from 'recoil';
 
 interface SkipProps {
   handleSkip: React.MouseEventHandler<HTMLButtonElement>;
-  showPokemon: boolean;
+  isDisabled: boolean;
 }
 
-export const Skip = ({ handleSkip, showPokemon }: SkipProps) => {
+export const Skip = ({ handleSkip, isDisabled }: SkipProps) => {
+  const timer = useRecoilValue(timerState);
+
   return (
-    <StyledSkipBtn onClick={handleSkip} disabled={showPokemon}>
+    <StyledSkipBtn
+      onClick={handleSkip}
+      disabled={isDisabled || timer === 'Ended!'}
+    >
       <StyledSkipIcon>
         <Image
           src="/assets/skipPokeball.svg"
