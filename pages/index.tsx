@@ -3,7 +3,6 @@ import clientPromise from '../lib/mongodb';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useApi } from '../hooks/useApi';
-import { useWindowSize } from '../hooks/useWindowSize';
 import { useRecoilState, useResetRecoilState, useRecoilValue } from 'recoil';
 import startGame from '../public/sounds/startGame.mp3';
 import {
@@ -58,7 +57,6 @@ const Home: NextPage = () => {
   const dynamicRoute = useRouter().asPath;
   const resetAllPokemon = useResetRecoilState(allPokemonState);
   const resetTimer = useResetRecoilState(timerState);
-  const size = useWindowSize();
 
   useApi(
     chosenGen === 'all'
