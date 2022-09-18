@@ -23,7 +23,7 @@ export const scoreState = atom({
 
 export const timerState = atom({
   key: 'timerState',
-  default: 60000000 as number | string,
+  default: 60 as number | string,
 });
 
 export const showPokemonState = atom({
