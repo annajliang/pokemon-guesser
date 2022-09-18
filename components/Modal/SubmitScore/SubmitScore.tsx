@@ -1,7 +1,9 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import Image from 'next/image';
+import { Profanity, ProfanityOptions } from '@2toad/profanity';
 import { leaderboardState } from '../../../recoil';
+
 import {
   StyledText,
   StyledForm,
@@ -22,6 +24,12 @@ export const SubmitScore = () => {
   });
   const score = useRecoilValue(scoreState);
   const setLeaderboard = useSetRecoilState(leaderboardState);
+
+  const options = new ProfanityOptions();
+  options.wholeWord = false;
+  options.grawlix = '*****';
+
+  const profanity = new Profanity(options);
 
   const getScores = async () => {
     try {
@@ -68,11 +76,23 @@ export const SubmitScore = () => {
   };
 
   const submitScore = () => {
-    if (playerName.trim()) {
-      addPlayerToDb(playerName, score);
-    } else {
-      setToolTip({ ...tooltip, isShown: true });
+    const playerNameTrimmed = playerName.trim();
+
+    if (!playerNameTrimmed) {
+      return setToolTip({
+        isShown: true,
+        message: 'Please enter a valid name.',
+      });
     }
+
+    if (profanity.exists(playerNameTrimmed)) {
+      return setToolTip({
+        isShown: true,
+        message: 'Please do not write profanity.',
+      });
+    }
+
+    addPlayerToDb(playerName, score);
   };
 
   return (
@@ -109,7 +129,7 @@ export const SubmitScore = () => {
               height={25}
               priority
             />
-            <p>Please enter a valid name.</p>
+            <p>{tooltip.message}</p>
           </StyledToolTip>
         )}
       </StyledForm>

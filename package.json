@@ -10,6 +10,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
+    "@2toad/profanity": "^2.2.0",
     "@reach/dialog": "^0.17.0",
     "intercept-stdout": "^0.1.2",
     "js-levenshtein": "^1.1.6",
