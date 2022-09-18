@@ -72,6 +72,7 @@ export const Form = () => {
     evaluateGuess();
     setShowPokemon(true);
     const filteredUnseenIds = getFilteredUnseenIds(unseenIds, currentIndex);
+    setUnseenIds(filteredUnseenIds);
     const unseenId = getRandomItem(filteredUnseenIds);
     // setNextIndex(unseenId);
 
