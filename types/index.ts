@@ -1,4 +1,4 @@
-export interface Pokemon {
+export interface PokemonProps {
   name: string;
   id: string | undefined;
   url?: string | undefined;
