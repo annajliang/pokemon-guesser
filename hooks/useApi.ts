@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { allPokemonState, unseenIdsState } from '../recoil';
 import { getPokemonNameId, getPokemonIds } from '../services';
-import { Pokemon } from '../types';
+import { PokemonProps } from '../types';
 
 export const useApi = (url: string) => {
   const [allPokemon, setAllPokemon] = useRecoilState(allPokemonState);
   const setUnseenIds = useSetRecoilState(unseenIdsState);
 
   useEffect(() => {
-    const setupPokemonData = (data: Pokemon[]) => {
+    const setupPokemonData = (data: PokemonProps[]) => {
       const pokemonNameId = getPokemonNameId(data);
       setAllPokemon(pokemonNameId);
       const pokemonIds = getPokemonIds(data);

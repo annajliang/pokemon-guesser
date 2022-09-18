@@ -7,11 +7,12 @@ import { SoundIcon } from '../Sound/Sound';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   allPokemonState,
-  randomIndexState,
+  currentIndexState,
   scoreState,
   showPokemonState,
   unseenIdsState,
   isGuessCorrectState,
+  nextIndexState,
 } from '../../recoil';
 import { StyledForm, StyledContainer, StyledSettings } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
@@ -20,16 +21,16 @@ import { getRandomItem } from '../../services';
 
 const getFilteredUnseenIds = (
   unseenIds: (number | undefined)[],
-  randomIndex: number
+  currentIndex: number
 ) => {
   return unseenIds.filter((id) => {
-    return id !== randomIndex;
+    return id !== currentIndex;
   });
 };
 
 export const Form = () => {
   const [guess, setGuess] = useState('');
-  const [randomIndex, setRandomIndex] = useRecoilState(randomIndexState);
+  const [currentIndex, setCurrentIndex] = useRecoilState(currentIndexState);
   const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
   const [isGuessCorrect, setIsGuessCorrect] =
     useRecoilState(isGuessCorrectState);
@@ -39,7 +40,8 @@ export const Form = () => {
   const setScore = useSetRecoilState(scoreState);
   const [wrongAudio, setWrongAudio] = useState<HTMLAudioElement>();
   const [correctAudio, setCorrectAudio] = useState<HTMLAudioElement>();
-  const currentPokemon = allPokemon[randomIndex]?.name;
+  const currentPokemon = allPokemon[currentIndex]?.name;
+  const [nextIndex, setNextIndex] = useRecoilState(nextIndexState);
 
   //https://github.com/vercel/next.js/discussions/17963
   useEffect(() => {
@@ -65,13 +67,14 @@ export const Form = () => {
   const handleNextPokemon = () => {
     evaluateGuess();
     setShowPokemon(true);
-    const filteredUnseenIds = getFilteredUnseenIds(unseenIds, randomIndex);
+    const filteredUnseenIds = getFilteredUnseenIds(unseenIds, currentIndex);
+    setUnseenIds(filteredUnseenIds);
     const unseenId = getRandomItem(filteredUnseenIds);
 
     setTimeout(() => {
+      setNextIndex(unseenId);
+      setCurrentIndex(nextIndex);
       setShowPokemon(false);
-      setUnseenIds(filteredUnseenIds);
-      setRandomIndex(unseenId);
       setIsGuessCorrect(null);
       setGuess('');
     }, 1000);

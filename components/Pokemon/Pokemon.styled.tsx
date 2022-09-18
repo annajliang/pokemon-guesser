@@ -59,3 +59,8 @@ export const StyledH1 = styled.h1`
     margin: 0 2rem;
   }
 `;
+
+export const StyledNextPokemon = styled.div`
+  position: absolute;
+  visibility: hidden;
+`;

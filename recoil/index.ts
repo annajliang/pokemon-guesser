@@ -1,13 +1,18 @@
 import { atom } from 'recoil';
-import { Pokemon, Modal, Leaderboard } from '../types';
+import { PokemonProps, Modal, Leaderboard } from '../types';
 
 export const allPokemonState = atom({
   key: 'allPokemonState',
-  default: [] as Pokemon[],
+  default: [] as PokemonProps[],
 });
 
-export const randomIndexState = atom({
-  key: 'randomIndexState',
+export const currentIndexState = atom({
+  key: 'currentIndexState',
+  default: 0 as number,
+});
+
+export const nextIndexState = atom({
+  key: 'nextIndexState',
   default: 0 as number,
 });
 

@@ -1,14 +1,14 @@
-import { Pokemon } from '../types';
+import { PokemonProps } from '../types';
 
-export const getRandomIndex = (arr: any[]) => {
+export const getcurrentIndex = (arr: any[]) => {
   return Math.floor(Math.random() * arr.length);
 };
 
 export const getRandomItem = (arr: any[]) => {
-  return arr[getRandomIndex(arr)];
+  return arr[getcurrentIndex(arr)];
 };
 
-const getPokemonId = (url: Pokemon['url']) => {
+const getPokemonId = (url: PokemonProps['url']) => {
   const id = url?.split('/')[6];
 
   if (!id) {
@@ -43,8 +43,8 @@ const getReformattedName = (name: string) => {
   return name.charAt(0).toUpperCase() + name.slice(1);
 };
 
-export const getPokemonNameId = (results: Pokemon[]) => {
-  return results.map((result: Pokemon) => {
+export const getPokemonNameId = (results: PokemonProps[]) => {
+  return results.map((result: PokemonProps) => {
     return {
       name: getReformattedName(result.name),
       id: getPokemonId(result.url),
@@ -53,8 +53,8 @@ export const getPokemonNameId = (results: Pokemon[]) => {
   });
 };
 
-export const getPokemonIds = (results: Pokemon[]) => {
-  return results.map((result: Pokemon, i) => {
+export const getPokemonIds = (results: PokemonProps[]) => {
+  return results.map((result: PokemonProps, i) => {
     return i;
   });
 };
