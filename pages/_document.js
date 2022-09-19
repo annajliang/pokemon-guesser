@@ -43,6 +43,7 @@ class MyDocument extends Document {
             rel="stylesheet"
             type="text/css"
           />
+          <link rel="preload" as="image" href="/assets/spinner.gif" />
         </Head>
         <body>
           <script>0</script>
