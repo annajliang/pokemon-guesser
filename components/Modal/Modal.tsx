@@ -11,7 +11,7 @@ import {
 interface ModalProps {
   showDialog: boolean;
   closeModal: () => void;
-  variant: 'gameOver' | 'leaderboard';
+  variant: 'gameOver' | 'leaderboard' | 'disclaimer';
   children: JSX.Element;
 }
 
