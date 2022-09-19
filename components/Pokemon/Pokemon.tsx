@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { PokemonProps } from '../../types';
+import React, { useRef, useEffect } from 'react';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import {
   allPokemonState,
@@ -27,6 +28,7 @@ interface RandomPokemonProps {
     width: number | undefined;
     height: number | undefined;
   };
+  pokemonRef: React.MutableRefObject<null>;
 }
 
 const RandomPokemon = ({
@@ -34,40 +36,48 @@ const RandomPokemon = ({
   currentIndex,
   showPokemon,
   size,
+  pokemonRef,
 }: RandomPokemonProps) => {
+  // useEffect(() => {
+  //   console.log('pokemonRef', pokemonRef);
+  // }, [])
+
+  console.log('pokemonRef', pokemonRef.current);
   return (
     <>
-      {allPokemon[currentIndex] ? (
-        <StyledPicture>
+      {allPokemon[currentIndex] && (
+        <StyledPicture ref={pokemonRef}>
           <source
             srcSet={require(`../../public/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png?webp`)}
             type="image/webp"
           />
-          <StyledPokemonImage showPokemon={showPokemon}>
-            <Image
-              src={`/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png`}
-              alt={`${allPokemon[currentIndex].name}`}
-              width={`${
-                size.width !== undefined && size.width <= 970 ? 300 : 400
-              }`}
-              height={`${
-                size.width !== undefined && size.width <= 970 ? 300 : 400
-              }`}
-              priority={true}
-              draggable="false"
-            />
-          </StyledPokemonImage>
+          {pokemonRef.current ? (
+            <StyledPokemonImage showPokemon={showPokemon}>
+              <Image
+                src={`/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png`}
+                alt={`${allPokemon[currentIndex].name}`}
+                width={`${
+                  size.width !== undefined && size.width <= 970 ? 300 : 400
+                }`}
+                height={`${
+                  size.width !== undefined && size.width <= 970 ? 300 : 400
+                }`}
+                priority={true}
+                draggable="false"
+              />
+            </StyledPokemonImage>
+          ) : (
+            <StyledSpinner>
+              <Image
+                src="/assets/spinner.gif"
+                alt=""
+                height={200}
+                width={200}
+                priority
+              />
+            </StyledSpinner>
+          )}
         </StyledPicture>
-      ) : (
-        <StyledSpinner>
-          <Image
-            src="/assets/spinner.gif"
-            alt=""
-            height={200}
-            width={200}
-            priority
-          />
-        </StyledSpinner>
       )}
     </>
   );
@@ -80,6 +90,7 @@ export const Pokemon = () => {
   const isGuessCorrect = useRecoilValue(isGuessCorrectState);
   const size = useWindowSize();
   const [nextIndex, setNextIndex] = useRecoilState(nextIndexState);
+  const pokemonRef = useRef(null);
 
   if (currentIndex === 0) {
     setCurrentIndex(getcurrentIndex(allPokemon));
@@ -102,6 +113,7 @@ export const Pokemon = () => {
             currentIndex={currentIndex}
             showPokemon={showPokemon}
             size={size}
+            pokemonRef={pokemonRef}
           />
           <StyledNextPokemon>
             <RandomPokemon
@@ -109,6 +121,7 @@ export const Pokemon = () => {
               currentIndex={nextIndex}
               showPokemon={showPokemon}
               size={size}
+              pokemonRef={pokemonRef}
             />
           </StyledNextPokemon>
         </>
