@@ -18,14 +18,3 @@ export const StyledScore = styled.div`
     color: ${theme.colors.gunsmoke};
   }
 `;
-
-export const StyledText = styled.p`
-  padding: 1rem 9rem 2rem;
-  font-family: ${theme.fonts.sen};
-  font-size: 2rem;
-  color: ${theme.colors.gunsmoke};
-
-  @media (max-width: 500px) {
-    font-size: 1.5rem;
-  }
-`;

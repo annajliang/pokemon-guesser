@@ -5,10 +5,11 @@ import {
   timerState,
   leaderboardState,
 } from '../../../recoil';
-import { StyledContainer, StyledScore, StyledText } from './GameOver.styled';
+import { StyledContainer, StyledScore } from './GameOver.styled';
 import { SubmitScore } from '../SubmitScore/SubmitScore';
 import { BlockLink } from '../../BlockLink/BlockLink';
 import { Label } from '../../Form/Label/Label';
+import { StyledText } from '../../../styles/Global';
 
 const FinalScore = ({ score }: { score: number }) => {
   const [showModals, setShowModals] = useRecoilState(showModalsState);

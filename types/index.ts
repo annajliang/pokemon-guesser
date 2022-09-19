@@ -5,12 +5,13 @@ export interface PokemonProps {
   gen: number;
 }
 
-export interface Modal {
+export interface ModalProps {
   leaderboard: boolean;
   gameOver: boolean;
+  disclaimer: boolean;
 }
 
-export interface Leaderboard {
+export interface LeaderboardProps {
   _id: string;
   name: string;
   score: number;

@@ -1,13 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 
-export const StyledText = styled.p`
-  padding: 1rem 9rem 2rem;
-  font-family: ${theme.fonts.sen};
-  font-size: 2rem;
-  color: ${theme.colors.gunsmoke};
-`;
-
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;

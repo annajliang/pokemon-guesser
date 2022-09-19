@@ -1,4 +1,4 @@
-import '../styles/global.css';
+import '../styles/fonts.css';
 import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 import { Normalize } from '../styles/Normalize';

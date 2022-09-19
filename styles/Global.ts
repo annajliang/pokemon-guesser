@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import { theme } from './theme';
 
 export const Global = createGlobalStyle`
@@ -126,5 +127,16 @@ button {
    @media (max-width: 420px) {
       font-size: 1rem;
    }
+  }
+`;
+
+export const StyledText = styled.p`
+  padding: 1rem 9rem 2rem;
+  font-family: ${theme.fonts.sen};
+  font-size: 2rem;
+  color: ${theme.colors.gunsmoke};
+
+  @media (max-width: 500px) {
+    font-size: 1.5rem;
   }
 `;

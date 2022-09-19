@@ -5,7 +5,6 @@ import { Profanity, ProfanityOptions } from '@2toad/profanity';
 import { leaderboardState } from '../../../recoil';
 
 import {
-  StyledText,
   StyledForm,
   StyledPlayerInput,
   StyledSubmitStatus,
@@ -14,6 +13,7 @@ import {
 import { scoreState } from '../../../recoil';
 import { Button } from '../../Button/Button';
 import { Label } from '../../Form/Label/Label';
+import { StyledText } from '../../../styles/Global';
 
 export const SubmitScore = () => {
   const [playerName, setPlayerName] = useState('');

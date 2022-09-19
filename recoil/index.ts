@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { PokemonProps, Modal, Leaderboard } from '../types';
+import { PokemonProps, ModalProps, LeaderboardProps } from '../types';
 
 export const allPokemonState = atom({
   key: 'allPokemonState',
@@ -56,10 +56,11 @@ export const showModalsState = atom({
   default: {
     leaderboard: false,
     gameOver: false,
-  } as Modal,
+    disclaimer: false,
+  } as ModalProps,
 });
 
 export const leaderboardState = atom({
   key: 'leaderboardState',
-  default: [] as Leaderboard[],
+  default: [] as LeaderboardProps[],
 });

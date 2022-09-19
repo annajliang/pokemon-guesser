@@ -1,7 +1,8 @@
 import { leaderboardState } from '../../../recoil';
 import { useRecoilValue } from 'recoil';
-import { StyledRanking, StyledText } from './Leaderboard.styled';
+import { StyledRanking } from './Leaderboard.styled';
 import { Player } from './Player';
+import { StyledText } from '../../../styles/Global';
 
 export const Leaderboard = () => {
   const leaderboard = useRecoilValue(leaderboardState);
