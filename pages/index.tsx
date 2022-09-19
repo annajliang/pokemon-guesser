@@ -10,6 +10,7 @@ import {
   startGameAudioState,
   allPokemonState,
   timerState,
+  scoreState,
 } from '../recoil';
 import styled from 'styled-components';
 import { BlockLink } from '../components/BlockLink/BlockLink';
@@ -57,6 +58,7 @@ const Home: NextPage = () => {
   const dynamicRoute = useRouter().asPath;
   const resetAllPokemon = useResetRecoilState(allPokemonState);
   const resetTimer = useResetRecoilState(timerState);
+  const resetScore = useResetRecoilState(scoreState);
 
   useApi(
     chosenGen === 'all'
@@ -71,8 +73,16 @@ const Home: NextPage = () => {
       resetAllPokemon();
       resetGen();
       resetTimer();
+      resetScore();
     }
-  }, [resetAllPokemon, setStartGameAudio, dynamicRoute, resetGen, resetTimer]);
+  }, [
+    resetAllPokemon,
+    setStartGameAudio,
+    dynamicRoute,
+    resetGen,
+    resetTimer,
+    resetScore,
+  ]);
 
   return (
     <StyledContainer>
@@ -96,9 +106,9 @@ const Home: NextPage = () => {
         <BlockLink
           label="Start"
           href="/game"
-          onClick={() => {
-            startGameAudio?.play();
-          }}
+          // onClick={() => {
+          //   startGameAudio?.play();
+          // }}
         />
       </StyledIntro>
     </StyledContainer>
