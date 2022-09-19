@@ -69,6 +69,7 @@ export const Form = () => {
     setShowPokemon(true);
     const filteredUnseenIds = getFilteredUnseenIds(unseenIds, currentIndex);
     setUnseenIds(filteredUnseenIds);
+    console.log(unseenIds);
     const unseenId = getRandomItem(filteredUnseenIds);
 
     setTimeout(() => {

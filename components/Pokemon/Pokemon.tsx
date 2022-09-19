@@ -8,6 +8,7 @@ import {
   showPokemonState,
   isGuessCorrectState,
   nextIndexState,
+  unseenIdsState,
 } from '../../recoil';
 import {
   StyledPokemonImage,
@@ -15,7 +16,6 @@ import {
   StyledPicture,
   StyledH1,
   StyledNextPokemon,
-  StyledSpinner,
 } from './Pokemon.styled';
 import { getcurrentIndex } from '../../services';
 
@@ -36,40 +36,24 @@ const RandomPokemon = ({
   size,
 }: RandomPokemonProps) => {
   return (
-    <>
-      {allPokemon[currentIndex] ? (
-        <StyledPicture>
-          <source
-            srcSet={require(`../../public/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png?webp`)}
-            type="image/webp"
-          />
-          <StyledPokemonImage showPokemon={showPokemon}>
-            <Image
-              src={`/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png`}
-              alt={`${allPokemon[currentIndex].name}`}
-              width={`${
-                size.width !== undefined && size.width <= 970 ? 300 : 400
-              }`}
-              height={`${
-                size.width !== undefined && size.width <= 970 ? 300 : 400
-              }`}
-              priority={true}
-              draggable="false"
-            />
-          </StyledPokemonImage>
-        </StyledPicture>
-      ) : (
-        <StyledSpinner>
-          <Image
-            src="/assets/spinner.gif"
-            alt=""
-            height={200}
-            width={200}
-            priority
-          />
-        </StyledSpinner>
-      )}
-    </>
+    <StyledPicture>
+      <source
+        srcSet={require(`../../public/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png?webp`)}
+        type="image/webp"
+      />
+      <StyledPokemonImage showPokemon={showPokemon}>
+        <Image
+          src={`/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png`}
+          alt={`${allPokemon[currentIndex].name}`}
+          width={`${size.width !== undefined && size.width <= 970 ? 300 : 400}`}
+          height={`${
+            size.width !== undefined && size.width <= 970 ? 300 : 400
+          }`}
+          priority={true}
+          draggable="false"
+        />
+      </StyledPokemonImage>
+    </StyledPicture>
   );
 };
 
@@ -80,11 +64,25 @@ export const Pokemon = () => {
   const isGuessCorrect = useRecoilValue(isGuessCorrectState);
   const size = useWindowSize();
   const [nextIndex, setNextIndex] = useRecoilState(nextIndexState);
+  const [unseenIds, setUnseenIds] = useRecoilState(unseenIdsState);
 
   if (currentIndex === 0) {
-    setCurrentIndex(getcurrentIndex(allPokemon));
-    setNextIndex(getcurrentIndex(allPokemon));
+    const firstIndex = getcurrentIndex(allPokemon);
+    const secondIndex = getcurrentIndex(allPokemon);
+    setCurrentIndex(firstIndex);
+    setNextIndex(secondIndex);
+
+    const filteredUnseenIds = unseenIds.filter((id) => {
+      return id !== firstIndex && id !== secondIndex;
+    });
+
+    setUnseenIds(filteredUnseenIds);
+    console.log('filteredUnseenIds', filteredUnseenIds);
   }
+
+  console.log('currentIndex', currentIndex);
+  console.log('nextIndex', nextIndex);
+  console.log('----------------');
 
   return (
     <>
