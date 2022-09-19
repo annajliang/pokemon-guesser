@@ -44,42 +44,38 @@ const RandomPokemon = ({
 
   console.log('pokemonRef', pokemonRef.current);
   return (
-    <>
-      {allPokemon[currentIndex] && (
-        <StyledPicture ref={pokemonRef}>
-          <source
-            srcSet={require(`../../public/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png?webp`)}
-            type="image/webp"
+    <StyledPicture ref={pokemonRef}>
+      <source
+        srcSet={require(`../../public/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png?webp`)}
+        type="image/webp"
+      />
+      {pokemonRef.current ? (
+        <StyledPokemonImage showPokemon={showPokemon}>
+          <Image
+            src={`/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png`}
+            alt={`${allPokemon[currentIndex].name}`}
+            width={`${
+              size.width !== undefined && size.width <= 970 ? 300 : 400
+            }`}
+            height={`${
+              size.width !== undefined && size.width <= 970 ? 300 : 400
+            }`}
+            priority={true}
+            draggable="false"
           />
-          {pokemonRef.current ? (
-            <StyledPokemonImage showPokemon={showPokemon}>
-              <Image
-                src={`/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png`}
-                alt={`${allPokemon[currentIndex].name}`}
-                width={`${
-                  size.width !== undefined && size.width <= 970 ? 300 : 400
-                }`}
-                height={`${
-                  size.width !== undefined && size.width <= 970 ? 300 : 400
-                }`}
-                priority={true}
-                draggable="false"
-              />
-            </StyledPokemonImage>
-          ) : (
-            <StyledSpinner>
-              <Image
-                src="/assets/spinner.gif"
-                alt=""
-                height={200}
-                width={200}
-                priority
-              />
-            </StyledSpinner>
-          )}
-        </StyledPicture>
+        </StyledPokemonImage>
+      ) : (
+        <StyledSpinner>
+          <Image
+            src="/assets/spinner.gif"
+            alt=""
+            height={200}
+            width={200}
+            priority
+          />
+        </StyledSpinner>
       )}
-    </>
+    </StyledPicture>
   );
 };
 
