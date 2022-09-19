@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { allPokemonState } from '../recoil';
+import { allPokemonState, currentIndexState } from '../recoil';
 import { Pokemon } from '../components/Pokemon/Pokemon';
 import { Form } from '../components/Form/Form';
 import { Error } from '../components/Error/Error';
@@ -35,11 +35,14 @@ export const StyledContainer = styled.div`
 
 const Game: NextPage = () => {
   const allPokemon = useRecoilValue(allPokemonState);
+  const currentIndex = useRecoilValue(currentIndexState);
+
+  console.log('allPokemon[currentIndex]', allPokemon[currentIndex]);
 
   return (
     <>
       <StyledContainer>
-        {allPokemon.length > 0 ? (
+        {allPokemon.length > 0 && allPokemon[currentIndex]?.gen ? (
           <>
             <Status />
             <Pokemon />

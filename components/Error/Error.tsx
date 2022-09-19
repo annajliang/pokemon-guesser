@@ -6,10 +6,9 @@ export const Error = () => {
     <StyledErrorContainer>
       <h1>Error Occured!</h1>
       <StyledErrorMessage>
-        Uh-oh! Looks like you were trying to play the game without selecting a
-        Pokémon generation first. Please go{' '}
-        <Link href="/">back to the homepage</Link> and pick your generation
-        before you play.
+        Uh-oh! Looks like an error somehow occcured. Sorry about that! Please go{' '}
+        <Link href="/">back to the homepage</Link>, pick your generation and try
+        again.
       </StyledErrorMessage>
     </StyledErrorContainer>
   );
