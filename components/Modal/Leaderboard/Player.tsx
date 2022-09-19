@@ -17,7 +17,7 @@ export const Player = ({ rank, player }: PlayerProps) => {
         <Medal rank={rank} />
         <p>{player.name}</p>
       </div>
-      <StyledScore>{player.score}</StyledScore>
+      <StyledScore>{player.score} pts.</StyledScore>
     </StyledPlayer>
   );
 };
