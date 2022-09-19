@@ -77,12 +77,7 @@ export const Pokemon = () => {
     });
 
     setUnseenIds(filteredUnseenIds);
-    console.log('filteredUnseenIds', filteredUnseenIds);
   }
-
-  console.log('currentIndex', currentIndex);
-  console.log('nextIndex', nextIndex);
-  console.log('----------------');
 
   return (
     <>
