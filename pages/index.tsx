@@ -11,6 +11,8 @@ import {
   allPokemonState,
   timerState,
   scoreState,
+  currentIndexState,
+  nextIndexState,
 } from '../recoil';
 import styled from 'styled-components';
 import { BlockLink } from '../components/BlockLink/BlockLink';
@@ -59,6 +61,8 @@ const Home: NextPage = () => {
   const resetAllPokemon = useResetRecoilState(allPokemonState);
   const resetTimer = useResetRecoilState(timerState);
   const resetScore = useResetRecoilState(scoreState);
+  const resetCurrentIndex = useResetRecoilState(currentIndexState);
+  const resetNextIndex = useResetRecoilState(nextIndexState);
 
   useApi(
     chosenGen === 'all'
@@ -74,6 +78,8 @@ const Home: NextPage = () => {
       resetGen();
       resetTimer();
       resetScore();
+      resetCurrentIndex();
+      resetNextIndex();
     }
   }, [
     resetAllPokemon,
@@ -82,6 +88,8 @@ const Home: NextPage = () => {
     resetGen,
     resetTimer,
     resetScore,
+    resetCurrentIndex,
+    resetNextIndex,
   ]);
 
   return (
