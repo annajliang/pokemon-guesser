@@ -114,9 +114,9 @@ const Home: NextPage = () => {
         <BlockLink
           label="Start"
           href="/game"
-          // onClick={() => {
-          //   startGameAudio?.play();
-          // }}
+          onClick={() => {
+            startGameAudio?.play();
+          }}
         />
       </StyledIntro>
     </StyledContainer>

@@ -15,8 +15,6 @@ export const Dropdown = () => {
     }
   };
 
-  console.log('chosenGen', chosenGen);
-
   return (
     <StyledDropdownContainer>
       <StyledDropdown name="generation" id="generation" onChange={handleChange}>

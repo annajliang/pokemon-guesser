@@ -37,12 +37,10 @@ const Game: NextPage = () => {
   const allPokemon = useRecoilValue(allPokemonState);
   const currentIndex = useRecoilValue(currentIndexState);
 
-  console.log('allPokemon[currentIndex]', allPokemon[currentIndex]);
-
   return (
     <>
       <StyledContainer>
-        {allPokemon.length > 0 && allPokemon[currentIndex]?.gen ? (
+        {allPokemon.length > 0 ? (
           <>
             <Status />
             <Pokemon />

@@ -9,7 +9,6 @@ import {
   isGuessCorrectState,
   nextIndexState,
   unseenIdsState,
-  chosenGenState,
 } from '../../recoil';
 import {
   StyledPokemonImage,
@@ -36,32 +35,25 @@ const RandomPokemon = ({
   showPokemon,
   size,
 }: RandomPokemonProps) => {
-  const choosenGen = useRecoilValue(chosenGenState);
   return (
-    <>
-      {choosenGen && (
-        <StyledPicture>
-          <source
-            srcSet={require(`../../public/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png?webp`)}
-            type="image/webp"
-          />
-          <StyledPokemonImage showPokemon={showPokemon}>
-            <Image
-              src={`/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png`}
-              alt={`${allPokemon[currentIndex].name}`}
-              width={`${
-                size.width !== undefined && size.width <= 970 ? 300 : 400
-              }`}
-              height={`${
-                size.width !== undefined && size.width <= 970 ? 300 : 400
-              }`}
-              priority={true}
-              draggable="false"
-            />
-          </StyledPokemonImage>
-        </StyledPicture>
-      )}
-    </>
+    <StyledPicture>
+      <source
+        srcSet={require(`../../public/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png?webp`)}
+        type="image/webp"
+      />
+      <StyledPokemonImage showPokemon={showPokemon}>
+        <Image
+          src={`/pokemon/gen${allPokemon[currentIndex].gen}/${allPokemon[currentIndex].id}.png`}
+          alt={`${allPokemon[currentIndex].name}`}
+          width={`${size.width !== undefined && size.width <= 970 ? 300 : 400}`}
+          height={`${
+            size.width !== undefined && size.width <= 970 ? 300 : 400
+          }`}
+          priority={true}
+          draggable="false"
+        />
+      </StyledPokemonImage>
+    </StyledPicture>
   );
 };
 
