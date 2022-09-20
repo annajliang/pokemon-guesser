@@ -2,6 +2,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import Image from 'next/image';
 import { Profanity, ProfanityOptions } from '@2toad/profanity';
+import { SubmissionStatus } from '../../../types';
 import { leaderboardState } from '../../../recoil';
 
 import {
@@ -17,14 +18,15 @@ import { StyledText } from '../../../styles/Global';
 
 export const SubmitScore = () => {
   const [playerName, setPlayerName] = useState('');
-  const [isScoreSubmitted, setIsScoreSubmitted] = useState(false);
   const [tooltip, setToolTip] = useState({
     message: '',
     isShown: false,
   });
   const score = useRecoilValue(scoreState);
   const setLeaderboard = useSetRecoilState(leaderboardState);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState(
+    SubmissionStatus.READY
+  );
 
   const options = new ProfanityOptions();
   options.wholeWord = false;
@@ -63,14 +65,12 @@ export const SubmitScore = () => {
       }
 
       const { message } = await response.json();
-      setIsScoreSubmitted(true);
-      setIsDisabled(false);
+      setSubmissionStatus(SubmissionStatus.SUCCESS);
       setToolTip({ ...tooltip, message });
       getScores();
     } catch (err) {
       console.log(err);
-      setIsScoreSubmitted(true);
-      setIsDisabled(false);
+      setSubmissionStatus(SubmissionStatus.FAILURE);
       setToolTip({
         ...tooltip,
         message: 'Failed to submit score. Try again!',
@@ -95,7 +95,7 @@ export const SubmitScore = () => {
       });
     }
 
-    setIsDisabled(true);
+    setSubmissionStatus(SubmissionStatus.SUBMITTING);
     addPlayerToDb(playerName, score);
   };
 
@@ -119,13 +119,14 @@ export const SubmitScore = () => {
           maxLength={12}
           onChange={(e) => setPlayerName(e.target.value)}
         />
-        {isScoreSubmitted ? (
+        {submissionStatus === SubmissionStatus.SUCCESS ||
+        submissionStatus === SubmissionStatus.FAILURE ? (
           <StyledSubmitStatus>{tooltip.message}</StyledSubmitStatus>
         ) : (
           <Button
             label="Submit"
             onClick={submitScore}
-            isDisabled={isDisabled}
+            submissionStatus={submissionStatus}
           />
         )}
         {tooltip.isShown && (

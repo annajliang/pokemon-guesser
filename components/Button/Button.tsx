@@ -1,4 +1,5 @@
 import { StyledButton } from './Button.styled';
+import { SubmissionStatus } from '../../types';
 
 type Size = 'small' | 'medium' | 'large';
 
@@ -7,13 +8,13 @@ export interface ButtonProps {
   label: string;
   size?: Size;
   onClick?: () => void;
-  isDisabled?: boolean;
+  submissionStatus?: SubmissionStatus;
 }
 
 export const Button = ({
   label,
   onClick,
-  isDisabled,
+  submissionStatus,
   variant = 'primary',
   size = 'medium',
 }: ButtonProps) => {
@@ -23,7 +24,7 @@ export const Button = ({
         variant={variant}
         size={size}
         onClick={onClick}
-        disabled={isDisabled}
+        disabled={submissionStatus === SubmissionStatus.SUCCESS}
       >
         {label}
       </StyledButton>
