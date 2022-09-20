@@ -86,7 +86,7 @@ export const SubmitScore = () => {
       });
     }
 
-    if (profanity.exists(playerNameTrimmed)) {
+    if (profanity.exists(playerNameTrimmed.replace(/\s/g, ''))) {
       return setToolTip({
         isShown: true,
         message: 'Please do not write profanity.',
