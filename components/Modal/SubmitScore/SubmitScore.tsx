@@ -2,6 +2,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import Image from 'next/image';
 import { Profanity, ProfanityOptions } from '@2toad/profanity';
+import { SubmissionStatus } from '../../../types';
 import { leaderboardState } from '../../../recoil';
 
 import {
@@ -17,13 +18,16 @@ import { StyledText } from '../../../styles/Global';
 
 export const SubmitScore = () => {
   const [playerName, setPlayerName] = useState('');
-  const [isScoreSubmitted, setIsScoreSubmitted] = useState(false);
   const [tooltip, setToolTip] = useState({
     message: '',
     isShown: false,
   });
   const score = useRecoilValue(scoreState);
   const setLeaderboard = useSetRecoilState(leaderboardState);
+  const [submissionStatus, setSubmissionStatus] = useState(
+    SubmissionStatus.READY
+  );
+  const [submissionMessage, setSubmissionMessage] = useState('');
 
   const options = new ProfanityOptions();
   options.wholeWord = false;
@@ -62,16 +66,13 @@ export const SubmitScore = () => {
       }
 
       const { message } = await response.json();
-      setIsScoreSubmitted(true);
-      setToolTip({ ...tooltip, message });
+      setSubmissionStatus(SubmissionStatus.SUCCESS);
+      setSubmissionMessage(message);
       getScores();
     } catch (err) {
       console.log(err);
-      setIsScoreSubmitted(true);
-      setToolTip({
-        ...tooltip,
-        message: 'Failed to submit score. Try again!',
-      });
+      setSubmissionStatus(SubmissionStatus.FAIL);
+      setSubmissionMessage('Failed to submit score. Try again!');
     }
   };
 
@@ -92,6 +93,7 @@ export const SubmitScore = () => {
       });
     }
 
+    setSubmissionStatus(SubmissionStatus.SUBMITTING);
     addPlayerToDb(playerName, score);
   };
 
@@ -115,10 +117,15 @@ export const SubmitScore = () => {
           maxLength={12}
           onChange={(e) => setPlayerName(e.target.value)}
         />
-        {isScoreSubmitted ? (
-          <StyledSubmitStatus>{tooltip.message}</StyledSubmitStatus>
+        {submissionStatus === SubmissionStatus.SUCCESS ||
+        submissionStatus === SubmissionStatus.FAIL ? (
+          <StyledSubmitStatus>{submissionMessage}</StyledSubmitStatus>
         ) : (
-          <Button label="Submit" onClick={submitScore} />
+          <Button
+            label="Submit"
+            onClick={submitScore}
+            submissionStatus={submissionStatus}
+          />
         )}
         {tooltip.isShown && (
           <StyledToolTip>

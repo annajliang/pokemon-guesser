@@ -81,31 +81,27 @@ export const Pokemon = () => {
 
   return (
     <>
-      {allPokemon[currentIndex] && (
-        <>
-          {showPokemon ? (
-            <StyledName isGuessCorrect={isGuessCorrect}>
-              {allPokemon[currentIndex].name}
-            </StyledName>
-          ) : (
-            <StyledH1>Who&apos;s That Pokémon?</StyledH1>
-          )}
-          <RandomPokemon
-            allPokemon={allPokemon}
-            currentIndex={currentIndex}
-            showPokemon={showPokemon}
-            size={size}
-          />
-          <StyledNextPokemon>
-            <RandomPokemon
-              allPokemon={allPokemon}
-              currentIndex={nextIndex}
-              showPokemon={showPokemon}
-              size={size}
-            />
-          </StyledNextPokemon>
-        </>
+      {showPokemon ? (
+        <StyledName isGuessCorrect={isGuessCorrect}>
+          {allPokemon[currentIndex].name}
+        </StyledName>
+      ) : (
+        <StyledH1>Who&apos;s That Pokémon?</StyledH1>
       )}
+      <RandomPokemon
+        allPokemon={allPokemon}
+        currentIndex={currentIndex}
+        showPokemon={showPokemon}
+        size={size}
+      />
+      <StyledNextPokemon>
+        <RandomPokemon
+          allPokemon={allPokemon}
+          currentIndex={nextIndex}
+          showPokemon={showPokemon}
+          size={size}
+        />
+      </StyledNextPokemon>
     </>
   );
 };

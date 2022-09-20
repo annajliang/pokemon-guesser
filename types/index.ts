@@ -16,3 +16,10 @@ export interface LeaderboardProps {
   name: string;
   score: number;
 }
+
+export enum SubmissionStatus {
+  READY = 'ready',
+  SUBMITTING = 'submitting',
+  SUCCESS = 'success',
+  FAIL = 'fail',
+}
