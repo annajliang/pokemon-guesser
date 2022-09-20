@@ -21,5 +21,5 @@ export enum SubmissionStatus {
   READY = 'ready',
   SUBMITTING = 'submitting',
   SUCCESS = 'success',
-  FAILURE = 'failure',
+  FAIL = 'fail',
 }

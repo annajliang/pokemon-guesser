@@ -27,6 +27,7 @@ export const SubmitScore = () => {
   const [submissionStatus, setSubmissionStatus] = useState(
     SubmissionStatus.READY
   );
+  const [submissionMessage, setSubmissionMessage] = useState('');
 
   const options = new ProfanityOptions();
   options.wholeWord = false;
@@ -66,15 +67,12 @@ export const SubmitScore = () => {
 
       const { message } = await response.json();
       setSubmissionStatus(SubmissionStatus.SUCCESS);
-      setToolTip({ ...tooltip, message });
+      setSubmissionMessage(message);
       getScores();
     } catch (err) {
       console.log(err);
-      setSubmissionStatus(SubmissionStatus.FAILURE);
-      setToolTip({
-        ...tooltip,
-        message: 'Failed to submit score. Try again!',
-      });
+      setSubmissionStatus(SubmissionStatus.FAIL);
+      setSubmissionMessage('Failed to submit score. Try again!');
     }
   };
 
@@ -120,8 +118,8 @@ export const SubmitScore = () => {
           onChange={(e) => setPlayerName(e.target.value)}
         />
         {submissionStatus === SubmissionStatus.SUCCESS ||
-        submissionStatus === SubmissionStatus.FAILURE ? (
-          <StyledSubmitStatus>{tooltip.message}</StyledSubmitStatus>
+        submissionStatus === SubmissionStatus.FAIL ? (
+          <StyledSubmitStatus>{submissionMessage}</StyledSubmitStatus>
         ) : (
           <Button
             label="Submit"
