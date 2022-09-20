@@ -7,17 +7,24 @@ export interface ButtonProps {
   label: string;
   size?: Size;
   onClick?: () => void;
+  isDisabled?: boolean;
 }
 
 export const Button = ({
   label,
   onClick,
+  isDisabled,
   variant = 'primary',
   size = 'medium',
 }: ButtonProps) => {
   return (
     <>
-      <StyledButton variant={variant} size={size} onClick={onClick}>
+      <StyledButton
+        variant={variant}
+        size={size}
+        onClick={onClick}
+        disabled={isDisabled}
+      >
         {label}
       </StyledButton>
     </>

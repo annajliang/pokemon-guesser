@@ -24,6 +24,7 @@ export const SubmitScore = () => {
   });
   const score = useRecoilValue(scoreState);
   const setLeaderboard = useSetRecoilState(leaderboardState);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const options = new ProfanityOptions();
   options.wholeWord = false;
@@ -63,11 +64,13 @@ export const SubmitScore = () => {
 
       const { message } = await response.json();
       setIsScoreSubmitted(true);
+      setIsDisabled(false);
       setToolTip({ ...tooltip, message });
       getScores();
     } catch (err) {
       console.log(err);
       setIsScoreSubmitted(true);
+      setIsDisabled(false);
       setToolTip({
         ...tooltip,
         message: 'Failed to submit score. Try again!',
@@ -92,6 +95,7 @@ export const SubmitScore = () => {
       });
     }
 
+    setIsDisabled(true);
     addPlayerToDb(playerName, score);
   };
 
@@ -118,7 +122,11 @@ export const SubmitScore = () => {
         {isScoreSubmitted ? (
           <StyledSubmitStatus>{tooltip.message}</StyledSubmitStatus>
         ) : (
-          <Button label="Submit" onClick={submitScore} />
+          <Button
+            label="Submit"
+            onClick={submitScore}
+            isDisabled={isDisabled}
+          />
         )}
         {tooltip.isShown && (
           <StyledToolTip>
