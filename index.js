@@ -5,7 +5,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 const axios = require('axios');
 
-const URL = 'https://bulbapedia.bulbagarden.net/wiki/Blissey_(Pok%C3%A9mon)';
+const URL = 'https://bulbapedia.bulbagarden.net/wiki/Camerupt_(Pok%C3%A9mon)';
 
 const getRandomKeyboardEvent = () => {
   const events = [
@@ -395,12 +395,26 @@ function delay() {
 
     await page.keyboard.press(getRandomKeyboardEvent());
 
-    const element = await page.waitForSelector('a[href*="Generation"]', {
-      waitUntil: 'domcontentloaded',
-      timeout: 0,
-    }); // select the element
+    // const element = await page.waitForSelector('p a[href*="Generation"]', {
+    //   waitUntil: 'domcontentloaded',
+    //   timeout: 0,
+    // }); // select the element
+
+    const element =
+      (await page.waitForSelector('a[href*="Generation"]', {
+        waitUntil: 'domcontentloaded',
+        timeout: 0,
+      })) ||
+      (await page.waitForSelector('p a[href*="Generation"]', {
+        waitUntil: 'domcontentloaded',
+        timeout: 0,
+      })); // select the element
+
+    console.log('element', element);
 
     const pokemonGen = await element.evaluate((el) => el.textContent); // grab the textContent from the element, by evaluating this function in the browser context
+
+    console.log('pokemonGen', pokemonGen);
 
     const romanNumeral = pokemonGen.replace(/^.*?\s/, '');
 
@@ -434,9 +448,13 @@ function delay() {
           waitUntil: ['networkidle0', 'domcontentloaded'],
           timeout: 0,
         });
+        console.log('a');
       }
 
-      if (!is503) {
+      const test = await page.$eval('h1', () => true).catch(() => false);
+
+      if (!test) {
+        console.log('c');
         break;
       }
     }
@@ -476,14 +494,25 @@ function delay() {
       axios({
         url,
         responseType: 'stream',
-      }).then(
-        (response) =>
-          new Promise((resolve, reject) => {
-            response.data
-              .pipe(fs.createWriteStream(imagePath))
-              .on('finish', () => resolve())
-              .on('error', (e) => reject(e));
-          })
+      }).then((response) =>
+        new Promise((resolve, reject) => {
+          response.data
+            .pipe(fs.createWriteStream(imagePath))
+            .on('finish', () => resolve())
+            .on('error', (e) => {
+              reject(e);
+            });
+        }).catch((e) => {
+          console.log(e);
+          const retry = async () => {
+            await page.reload({
+              waitUntil: ['networkidle0', 'domcontentloaded'],
+              timeout: 0,
+            });
+          };
+
+          retry();
+        })
       );
 
     await delay();
