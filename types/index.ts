@@ -2,7 +2,7 @@ export interface PokemonProps {
   name: string;
   id: string | undefined;
   url?: string | undefined;
-  gen: number;
+  gen: number | undefined;
 }
 
 export interface ModalProps {

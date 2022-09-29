@@ -4,17 +4,25 @@ import {
   scoreState,
   isGuessCorrectState,
   showPokemonState,
+  currentIndexState,
+  allPokemonState,
 } from '../../recoil';
 import {
   StyledScore,
   StyledScoreIcon,
   StyledAddedPoints,
 } from './Score.styled';
+import { calcPoints } from '../../services';
 
 export const Score = () => {
   const score = useRecoilValue(scoreState);
   const isGuessCorrect = useRecoilValue(isGuessCorrectState);
   const showPokemon = useRecoilValue(showPokemonState);
+  const currentIndex = useRecoilValue(currentIndexState);
+  const allPokemon = useRecoilValue(allPokemonState);
+  const gen = allPokemon[currentIndex]?.gen;
+
+  const points = calcPoints(gen);
 
   return (
     <StyledScore>
@@ -29,9 +37,11 @@ export const Score = () => {
       </StyledScoreIcon>
       <h3>Score</h3>
       <p>{score}</p>
-      {isGuessCorrect && <StyledAddedPoints>+5</StyledAddedPoints>}
+      {isGuessCorrect && (
+        <StyledAddedPoints points={points}>+{points}</StyledAddedPoints>
+      )}
       {!isGuessCorrect && showPokemon && (
-        <StyledAddedPoints>-5</StyledAddedPoints>
+        <StyledAddedPoints points={points}>-{points}</StyledAddedPoints>
       )}
     </StyledScore>
   );

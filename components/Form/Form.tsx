@@ -13,11 +13,12 @@ import {
   unseenIdsState,
   isGuessCorrectState,
   nextIndexState,
+  chosenGenState,
 } from '../../recoil';
 import { StyledForm, StyledContainer, StyledSettings } from './Form.styled';
 import correct from '../../public/sounds/correct.mp3';
 import wrong from '../../public/sounds/wrong.mp3';
-import { getRandomItem } from '../../services';
+import { getRandomItem, calcPoints } from '../../services';
 
 const getFilteredUnseenIds = (
   unseenIds: (number | undefined)[],
@@ -41,6 +42,7 @@ export const Form = () => {
   const [wrongAudio, setWrongAudio] = useState<HTMLAudioElement>();
   const [correctAudio, setCorrectAudio] = useState<HTMLAudioElement>();
   const currentPokemon = allPokemon[currentIndex]?.name;
+  const gen = allPokemon[currentIndex]?.gen;
   const [nextIndex, setNextIndex] = useRecoilState(nextIndexState);
 
   //https://github.com/vercel/next.js/discussions/17963
@@ -56,12 +58,12 @@ export const Form = () => {
     if (levenshteinDistance < 2) {
       isSoundOn && correctAudio?.play();
       setIsGuessCorrect(true);
-      return setScore((prevScore) => prevScore + 5);
+      return setScore((prevScore) => prevScore + calcPoints(gen));
     }
 
     setIsGuessCorrect(false);
     isSoundOn && wrongAudio?.play();
-    setScore((prevScore) => prevScore - 5);
+    setScore((prevScore) => prevScore - calcPoints(gen));
   };
 
   const handleNextPokemon = () => {

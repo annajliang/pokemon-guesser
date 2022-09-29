@@ -39,9 +39,9 @@ export const StyledScore = styled.div`
   }
 `;
 
-export const StyledAddedPoints = styled.p`
+export const StyledAddedPoints = styled.p<{ points: number }>`
   position: absolute;
-  right: -3.5rem;
+  right: ${({ points }) => (points < 10 ? '-3.5rem' : '-4.5rem')};
   bottom: 0;
   animation-name: fade-in-up;
   animation-duration: 2s;
