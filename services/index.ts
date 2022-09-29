@@ -101,7 +101,7 @@ export const getPokemonIds = (results: PokemonProps[]) => {
   });
 };
 
-export const calcPoints = (gen: number) => {
+export const calcPoints = (gen: number | undefined) => {
   switch (gen) {
     case 1:
       return 2;
