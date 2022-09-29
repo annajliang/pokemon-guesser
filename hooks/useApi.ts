@@ -9,8 +9,12 @@ export const useApi = (url: string) => {
   const setUnseenIds = useSetRecoilState(unseenIdsState);
 
   useEffect(() => {
-    const setupPokemonData = (data: PokemonProps[], id: number) => {
-      const pokemonNameId = getPokemonNameId(data, id);
+    const setupPokemonData = (
+      data: PokemonProps[],
+      gen: number | undefined
+    ) => {
+      const pokemonNameId = getPokemonNameId(data, gen);
+      console.log('pokemonNameId', pokemonNameId);
       setAllPokemon(pokemonNameId);
       const pokemonIds = getPokemonIds(data);
       setUnseenIds(pokemonIds);
@@ -33,7 +37,7 @@ export const useApi = (url: string) => {
           setupPokemonData(pokemon_species, data.id);
         } else {
           const { results } = data;
-          setupPokemonData(results, data.id);
+          setupPokemonData(results, undefined);
         }
       } catch (err) {
         console.log(err);
