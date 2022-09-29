@@ -5,7 +5,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 const axios = require('axios');
 
-const URL = 'https://bulbapedia.bulbagarden.net/wiki/Camerupt_(Pok%C3%A9mon)';
+const URL = 'https://bulbapedia.bulbagarden.net/wiki/Sneasler_(Pok%C3%A9mon)';
 
 const getRandomKeyboardEvent = () => {
   const events = [
@@ -311,275 +311,581 @@ function delay() {
   // }
 
   // Initialize Puppeteer
+  // const browser = await puppeteer.launch({
+  //   headless: false,
+  // });
+  // await delay();
+  // const page = (await browser.pages())[0];
+  // // const page = await browser.newPage();
+
+  // await delay();
+
+  // page.setDefaultNavigationTimeout(0);
+
+  // const numOfPokemon = 905;
+
+  // await delay();
+
+  // await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 0 });
+
+  // await delay();
+
+  // await page.keyboard.press(getRandomKeyboardEvent());
+
+  // for (let i = 1; i <= numOfPokemon; i++) {
+  //   console.log('page has been loaded!');
+
+  //   await delay();
+
+  //   // await page.waitForSelector('a.image', {
+  //   //   waitUntil: 'domcontentloaded',
+  //   //   timeout: 0,
+  //   //   visible: true,
+  //   // });
+
+  //   await page.keyboard.press(getRandomKeyboardEvent());
+  //   await delay();
+  //   await page.keyboard.press('ArrowDown');
+  //   await delay();
+  //   await page.keyboard.press('ArrowDown');
+
+  //   // await Promise.all([page.click('a'), page.waitForNavigation()]);
+
+  //   await delay();
+
+  //   // await page.goBack();
+
+  //   await page.keyboard.press(getRandomKeyboardEvent());
+  //   await delay();
+  //   await page.keyboard.press('Tab');
+  //   await delay();
+  //   await page.keyboard.press('ArrowUp');
+
+  //   await delay();
+
+  //   await page.waitForSelector('body', {
+  //     waitUntil: 'domcontentloaded',
+  //     timeout: 0,
+  //   });
+
+  //   const hrefs = await page.$$eval('a', (as) => as.map((a) => a.href));
+
+  //   const randomLink = getRandomLink(hrefs);
+
+  //   console.log('randomLink', randomLink);
+
+  //   console.log('1');
+
+  //   await page.goto(randomLink, {
+  //     waitUntil: 'domcontentloaded',
+  //     timeout: 0,
+  //   });
+
+  //   await page.keyboard.press(getRandomKeyboardEvent());
+  //   await delay();
+  //   await page.keyboard.press('Tab');
+
+  //   console.log('2');
+
+  //   await delay();
+
+  //   await page.goBack();
+
+  //   await delay();
+
+  //   await page.keyboard.press(getRandomKeyboardEvent());
+
+  //   // const element = await page.waitForSelector('p a[href*="Generation"]', {
+  //   //   waitUntil: 'domcontentloaded',
+  //   //   timeout: 0,
+  //   // }); // select the element
+
+  //   const element =
+  //     (await page.waitForSelector('a[href*="Generation"]', {
+  //       waitUntil: 'domcontentloaded',
+  //       timeout: 0,
+  //     })) ||
+  //     (await page.waitForSelector('p a[href*="Generation"]', {
+  //       waitUntil: 'domcontentloaded',
+  //       timeout: 0,
+  //     })); // select the element
+
+  //   console.log('element', element);
+
+  //   const pokemonGen = await element.evaluate((el) => el.textContent); // grab the textContent from the element, by evaluating this function in the browser context
+
+  //   console.log('pokemonGen', pokemonGen);
+
+  //   const romanNumeral = pokemonGen.replace(/^.*?\s/, '');
+
+  //   await delay();
+
+  //   await Promise.all([page.click('a.image'), page.waitForNavigation()]);
+
+  //   await delay();
+
+  //   await page.keyboard.press(getRandomKeyboardEvent());
+
+  //   await page.waitForSelector(
+  //     '.fullImageLink a[href*="bulbagarden.net/media/upload"]',
+  //     { waitUntil: 'domcontentloaded', timeout: 0, visible: true }
+  //   );
+
+  //   await delay();
+
+  //   await Promise.all([
+  //     page.click('.fullImageLink a[href*="bulbagarden.net/media/upload"]'),
+  //     page.waitForNavigation(),
+  //   ]);
+
+  //   //  let is503 = (await page.$eval('h1', (el) => el.textContent)) || '';
+  //   const is503 = await page.$eval('h1', () => true).catch(() => false);
+  //   console.log('is503', is503);
+
+  //   while (true) {
+  //     if (is503) {
+  //       await page.reload({
+  //         waitUntil: ['networkidle0', 'domcontentloaded'],
+  //         timeout: 0,
+  //       });
+  //       console.log('a');
+  //     }
+
+  //     const test = await page.$eval('h1', () => true).catch(() => false);
+
+  //     if (!test) {
+  //       console.log('c');
+  //       break;
+  //     }
+  //   }
+
+  //   // if (is503) {
+  //   //   await page.reload({
+  //   //     waitUntil: ['networkidle0', 'domcontentloaded'],
+  //   //     timeout: 0,
+  //   //   });
+  //   // }
+
+  //   const imageUrl = await page.$eval('img', (img) => img.src);
+
+  //   // const otherSiteLink = getRandomLink(otherSites);
+
+  //   // await page.goto(otherSiteLink, {
+  //   //   waitUntil: 'domcontentloaded',
+  //   //   timeout: 0,
+  //   // });
+
+  //   // await delay();
+  //   // await delay();
+  //   // await page.goBack();
+
+  //   const splitImageUrls = imageUrl.split('/');
+  //   const imageFileName = splitImageUrls[splitImageUrls.length - 1].replace(
+  //     /\D/g,
+  //     ''
+  //   );
+  //   console.log('imageFileName', imageFileName);
+  //   await delay();
+
+  //   await page.keyboard.press(getRandomKeyboardEvent());
+
+  //   // https://stackoverflow.com/questions/12740659/downloading-images-with-node-js
+  //   const downloadImage = (url, imagePath) =>
+  //     axios({
+  //       url,
+  //       responseType: 'stream',
+  //     }).then((response) =>
+  //       new Promise((resolve, reject) => {
+  //         response.data
+  //           .pipe(fs.createWriteStream(imagePath))
+  //           .on('finish', () => resolve())
+  //           .on('error', (e) => {
+  //             reject(e);
+  //           });
+  //       }).catch((e) => {
+  //         console.log(e);
+  //         const retry = async () => {
+  //           await page.reload({
+  //             waitUntil: ['networkidle0', 'domcontentloaded'],
+  //             timeout: 0,
+  //           });
+  //         };
+
+  //         retry();
+  //       })
+  //     );
+
+  //   await delay();
+
+  //   await downloadImage(
+  //     imageUrl,
+  //     `./public/pokemon/gen${romanToInt(romanNumeral)}/${imageFileName}.png`
+  //   );
+
+  //   await delay();
+
+  //   await page.goBack();
+
+  //   await page.keyboard.press(getRandomKeyboardEvent());
+  //   await delay();
+  //   await page.keyboard.press('ArrowDown');
+  //   await delay();
+  //   await page.keyboard.press('ArrowUp');
+
+  //   await delay();
+
+  //   await page.goBack();
+
+  //   await page.waitForSelector('body', {
+  //     waitUntil: 'domcontentloaded',
+  //     timeout: 0,
+  //   });
+
+  //   const secondHrefs = await page.$$eval('a', (as) => as.map((a) => a.href));
+
+  //   const secondRandomLink = getRandomLink(secondHrefs);
+
+  //   await page.goto(secondRandomLink, {
+  //     waitUntil: 'domcontentloaded',
+  //     timeout: 0,
+  //   });
+
+  //   await page.keyboard.press(getRandomKeyboardEvent());
+  //   await delay();
+  //   await page.keyboard.press('Tab');
+
+  //   await delay();
+
+  //   await page.goBack();
+
+  //   await page.keyboard.press(getRandomKeyboardEvent());
+  //   await delay();
+  //   await page.keyboard.press('ArrowDown');
+  //   await delay();
+  //   await page.keyboard.press('ArrowUp');
+  //   await delay();
+  //   await page.keyboard.press(getRandomKeyboardEvent());
+
+  //   await page.waitForSelector(
+  //     'td[style*="45%"] td[style*="left"] a[href*="(Pok%C3%A9mon)"]',
+  //     { waitUntil: 'domcontentloaded', timeout: 0 }
+  //   );
+
+  //   await delay();
+
+  //   await Promise.all([
+  //     page.click(
+  //       'td[style*="45%"] td[style*="left"] a[href*="(Pok%C3%A9mon)"]'
+  //     ),
+  //     // page.waitForNavigation(),
+  //   ]);
+  // }
+
+  // await browser.close();
+
   const browser = await puppeteer.launch({
     headless: false,
   });
+
   await delay();
   const page = (await browser.pages())[0];
-  // const page = await browser.newPage();
 
-  await delay();
-
-  page.setDefaultNavigationTimeout(0);
-
-  const numOfPokemon = 905;
-
-  await delay();
-
-  await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 0 });
-
-  await delay();
-
-  await page.keyboard.press(getRandomKeyboardEvent());
-
-  for (let i = 1; i <= numOfPokemon; i++) {
-    console.log('page has been loaded!');
-
-    await delay();
-
-    // await page.waitForSelector('a.image', {
-    //   waitUntil: 'domcontentloaded',
-    //   timeout: 0,
-    //   visible: true,
+  try {
+    // const browser = await puppeteer.launch({
+    //   headless: false,
     // });
-
-    await page.keyboard.press(getRandomKeyboardEvent());
-    await delay();
-    await page.keyboard.press('ArrowDown');
-    await delay();
-    await page.keyboard.press('ArrowDown');
-
-    // await Promise.all([page.click('a'), page.waitForNavigation()]);
+    // await delay();
+    // const page = (await browser.pages())[0];
+    // const page = await browser.newPage();
 
     await delay();
 
-    // await page.goBack();
+    page.setDefaultNavigationTimeout(0);
 
-    await page.keyboard.press(getRandomKeyboardEvent());
-    await delay();
-    await page.keyboard.press('Tab');
-    await delay();
-    await page.keyboard.press('ArrowUp');
+    const numOfPokemon = 905;
 
     await delay();
 
-    await page.waitForSelector('body', {
-      waitUntil: 'domcontentloaded',
-      timeout: 0,
-    });
-
-    const hrefs = await page.$$eval('a', (as) => as.map((a) => a.href));
-
-    const randomLink = getRandomLink(hrefs);
-
-    console.log('randomLink', randomLink);
-
-    console.log('1');
-
-    await page.goto(randomLink, {
-      waitUntil: 'domcontentloaded',
-      timeout: 0,
-    });
-
-    await page.keyboard.press(getRandomKeyboardEvent());
-    await delay();
-    await page.keyboard.press('Tab');
-
-    console.log('2');
-
-    await delay();
-
-    await page.goBack();
+    await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 0 });
 
     await delay();
 
     await page.keyboard.press(getRandomKeyboardEvent());
 
-    // const element = await page.waitForSelector('p a[href*="Generation"]', {
-    //   waitUntil: 'domcontentloaded',
-    //   timeout: 0,
-    // }); // select the element
+    for (let i = 1; i <= numOfPokemon; i++) {
+      console.log('page has been loaded!');
 
-    const element =
-      (await page.waitForSelector('a[href*="Generation"]', {
+      await delay();
+
+      // await page.waitForSelector('a.image', {
+      //   waitUntil: 'domcontentloaded',
+      //   timeout: 0,
+      //   visible: true,
+      // });
+
+      await page.keyboard.press(getRandomKeyboardEvent());
+      await delay();
+      await page.keyboard.press('ArrowDown');
+      await delay();
+      await page.keyboard.press('ArrowDown');
+
+      // await Promise.all([page.click('a'), page.waitForNavigation()]);
+
+      await delay();
+
+      // await page.goBack();
+
+      await page.keyboard.press(getRandomKeyboardEvent());
+      await delay();
+      await page.keyboard.press('Tab');
+      await delay();
+      await page.keyboard.press('ArrowUp');
+
+      await delay();
+
+      await page.waitForSelector('body', {
         waitUntil: 'domcontentloaded',
         timeout: 0,
-      })) ||
-      (await page.waitForSelector('p a[href*="Generation"]', {
+      });
+
+      const hrefs = await page.$$eval('a', (as) => as.map((a) => a.href));
+
+      const randomLink = getRandomLink(hrefs);
+
+      console.log('randomLink', randomLink);
+
+      console.log('1');
+
+      await page.goto(randomLink, {
         waitUntil: 'domcontentloaded',
         timeout: 0,
-      })); // select the element
+      });
 
-    console.log('element', element);
+      await page.keyboard.press(getRandomKeyboardEvent());
+      await delay();
+      await page.keyboard.press('Tab');
 
-    const pokemonGen = await element.evaluate((el) => el.textContent); // grab the textContent from the element, by evaluating this function in the browser context
+      console.log('2');
 
-    console.log('pokemonGen', pokemonGen);
+      await delay();
 
-    const romanNumeral = pokemonGen.replace(/^.*?\s/, '');
+      await page.goBack();
 
-    await delay();
+      await delay();
 
-    await Promise.all([page.click('a.image'), page.waitForNavigation()]);
+      await page.keyboard.press(getRandomKeyboardEvent());
 
-    await delay();
+      // const element = await page.waitForSelector('p a[href*="Generation"]', {
+      //   waitUntil: 'domcontentloaded',
+      //   timeout: 0,
+      // }); // select the element
 
-    await page.keyboard.press(getRandomKeyboardEvent());
-
-    await page.waitForSelector(
-      '.fullImageLink a[href*="bulbagarden.net/media/upload"]',
-      { waitUntil: 'domcontentloaded', timeout: 0, visible: true }
-    );
-
-    await delay();
-
-    await Promise.all([
-      page.click('.fullImageLink a[href*="bulbagarden.net/media/upload"]'),
-      page.waitForNavigation(),
-    ]);
-
-    //  let is503 = (await page.$eval('h1', (el) => el.textContent)) || '';
-    const is503 = await page.$eval('h1', () => true).catch(() => false);
-    console.log('is503', is503);
-
-    while (true) {
-      if (is503) {
-        await page.reload({
-          waitUntil: ['networkidle0', 'domcontentloaded'],
+      const element =
+        (await page.waitForSelector('a[href*="Generation"]', {
+          waitUntil: 'domcontentloaded',
           timeout: 0,
-        });
-        console.log('a');
-      }
+        })) ||
+        (await page.waitForSelector('p a[href*="Generation"]', {
+          waitUntil: 'domcontentloaded',
+          timeout: 0,
+        })); // select the element
 
-      const test = await page.$eval('h1', () => true).catch(() => false);
+      const pokemonGen = await element.evaluate((el) => el.textContent); // grab the textContent from the element, by evaluating this function in the browser context
 
-      if (!test) {
-        console.log('c');
-        break;
-      }
-    }
+      console.log('pokemonGen', pokemonGen);
 
-    // if (is503) {
-    //   await page.reload({
-    //     waitUntil: ['networkidle0', 'domcontentloaded'],
-    //     timeout: 0,
-    //   });
-    // }
+      const romanNumeral = pokemonGen.replace(/^.*?\s/, '');
 
-    const imageUrl = await page.$eval('img', (img) => img.src);
+      await delay();
 
-    // const otherSiteLink = getRandomLink(otherSites);
+      await Promise.all([page.click('a.image'), page.waitForNavigation()]);
 
-    // await page.goto(otherSiteLink, {
-    //   waitUntil: 'domcontentloaded',
-    //   timeout: 0,
-    // });
+      await delay();
 
-    // await delay();
-    // await delay();
-    // await page.goBack();
+      await page.keyboard.press(getRandomKeyboardEvent());
 
-    const splitImageUrls = imageUrl.split('/');
-    const imageFileName = splitImageUrls[splitImageUrls.length - 1].replace(
-      /\D/g,
-      ''
-    );
-    console.log('imageFileName', imageFileName);
-    await delay();
-
-    await page.keyboard.press(getRandomKeyboardEvent());
-
-    // https://stackoverflow.com/questions/12740659/downloading-images-with-node-js
-    const downloadImage = (url, imagePath) =>
-      axios({
-        url,
-        responseType: 'stream',
-      }).then((response) =>
-        new Promise((resolve, reject) => {
-          response.data
-            .pipe(fs.createWriteStream(imagePath))
-            .on('finish', () => resolve())
-            .on('error', (e) => {
-              reject(e);
-            });
-        }).catch((e) => {
-          console.log(e);
-          const retry = async () => {
-            await page.reload({
-              waitUntil: ['networkidle0', 'domcontentloaded'],
-              timeout: 0,
-            });
-          };
-
-          retry();
-        })
+      await page.waitForSelector(
+        '.fullImageLink a[href*="bulbagarden.net/media/upload"]',
+        { waitUntil: 'domcontentloaded', timeout: 0, visible: true }
       );
 
-    await delay();
+      await delay();
 
-    await downloadImage(
-      imageUrl,
-      `./public/pokemon/gen${romanToInt(romanNumeral)}/${imageFileName}.png`
-    );
+      await Promise.all([
+        page.click('.fullImageLink a[href*="bulbagarden.net/media/upload"]'),
+        page.waitForNavigation(),
+      ]);
 
-    await delay();
+      //  let is503 = (await page.$eval('h1', (el) => el.textContent)) || '';
+      const is503 = await page.$eval('h1', () => true).catch(() => false);
+      console.log('is503', is503);
 
-    await page.goBack();
+      while (true) {
+        if (is503) {
+          await page.reload({
+            waitUntil: ['networkidle0', 'domcontentloaded'],
+            timeout: 0,
+          });
+          console.log('a');
+        }
 
-    await page.keyboard.press(getRandomKeyboardEvent());
-    await delay();
-    await page.keyboard.press('ArrowDown');
-    await delay();
-    await page.keyboard.press('ArrowUp');
+        const test = await page.$eval('h1', () => true).catch(() => false);
 
-    await delay();
+        if (!test) {
+          console.log('c');
+          break;
+        }
+      }
 
-    await page.goBack();
+      // if (is503) {
+      //   await page.reload({
+      //     waitUntil: ['networkidle0', 'domcontentloaded'],
+      //     timeout: 0,
+      //   });
+      // }
 
-    await page.waitForSelector('body', {
-      waitUntil: 'domcontentloaded',
-      timeout: 0,
-    });
+      const imageUrl = await page.$eval('img', (img) => img.src);
 
-    const secondHrefs = await page.$$eval('a', (as) => as.map((a) => a.href));
+      // const otherSiteLink = getRandomLink(otherSites);
 
-    const secondRandomLink = getRandomLink(secondHrefs);
+      // await page.goto(otherSiteLink, {
+      //   waitUntil: 'domcontentloaded',
+      //   timeout: 0,
+      // });
 
-    await page.goto(secondRandomLink, {
-      waitUntil: 'domcontentloaded',
-      timeout: 0,
-    });
+      // await delay();
+      // await delay();
+      // await page.goBack();
 
-    await page.keyboard.press(getRandomKeyboardEvent());
-    await delay();
-    await page.keyboard.press('Tab');
+      const splitImageUrls = imageUrl.split('/');
+      const imageFileName = splitImageUrls[splitImageUrls.length - 1].replace(
+        /\D/g,
+        ''
+      );
+      console.log('imageFileName', imageFileName);
+      await delay();
 
-    await delay();
+      await page.keyboard.press(getRandomKeyboardEvent());
 
-    await page.goBack();
+      // https://stackoverflow.com/questions/12740659/downloading-images-with-node-js
+      const downloadImage = (url, imagePath) =>
+        axios({
+          url,
+          responseType: 'stream',
+        }).then(
+          (response) =>
+            new Promise((resolve, reject) => {
+              response.data
+                .pipe(fs.createWriteStream(imagePath))
+                .on('finish', () => resolve())
+                .on('error', (e) => {
+                  reject(e);
+                });
+            })
+        );
 
-    await page.keyboard.press(getRandomKeyboardEvent());
-    await delay();
-    await page.keyboard.press('ArrowDown');
-    await delay();
-    await page.keyboard.press('ArrowUp');
-    await delay();
-    await page.keyboard.press(getRandomKeyboardEvent());
+      await delay();
 
-    await page.waitForSelector(
-      'td[style*="45%"] td[style*="left"] a[href*="(Pok%C3%A9mon)"]',
-      { waitUntil: 'domcontentloaded', timeout: 0 }
-    );
+      await downloadImage(
+        imageUrl,
+        `./public/pokemon/gen${romanToInt(romanNumeral)}/${imageFileName}.png`
+      );
 
-    await delay();
+      // await downloadImage(
+      //   imageUrl,
+      //   `./public/pokemon/gen6/${imageFileName}.png`
+      // );
 
-    await Promise.all([
-      page.click(
-        'td[style*="45%"] td[style*="left"] a[href*="(Pok%C3%A9mon)"]'
-      ),
-      // page.waitForNavigation(),
-    ]);
+      await delay();
+
+      await page.goBack();
+
+      await page.keyboard.press(getRandomKeyboardEvent());
+      await delay();
+      await page.keyboard.press('ArrowDown');
+      await delay();
+      await page.keyboard.press('ArrowUp');
+
+      await delay();
+
+      await page.goBack();
+
+      await page.waitForSelector('body', {
+        waitUntil: 'domcontentloaded',
+        timeout: 0,
+      });
+
+      const secondHrefs = await page.$$eval('a', (as) => as.map((a) => a.href));
+
+      const secondRandomLink = getRandomLink(secondHrefs);
+
+      await page.goto(secondRandomLink, {
+        waitUntil: 'domcontentloaded',
+        timeout: 0,
+      });
+
+      await page.keyboard.press(getRandomKeyboardEvent());
+      await delay();
+      await page.keyboard.press('Tab');
+
+      await delay();
+
+      await page.goBack();
+
+      await page.keyboard.press(getRandomKeyboardEvent());
+      await delay();
+      await page.keyboard.press('ArrowDown');
+      await delay();
+      await page.keyboard.press('ArrowUp');
+      await delay();
+      await page.keyboard.press(getRandomKeyboardEvent());
+
+      await page.waitForSelector(
+        'td[style*="45%"] td[style*="left"] a[href*="(Pok%C3%A9mon)"]',
+        { waitUntil: 'domcontentloaded', timeout: 0 }
+      );
+
+      await delay();
+
+      await Promise.all([
+        page.click(
+          'td[style*="45%"] td[style*="left"] a[href*="(Pok%C3%A9mon)"]'
+        ),
+        // page.waitForNavigation(),
+      ]);
+    }
+
+    await browser.close();
+  } catch (e) {
+    console.log('error', e);
+
+    if (e.response.status === 503) {
+      const is503 = await page.$eval('h1', () => true).catch(() => false);
+      console.log('is503', is503);
+
+      await page.reload({
+        waitUntil: ['networkidle0', 'domcontentloaded'],
+        timeout: 0,
+      });
+
+      console.log('refresh');
+
+      // while (true) {
+      //   if (is503) {
+      //     await page.reload({
+      //       waitUntil: ['networkidle0', 'domcontentloaded'],
+      //       timeout: 0,
+      //     });
+      //     console.log('a');
+      //   }
+
+      //   const test = await page.$eval('h1', () => true).catch(() => false);
+
+      //   if (!test) {
+      //     console.log('c');
+      //     break;
+      //   }
+      // }
+    }
   }
-
-  await browser.close();
 })();
