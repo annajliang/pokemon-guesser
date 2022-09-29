@@ -66,7 +66,7 @@ const Home: NextPage = () => {
 
   useApi(
     chosenGen === 'all'
-      ? 'https://pokeapi.co/api/v2/pokemon?limit=905'
+      ? 'https://pokeapi.co/api/v2/pokemon?limit=251'
       : `https://pokeapi.co/api/v2/generation/${chosenGen}`
   );
 
@@ -114,9 +114,9 @@ const Home: NextPage = () => {
         <BlockLink
           label="Start"
           href="/game"
-          // onClick={() => {
-          //   startGameAudio?.play();
-          // }}
+          onClick={() => {
+            startGameAudio?.play();
+          }}
         />
       </StyledIntro>
     </StyledContainer>
