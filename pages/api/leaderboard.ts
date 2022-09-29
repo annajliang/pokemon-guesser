@@ -28,7 +28,6 @@ const sendDataToDb = async (
   try {
     const data = req.body;
     const result = await db.collection('leaderboard').insertOne(data);
-    console.log(result);
     res.status(200).json({ message: 'Score successfully submitted!' });
   } catch (err) {
     console.log(err);
