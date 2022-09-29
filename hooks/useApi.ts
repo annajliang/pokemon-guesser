@@ -9,8 +9,8 @@ export const useApi = (url: string) => {
   const setUnseenIds = useSetRecoilState(unseenIdsState);
 
   useEffect(() => {
-    const setupPokemonData = (data: PokemonProps[]) => {
-      const pokemonNameId = getPokemonNameId(data);
+    const setupPokemonData = (data: PokemonProps[], id: number) => {
+      const pokemonNameId = getPokemonNameId(data, id);
       setAllPokemon(pokemonNameId);
       const pokemonIds = getPokemonIds(data);
       setUnseenIds(pokemonIds);
@@ -26,14 +26,16 @@ export const useApi = (url: string) => {
 
         const data = await response.json();
 
+        console.log('data', data);
+
         if (!data) return;
 
         if (url.includes('generation')) {
           const { pokemon_species } = data;
-          setupPokemonData(pokemon_species);
+          setupPokemonData(pokemon_species, data.id);
         } else {
           const { results } = data;
-          setupPokemonData(results);
+          setupPokemonData(results, data.id);
         }
       } catch (err) {
         console.log(err);

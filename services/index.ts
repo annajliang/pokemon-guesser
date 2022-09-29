@@ -43,12 +43,13 @@ const getReformattedName = (name: string) => {
   return name.charAt(0).toUpperCase() + name.slice(1);
 };
 
-export const getPokemonNameId = (results: PokemonProps[]) => {
+export const getPokemonNameId = (results: PokemonProps[], id: number) => {
   return results.map((result: PokemonProps) => {
+    console.log('result', result.id);
     return {
       name: getReformattedName(result.name),
       id: getPokemonId(result.url),
-      gen: result.url && parseInt(result.url.split('/')[6]) <= 151 ? 1 : 2,
+      gen: id,
     };
   });
 };
