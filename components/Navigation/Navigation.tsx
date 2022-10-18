@@ -20,7 +20,7 @@ export const Navigation = () => {
       {showModals.leaderboard && (
         <Modal
           showDialog={showModals.leaderboard}
-          closeModal={() => close({ leaderboard: false })}
+          // closeModal={() => close({ leaderboard: false })}
           variant="leaderboard"
         >
           <Leaderboard />
