@@ -26,6 +26,7 @@ export const Dropdown = () => {
         <option value="6">Gen 6</option>
         <option value="7">Gen 7</option>
         <option value="8">Gen 8</option>
+        <option value="9">Gen 9</option>
         <option value="all">All</option>
       </StyledDropdown>
     </StyledDropdownContainer>
